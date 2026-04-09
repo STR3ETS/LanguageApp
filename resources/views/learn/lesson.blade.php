@@ -42,7 +42,7 @@
                         <div class="text-center">
                             <div class="inline-flex items-center gap-2 px-4 py-2 glass rounded-full text-[10px] font-semibold text-soft uppercase tracking-widest mb-8">
                                 <i class="fa-solid fa-book-open text-indigo-light text-[9px]"></i>
-                                New word
+                                {{ __('ui.new_word') }}
                                 <span class="text-muted" x-text="(flashcardsDone + 1) + '/' + totalFlashcards"></span>
                             </div>
 
@@ -59,7 +59,7 @@
                                     <div class="font-display text-4xl sm:text-5xl font-bold text-bright italic mb-5" x-text="current.word"></div>
                                     <div class="gold-line mx-auto my-5"></div>
 
-                                    <div x-show="!showTranslation" class="text-soft text-sm">Tap to reveal translation</div>
+                                    <div x-show="!showTranslation" class="text-soft text-sm">{{ __('ui.tap_to_reveal') }}</div>
                                     <div x-show="showTranslation" x-transition class="font-display text-2xl font-bold text-gradient italic" x-text="current.translation"></div>
                                 </div>
 
@@ -72,7 +72,7 @@
                                     <i class="fa-solid fa-volume-high text-sm"></i>
                                 </button>
                                 <button @click="advanceStep()" class="group inline-flex items-center gap-2 px-8 py-3.5 bg-indigo hover:bg-indigo-light text-white text-sm font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_30px_var(--color-indigo-glow)] cursor-pointer">
-                                    Got it
+                                    {{ __('ui.got_it') }}
                                     <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
                                 </button>
                             </div>
@@ -85,7 +85,7 @@
                             <div class="text-center mb-10">
                                 <div class="inline-flex items-center gap-2 px-4 py-2 bg-mint/10 border border-mint/20 rounded-full text-[11px] font-semibold text-mint uppercase tracking-wider mb-6">
                                     <i class="fa-solid fa-gamepad text-[10px]"></i>
-                                    Choose the answer
+                                    {{ __('ui.choose_the_answer') }}
                                 </div>
                                 <h2 class="text-2xl sm:text-3xl font-extrabold text-bright" x-text="current.question"></h2>
                             </div>
@@ -123,11 +123,11 @@
                                 <div x-show="choiceState === 'wrong'"
                                      class="inline-flex items-center gap-2 px-5 py-3 bg-danger/10 border border-danger/20 rounded-2xl text-sm font-medium text-danger mb-5">
                                     <i class="fa-solid fa-rotate-left text-xs"></i>
-                                    We'll ask this one again later
+                                    {{ __('ui.well_ask_again') }}
                                 </div>
                                 <div>
                                     <button @click="advanceStep()" class="group inline-flex items-center gap-2 px-8 py-3 bg-indigo hover:bg-indigo-light text-white text-sm font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_20px_var(--color-indigo-glow)]">
-                                        Continue <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                        {{ __('ui.continue') }} <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
                                     </button>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                             <div class="text-center mb-10">
                                 <div class="inline-flex items-center gap-2 px-4 py-2 bg-sun/10 border border-sun/20 rounded-full text-[11px] font-semibold text-sun uppercase tracking-wider mb-6">
                                     <i class="fa-solid fa-keyboard text-[10px]"></i>
-                                    Type your answer
+                                    {{ __('ui.type_your_answer') }}
                                 </div>
                                 <h2 class="text-2xl sm:text-3xl font-extrabold text-bright" x-text="current.question"></h2>
                                 <div class="mt-3 text-sm text-muted">
@@ -190,13 +190,13 @@
                                          class="space-y-2 mb-5">
                                         <div class="inline-flex items-center gap-2 px-5 py-3 bg-danger/10 border border-danger/20 rounded-2xl text-sm font-medium text-danger">
                                             <i class="fa-solid fa-lightbulb"></i>
-                                            Correct: <strong class="font-mono" x-text="current.correct"></strong>
+                                            {{ __('ui.correct') }}: <strong class="font-mono" x-text="current.correct"></strong>
                                         </div>
-                                        <div class="text-xs text-muted"><i class="fa-solid fa-rotate-left text-[10px] mr-1"></i>We'll ask this one again</div>
+                                        <div class="text-xs text-muted"><i class="fa-solid fa-rotate-left text-[10px] mr-1"></i>{{ __('ui.well_ask_again') }}</div>
                                     </div>
                                     <div>
                                         <button @click="advanceStep()" class="group inline-flex items-center gap-2 px-8 py-3 bg-indigo hover:bg-indigo-light text-white text-sm font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_20px_var(--color-indigo-glow)]">
-                                            Continue <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                            {{ __('ui.continue') }} <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -209,7 +209,7 @@
                             <div class="text-center mb-8">
                                 <div class="inline-flex items-center gap-2 px-4 py-2 bg-sky/10 border border-sky/20 rounded-full text-[11px] font-semibold text-sky-light uppercase tracking-wider mb-6">
                                     <i class="fa-solid fa-link text-[10px]"></i>
-                                    Match the pairs
+                                    {{ __('ui.match_the_pairs') }}
                                 </div>
                                 <h2 class="text-xl sm:text-2xl font-extrabold text-bright" x-text="current.instruction"></h2>
                             </div>
@@ -262,13 +262,57 @@
                         </div>
                     </template>
 
+                    {{-- ======== FILL IN THE BLANK ======== --}}
+                    <template x-if="current && current.type === 'fill_blank'">
+                        <div>
+                            <div class="text-center mb-10">
+                                <div class="inline-flex items-center gap-2 px-4 py-2 bg-indigo/10 border border-indigo/20 rounded-full text-[11px] font-semibold text-indigo-light uppercase tracking-wider mb-6">
+                                    <i class="fa-solid fa-pen text-[10px]"></i>
+                                    {{ __('ui.fill_in_the_blank') }}
+                                </div>
+                                <h2 class="text-xl sm:text-2xl font-extrabold text-bright" x-text="current.sentence"></h2>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3 max-w-md mx-auto">
+                                <template x-for="(option, oi) in current.options" :key="oi">
+                                    <button @click="pickChoice(option)"
+                                        :disabled="choiceState !== null"
+                                        :class="{
+                                            'border-border bg-surface hover:border-indigo/30 hover:bg-elevated cursor-pointer': choiceState === null,
+                                            'border-mint/40 bg-mint/10': choiceState !== null && option === current.correct,
+                                            'border-danger/40 bg-danger/10': choiceState === 'wrong' && option === choicePicked,
+                                            'border-border bg-surface opacity-30': choiceState !== null && option !== current.correct && option !== choicePicked,
+                                            'cursor-not-allowed': choiceState !== null,
+                                        }"
+                                        class="px-4 py-3.5 border rounded-xl text-center font-medium transition-all duration-300">
+                                        <span class="text-bright text-sm" x-text="option"></span>
+                                    </button>
+                                </template>
+                            </div>
+
+                            <div x-show="choiceState !== null" x-transition class="mt-8 text-center">
+                                <div x-show="choiceState === 'correct'" class="inline-flex items-center gap-2 px-5 py-3 bg-mint/10 border border-mint/20 rounded-2xl text-sm font-medium text-mint mb-5">
+                                    <i class="fa-solid fa-check"></i> Correct!
+                                </div>
+                                <div x-show="choiceState === 'wrong'" class="inline-flex items-center gap-2 px-5 py-3 bg-danger/10 border border-danger/20 rounded-2xl text-sm font-medium text-danger mb-5">
+                                    <i class="fa-solid fa-lightbulb"></i> Answer: <strong x-text="current.correct"></strong>
+                                </div>
+                                <div>
+                                    <button @click="advanceStep()" class="group inline-flex items-center gap-2 px-8 py-3 bg-indigo hover:bg-indigo-light text-white text-sm font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_20px_var(--color-indigo-glow)]">
+                                        {{ __('ui.continue') }} <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
                     {{-- ======== LISTENING ======== --}}
                     <template x-if="current && current.type === 'listening'">
                         <div>
                             <div class="text-center mb-10">
                                 <div class="inline-flex items-center gap-2 px-4 py-2 bg-rose/10 border border-rose/20 rounded-full text-[11px] font-semibold text-rose-light uppercase tracking-wider mb-6">
                                     <i class="fa-solid fa-headphones text-[10px]"></i>
-                                    Listening
+                                    {{ __('ui.listening') }}
                                 </div>
                                 <h2 class="text-2xl sm:text-3xl font-extrabold text-bright mb-6" x-text="current.question"></h2>
 
@@ -278,7 +322,7 @@
                                 </button>
                                 <button @click="speak(current.word, current.lang)"
                                     class="mt-3 text-xs text-muted hover:text-indigo-light transition-colors cursor-pointer">
-                                    <i class="fa-solid fa-rotate-right text-[10px] mr-1"></i> Play again
+                                    <i class="fa-solid fa-rotate-right text-[10px] mr-1"></i> {{ __('ui.play_again') }}
                                 </button>
                             </div>
 
@@ -316,7 +360,7 @@
                                 </div>
                                 <div>
                                     <button @click="advanceStep()" class="group inline-flex items-center gap-2 px-8 py-3 bg-indigo hover:bg-indigo-light text-white text-sm font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_20px_var(--color-indigo-glow)]">
-                                        Continue <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                        {{ __('ui.continue') }} <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
                                     </button>
                                 </div>
                             </div>
@@ -329,9 +373,9 @@
                             <div class="text-center mb-10">
                                 <div class="inline-flex items-center gap-2 px-4 py-2 bg-sun/10 border border-sun/20 rounded-full text-[11px] font-semibold text-sun-light uppercase tracking-wider mb-6">
                                     <i class="fa-solid fa-scale-balanced text-[10px]"></i>
-                                    True or false
+                                    {{ __('ui.true_or_false') }}
                                 </div>
-                                <h2 class="text-xl sm:text-2xl font-extrabold text-bright mb-2">Is this correct?</h2>
+                                <h2 class="text-xl sm:text-2xl font-extrabold text-bright mb-2">{{ __('ui.is_this_correct') }}</h2>
                                 <p class="text-lg text-soft mt-4" x-text="current.question"></p>
                             </div>
 
@@ -347,7 +391,7 @@
                                     }"
                                     class="flex-1 py-6 border rounded-2xl text-center font-bold text-lg transition-all duration-300">
                                     <i class="fa-solid fa-check text-mint-light mr-2"></i>
-                                    <span class="text-bright">True</span>
+                                    <span class="text-bright">{{ __('ui.true') }}</span>
                                 </button>
                                 <button @click="pickTrueFalse('false')"
                                     :disabled="tfState !== null"
@@ -360,7 +404,7 @@
                                     }"
                                     class="flex-1 py-6 border rounded-2xl text-center font-bold text-lg transition-all duration-300">
                                     <i class="fa-solid fa-xmark text-danger mr-2"></i>
-                                    <span class="text-bright">False</span>
+                                    <span class="text-bright">{{ __('ui.false') }}</span>
                                 </button>
                             </div>
 
@@ -376,7 +420,7 @@
                                 </div>
                                 <div>
                                     <button @click="advanceStep()" class="group inline-flex items-center gap-2 px-8 py-3 bg-indigo hover:bg-indigo-light text-white text-sm font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_20px_var(--color-indigo-glow)]">
-                                        Continue <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                                        {{ __('ui.continue') }} <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
                                     </button>
                                 </div>
                             </div>
@@ -396,7 +440,7 @@
                 <div class="w-20 h-20 bg-mint/10 rounded-3xl flex items-center justify-center mx-auto mb-6 pulse-ring">
                     <i class="fa-solid fa-trophy text-mint text-3xl"></i>
                 </div>
-                <h2 class="text-3xl font-extrabold text-bright mb-2">Lesson complete!</h2>
+                <h2 class="text-3xl font-extrabold text-bright mb-2">{{ __('ui.lesson_complete') }}</h2>
                 <p class="text-muted mb-4">{{ $lesson->title }}</p>
 
                 <div class="flex justify-center gap-1 mb-10">
@@ -425,7 +469,7 @@
 
                 <div class="glass-card rounded-2xl p-6 max-w-sm mx-auto mb-10 text-left">
                     <div class="text-xs text-muted uppercase tracking-wider mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-book text-indigo-light text-[10px]"></i> Words learned
+                        <i class="fa-solid fa-book text-indigo-light text-[10px]"></i> {{ __('ui.words_learned') }}
                     </div>
                     <div class="space-y-2">
                         @foreach($steps as $step)
@@ -442,18 +486,43 @@
                 <div class="flex flex-col sm:flex-row gap-3 justify-center">
                     <a x-show="result.next_lesson_url" :href="result.next_lesson_url"
                        class="group inline-flex items-center justify-center gap-2 px-8 py-3 bg-indigo hover:bg-indigo-light text-white text-sm font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_20px_var(--color-indigo-glow)]">
-                        Next lesson <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
+                        {{ __('ui.next_lesson') }} <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform duration-300"></i>
                     </a>
                     <a :href="result.language_url"
                        class="inline-flex items-center justify-center gap-2 px-8 py-3 glass hover:bg-elevated text-text text-sm font-semibold rounded-full transition-all duration-200">
-                        <i class="fa-solid fa-road text-xs text-muted"></i> Back to path
+                        <i class="fa-solid fa-road text-xs text-muted"></i> {{ __('ui.back_to_path') }}
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
+    @php
+        $jsTranslations = [
+            'what_does_mean' => __('ui.q_what_does_mean', ['word' => '__WORD__']),
+            'how_do_you_say' => __('ui.q_how_do_you_say', ['word' => '__WORD__', 'lang' => trans_lang($language->slug)]),
+        ];
+
+        // Scan voice directory for actual files
+        $voiceDir = public_path('voices/' . strtolower($language->name) . '/les' . ($lesson->level->number ?? 1));
+        $voiceFiles = [];
+        if (is_dir($voiceDir)) {
+            foreach (scandir($voiceDir) as $file) {
+                if (str_ends_with($file, '.mp3')) {
+                    $name = substr($file, 0, -4);
+                    $tr = ['ç'=>'c','Ç'=>'C','ğ'=>'g','Ğ'=>'G','ı'=>'i','İ'=>'I','ö'=>'o','Ö'=>'O','ş'=>'s','Ş'=>'S','ü'=>'u','Ü'=>'U','â'=>'a','î'=>'i','û'=>'u'];
+                    $ascii = strtolower(strtr($name, $tr));
+                    $ascii = preg_replace('/[^a-z0-9]+/', '-', $ascii);
+                    $ascii = trim($ascii, '-');
+                    $voiceFiles[$ascii] = $file;
+                }
+            }
+        }
+    @endphp
     <script>
+    const _voiceMap = {!! json_encode($voiceFiles) !!};
+    const _t = {!! json_encode($jsTranslations) !!};
+    function _q(template, word) { return _t[template].replace('__WORD__', word); }
     function lessonApp() {
         return {
             // Raw steps from server
@@ -700,7 +769,7 @@
                         this.retryQueue.push({
                             _id: step._id, _retry: true,
                             type: 'multiple_choice',
-                            question: `How do you say "${translation}"?`,
+                            question: _q('how_do_you_say', translation),
                             correct: step.correct,
                             options: [step.correct, ...wrongWords].sort(() => Math.random() - 0.5),
                         });
@@ -708,7 +777,7 @@
                         // Not enough distractors, just re-ask as typing
                         this.retryQueue.push({ ...step, _retry: true });
                     }
-                } else if (step.type === 'multiple_choice' || step.type === 'listening') {
+                } else if (step.type === 'multiple_choice' || step.type === 'listening' || step.type === 'fill_blank') {
                     // Retry with reshuffled options
                     this.retryQueue.push({
                         ...step,
@@ -724,7 +793,7 @@
                         this.retryQueue.push({
                             _id: step._id, _retry: true,
                             type: 'multiple_choice',
-                            question: `What does "${flash.word}" mean?`,
+                            question: _q('what_does_mean', flash.word),
                             correct: flash.translation,
                             options: [flash.translation, ...wrong].sort(() => Math.random() - 0.5),
                         });
@@ -738,53 +807,88 @@
 
             _speakId: 0,
 
-            speak(word, lang) {
-                const langCodes = {
-                    'Dutch': ['nl-NL','nl'], 'German': ['de-DE','de'], 'French': ['fr-FR','fr'],
-                    'Spanish': ['es-ES','es-MX','es'], 'Portuguese': ['pt-PT','pt-BR','pt'],
-                    'Italian': ['it-IT','it'], 'Turkish': ['tr-TR','tr'], 'Russian': ['ru-RU','ru'],
-                    'Arabic': ['ar-SA','ar-AE','ar-EG','ar'], 'Japanese': ['ja-JP','ja'], 'Chinese': ['zh-CN','zh-TW','zh'],
-                };
-                const codes = langCodes[lang] || ['en-US'];
-                const voices = speechSynthesis.getVoices();
-                let voice = null;
-                for (const code of codes) {
-                    voice = voices.find(v => v.lang.startsWith(code.split('-')[0]));
-                    if (voice) break;
-                }
+            _audioEl: null,
 
-                // Stop previous without killing visualizer
+            speak(word, lang) {
                 this._speakId++;
                 const myId = this._speakId;
-                speechSynthesis.cancel();
-
-                const u = new SpeechSynthesisUtterance(word);
-                u.lang = codes[0];
-                if (voice) u.voice = voice;
-                u.rate = 0.8;
 
                 // Start visualizer
-                this.isSpeaking = true;
-                if (this.audioInterval) clearInterval(this.audioInterval);
-                this.audioInterval = setInterval(() => {
-                    this.audioBars = this.audioBars.map((_, i) => {
-                        const center = this.audioBars.length / 2;
-                        const dist = Math.abs(i - center) / center;
-                        const base = Math.max(8, 70 * (1 - dist * 0.6));
-                        return Math.min(100, Math.max(5, base + (Math.random() - 0.5) * 60));
-                    });
-                }, 80);
-
+                const startBars = () => {
+                    this.isSpeaking = true;
+                    if (this.audioInterval) clearInterval(this.audioInterval);
+                    this.audioInterval = setInterval(() => {
+                        this.audioBars = this.audioBars.map((_, i) => {
+                            const center = this.audioBars.length / 2;
+                            const dist = Math.abs(i - center) / center;
+                            const base = Math.max(8, 70 * (1 - dist * 0.6));
+                            return Math.min(100, Math.max(5, base + (Math.random() - 0.5) * 60));
+                        });
+                    }, 80);
+                };
                 const stopBars = () => {
-                    if (myId !== this._speakId) return; // newer speak call took over
+                    if (myId !== this._speakId) return;
                     this.isSpeaking = false;
                     if (this.audioInterval) clearInterval(this.audioInterval);
                     this.audioBars = this.audioBars.map(() => 5);
                 };
-                u.onend = stopBars;
-                u.onerror = stopBars;
 
-                speechSynthesis.speak(u);
+                // Stop any previous audio
+                if (this._audioEl) { this._audioEl.pause(); this._audioEl = null; }
+                speechSynthesis.cancel();
+
+                // Try MP3 file: mapped file from directory scan, then ASCII slug
+                const langSlug = lang.toLowerCase();
+                const lessonNum = '{{ $lesson->level->number ?? 1 }}';
+                const basePath = `/voices/${langSlug}/les${lessonNum}/`;
+                const asciiSlug = word.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                const mappedFile = _voiceMap[asciiSlug];
+                const urls = [];
+                if (mappedFile) urls.push(basePath + encodeURIComponent(mappedFile));
+                urls.push(basePath + asciiSlug + '.mp3');
+
+                const tryAudio = (urlIndex) => {
+                    if (urlIndex >= urls.length) {
+                        // All MP3 attempts failed — fallback to TTS
+                        this._audioEl = null;
+                        const langCodes = {
+                            'Dutch': ['nl-NL','nl'], 'German': ['de-DE','de'], 'French': ['fr-FR','fr'],
+                            'Spanish': ['es-ES','es-MX','es'], 'Portuguese': ['pt-PT','pt-BR','pt'],
+                            'Italian': ['it-IT','it'], 'Turkish': ['tr-TR','tr'], 'Russian': ['ru-RU','ru'],
+                            'Japanese': ['ja-JP','ja'], 'Chinese': ['zh-CN','zh-TW','zh'],
+                        };
+                        const codes = langCodes[lang] || ['en-US'];
+                        const voices = speechSynthesis.getVoices();
+                        let voice = null;
+                        for (const code of codes) {
+                            voice = voices.find(v => v.lang.startsWith(code.split('-')[0]));
+                            if (voice) break;
+                        }
+                        const u = new SpeechSynthesisUtterance(word);
+                        u.lang = codes[0];
+                        if (voice) u.voice = voice;
+                        u.rate = 0.8;
+                        startBars();
+                        u.onend = stopBars;
+                        u.onerror = stopBars;
+                        speechSynthesis.speak(u);
+                        return;
+                    }
+
+                    const audio = new Audio(urls[urlIndex]);
+                    this._audioEl = audio;
+                    audio.addEventListener('canplaythrough', () => {
+                        if (myId !== this._speakId) return;
+                        startBars();
+                        audio.play();
+                    }, { once: true });
+                    audio.addEventListener('ended', stopBars);
+                    audio.addEventListener('error', () => tryAudio(urlIndex + 1));
+                    audio.load();
+                };
+
+                tryAudio(0);
+
             },
 
             async finishLesson() {

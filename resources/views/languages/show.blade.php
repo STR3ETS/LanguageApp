@@ -312,7 +312,7 @@
                     <span class="text-muted text-sm">/ month</span>
                 </div>
                 <ul class="space-y-3">
-                    @foreach(['All 10 languages including ' . $language->name, 'All levels A1 to C2', 'All exercise types & spaced repetition', 'Audio flashcards', 'Priority support'] as $feat)
+                    @foreach(['All 2 languages including ' . $language->name, 'All levels A1 to C2', 'All exercise types & spaced repetition', 'Audio flashcards', 'Priority support'] as $feat)
                         <li class="flex items-center gap-3 text-sm text-text">
                             <i class="fa-solid fa-circle-check text-xs text-indigo-light"></i>{{ $feat }}
                         </li>

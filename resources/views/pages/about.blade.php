@@ -27,7 +27,7 @@
                     <p>It started with a simple observation: most language learning apps are either too gamified (fun but you don't learn much) or too academic (effective but boring). We wanted both.</p>
                     <p>We started building Fluence in 2024 from Amsterdam, Netherlands. A small team of language enthusiasts, designers, and engineers who believe that the best way to learn is through short, consistent daily practice — backed by real science.</p>
                     <p>Every feature in Fluence exists because research supports it. Spaced repetition, active recall, interleaving — these aren't buzzwords, they're the foundation of how our lessons work. We just wrapped them in an experience you'll actually want to open every day.</p>
-                    <p>Today, Fluence offers 10 languages and serves over 2,400 active learners. We're still small, still independent, and still obsessed with making language learning better.</p>
+                    <p>Today, Fluence offers 2 languages and serves over 2,400 active learners. We're still small, still independent, and still obsessed with making language learning better.</p>
                 </div>
             </div>
             <div class="space-y-4">

@@ -75,7 +75,7 @@
                 <div x-show="!annual" class="mb-8"></div>
 
                 <ul class="space-y-3 mb-8 flex-1">
-                    @foreach(['All 10 languages', 'All levels (A1–C2)', 'Unlimited lessons', 'All exercise types', 'Flashcards with audio', 'Spaced repetition', 'Progress dashboard', 'Priority support'] as $feat)
+                    @foreach(['All 2 languages', 'All levels (A1–C2)', 'Unlimited lessons', 'All exercise types', 'Flashcards with audio', 'Spaced repetition', 'Progress dashboard', 'Priority support'] as $feat)
                         <li class="flex items-center gap-3 text-sm text-text">
                             <i class="fa-solid fa-circle-check text-xs text-indigo-light"></i>{{ $feat }}
                         </li>
@@ -131,7 +131,7 @@
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
             @foreach([
-                ['icon' => 'fa-globe', 'title' => 'All 10 languages', 'desc' => 'Dutch, German, French, Spanish, Portuguese, Italian, Turkish, Russian, Japanese, and Chinese.', 'color' => 'sky'],
+                ['icon' => 'fa-globe', 'title' => 'All 2 languages', 'desc' => 'Dutch and Turkish (more coming soon).', 'color' => 'sky'],
                 ['icon' => 'fa-layer-group', 'title' => 'All levels A1–C2', 'desc' => 'Start from scratch or jump ahead. Every language offers a full progression from beginner to advanced.', 'color' => 'indigo'],
                 ['icon' => 'fa-infinity', 'title' => 'Unlimited lessons', 'desc' => 'No daily lesson limits. Learn as much or as little as you want, whenever you want.', 'color' => 'mint'],
                 ['icon' => 'fa-brain', 'title' => 'Spaced repetition', 'desc' => 'Our algorithm schedules reviews at the perfect moment so you never forget what you\'ve learned.', 'color' => 'mint'],
@@ -210,7 +210,7 @@
         <div class="space-y-3">
             @foreach([
                 ['q' => 'What can I do with the free plan?', 'a' => 'The free plan lets you learn 1 language at A1 (beginner) level. It includes basic exercises, progress tracking, streaks, and XP. No ads, no credit card. Perfect to try Fluence before upgrading.'],
-                ['q' => 'What do I get with Premium?', 'a' => 'Premium unlocks all 10 languages, all levels from A1 to C2, unlimited lessons, all exercise types, spaced repetition, audio flashcards, and priority support. Everything, basically.'],
+                ['q' => 'What do I get with Premium?', 'a' => 'Premium unlocks all 2 languages, all levels from A1 to C2, unlimited lessons, all exercise types, spaced repetition, audio flashcards, and priority support. Everything, basically.'],
                 ['q' => 'How does the Family plan work?', 'a' => 'The Family plan includes everything in Premium for up to 3 separate accounts. Each family member gets their own profile, progress, and streaks. One subscription, three learners.'],
                 ['q' => 'Is there a free trial for Premium?', 'a' => 'Yes! Both Premium and Family include a 7-day free trial. No credit card required to start. You can cancel anytime during the trial.'],
                 ['q' => 'Can I switch plans?', 'a' => 'Yes. Upgrade from Free to Premium or Family anytime. Downgrade works too — your progress is always saved, you just lose access to premium features.'],

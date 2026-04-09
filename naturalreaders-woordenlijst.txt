@@ -1,0 +1,572 @@
+NATURAL READERS WOORDENLIJST - TURKS A1 + A2
+=============================================
+Per les: kopieer elk woord, plak in Natural Readers,
+download als MP3, sla op als de bestandsnaam links.
+
+═══════════════════════════════════════════
+LES 3: Family & People
+Map: public/voices/turkish/les3/
+═══════════════════════════════════════════
+
+Opslaan als: anne.mp3                        Spreek uit: anne
+Opslaan als: baba.mp3                        Spreek uit: baba
+Opslaan als: erkek-kardes.mp3                Spreek uit: erkek kardeş
+Opslaan als: kiz-kardes.mp3                  Spreek uit: kız kardeş
+Opslaan als: ogul.mp3                        Spreek uit: oğul
+Opslaan als: kiz.mp3                         Spreek uit: kız
+
+Opslaan als: dede.mp3                        Spreek uit: dede
+Opslaan als: babaanne.mp3                    Spreek uit: babaanne
+Opslaan als: anneanne.mp3                    Spreek uit: anneanne
+Opslaan als: amca.mp3                        Spreek uit: amca
+Opslaan als: teyze.mp3                       Spreek uit: teyze
+Opslaan als: kuzen.mp3                       Spreek uit: kuzen
+
+Opslaan als: uzun-boylu.mp3                  Spreek uit: uzun boylu
+Opslaan als: kisa-boylu.mp3                  Spreek uit: kısa boylu
+Opslaan als: sari-sacli.mp3                  Spreek uit: sarı saçlı
+Opslaan als: siyah-sacli.mp3                 Spreek uit: siyah saçlı
+Opslaan als: mavi-gozlu.mp3                  Spreek uit: mavi gözlü
+Opslaan als: guzel.mp3                       Spreek uit: güzel
+
+Opslaan als: iyi.mp3                         Spreek uit: iyi
+Opslaan als: komik.mp3                       Spreek uit: komik
+Opslaan als: sessiz.mp3                      Spreek uit: sessiz
+Opslaan als: akilli.mp3                      Spreek uit: akıllı
+Opslaan als: caliskan.mp3                    Spreek uit: çalışkan
+Opslaan als: tembel.mp3                      Spreek uit: tembel
+
+Opslaan als: turkiye.mp3                     Spreek uit: Türkiye
+Opslaan als: turk.mp3                        Spreek uit: Türk
+Opslaan als: almanya.mp3                     Spreek uit: Almanya
+Opslaan als: hollanda.mp3                    Spreek uit: Hollanda
+Opslaan als: nereli.mp3                      Spreek uit: nereli
+Opslaan als: nerelisiniz.mp3                 Spreek uit: nerelisiniz
+
+Opslaan als: aile.mp3                        Spreek uit: aile
+Opslaan als: evli.mp3                        Spreek uit: evli
+Opslaan als: bekar.mp3                       Spreek uit: bekâr
+Opslaan als: cocuk.mp3                       Spreek uit: çocuk
+Opslaan als: bebek.mp3                       Spreek uit: bebek
+Opslaan als: es.mp3                          Spreek uit: eş
+
+═══════════════════════════════════════════
+LES 4: Colors & Adjectives
+Map: public/voices/turkish/les4/
+═══════════════════════════════════════════
+
+Opslaan als: kirmizi.mp3                     Spreek uit: kırmızı
+Opslaan als: mavi.mp3                        Spreek uit: mavi
+Opslaan als: yesil.mp3                       Spreek uit: yeşil
+Opslaan als: sari.mp3                        Spreek uit: sarı
+Opslaan als: siyah.mp3                       Spreek uit: siyah
+Opslaan als: beyaz.mp3                       Spreek uit: beyaz
+
+Opslaan als: turuncu.mp3                     Spreek uit: turuncu
+Opslaan als: mor.mp3                         Spreek uit: mor
+Opslaan als: pembe.mp3                       Spreek uit: pembe
+Opslaan als: kahverengi.mp3                  Spreek uit: kahverengi
+Opslaan als: gri.mp3                         Spreek uit: gri
+Opslaan als: altin-rengi.mp3                 Spreek uit: altın rengi
+
+Opslaan als: buyuk.mp3                       Spreek uit: büyük
+Opslaan als: kucuk.mp3                       Spreek uit: küçük
+Opslaan als: yeni.mp3                        Spreek uit: yeni
+Opslaan als: eski.mp3                        Spreek uit: eski
+Opslaan als: hos.mp3                         Spreek uit: hoş
+Opslaan als: cirkin.mp3                      Spreek uit: çirkin
+
+Opslaan als: hizli.mp3                       Spreek uit: hızlı
+Opslaan als: yavas.mp3                       Spreek uit: yavaş
+Opslaan als: kolay.mp3                       Spreek uit: kolay
+Opslaan als: zor.mp3                         Spreek uit: zor
+Opslaan als: pahali.mp3                      Spreek uit: pahalı
+Opslaan als: ucuz.mp3                        Spreek uit: ucuz
+
+Opslaan als: sicak.mp3                       Spreek uit: sıcak
+Opslaan als: soguk.mp3                       Spreek uit: soğuk
+Opslaan als: acik.mp3                        Spreek uit: açık
+Opslaan als: kapali.mp3                      Spreek uit: kapalı
+Opslaan als: dolu.mp3                        Spreek uit: dolu
+Opslaan als: bos.mp3                         Spreek uit: boş
+
+═══════════════════════════════════════════
+LES 5: Food & Drink
+Map: public/voices/turkish/les5/
+═══════════════════════════════════════════
+
+Opslaan als: ekmek.mp3                       Spreek uit: ekmek
+Opslaan als: pirinc.mp3                      Spreek uit: pirinç
+Opslaan als: et.mp3                          Spreek uit: et
+Opslaan als: tavuk.mp3                       Spreek uit: tavuk
+Opslaan als: balik.mp3                       Spreek uit: balık
+Opslaan als: yumurta.mp3                     Spreek uit: yumurta
+
+Opslaan als: domates.mp3                     Spreek uit: domates
+Opslaan als: salatalik.mp3                   Spreek uit: salatalık
+Opslaan als: patates.mp3                     Spreek uit: patates
+Opslaan als: sogan.mp3                       Spreek uit: soğan
+Opslaan als: biber.mp3                       Spreek uit: biber
+Opslaan als: peynir.mp3                      Spreek uit: peynir
+
+Opslaan als: elma.mp3                        Spreek uit: elma
+Opslaan als: portakal.mp3                    Spreek uit: portakal
+Opslaan als: muz.mp3                         Spreek uit: muz
+Opslaan als: cilek.mp3                       Spreek uit: çilek
+Opslaan als: uzum.mp3                        Spreek uit: üzüm
+Opslaan als: karpuz.mp3                      Spreek uit: karpuz
+
+Opslaan als: su.mp3                          Spreek uit: su
+Opslaan als: cay.mp3                         Spreek uit: çay
+Opslaan als: kahve.mp3                       Spreek uit: kahve
+Opslaan als: sut.mp3                         Spreek uit: süt
+Opslaan als: meyve-suyu.mp3                  Spreek uit: meyve suyu
+Opslaan als: ayran.mp3                       Spreek uit: ayran
+
+Opslaan als: kahvalti.mp3                    Spreek uit: kahvaltı
+Opslaan als: ogle-yemegi.mp3                 Spreek uit: öğle yemeği
+Opslaan als: aksam-yemegi.mp3                Spreek uit: akşam yemeği
+Opslaan als: atistirmalik.mp3                Spreek uit: atıştırmalık
+Opslaan als: tatli.mp3                       Spreek uit: tatlı
+Opslaan als: corba.mp3                       Spreek uit: çorba
+
+Opslaan als: hesap.mp3                       Spreek uit: hesap
+Opslaan als: menu.mp3                        Spreek uit: menü
+Opslaan als: garson.mp3                      Spreek uit: garson
+Opslaan als: siparis.mp3                     Spreek uit: sipariş
+Opslaan als: masa.mp3                        Spreek uit: masa
+Opslaan als: afiyet-olsun.mp3                Spreek uit: afiyet olsun
+
+═══════════════════════════════════════════
+LES 6: Daily Life
+Map: public/voices/turkish/les6/
+═══════════════════════════════════════════
+
+Opslaan als: uyanmak.mp3                     Spreek uit: uyanmak
+Opslaan als: kalkmak.mp3                     Spreek uit: kalkmak
+Opslaan als: yikamak.mp3                     Spreek uit: yıkamak
+Opslaan als: giyinmek.mp3                    Spreek uit: giyinmek
+Opslaan als: kahvalti-yapmak.mp3             Spreek uit: kahvaltı yapmak
+Opslaan als: evden-cikmak.mp3                Spreek uit: evden çıkmak
+
+Opslaan als: calismak.mp3                    Spreek uit: çalışmak
+Opslaan als: dinlenmek.mp3                   Spreek uit: dinlenmek
+Opslaan als: yemek-yemek.mp3                 Spreek uit: yemek yemek
+Opslaan als: uyumak.mp3                      Spreek uit: uyumak
+Opslaan als: dus-almak.mp3                   Spreek uit: duş almak
+Opslaan als: dis-fircalamak.mp3              Spreek uit: diş fırçalamak
+
+Opslaan als: pazartesi.mp3                   Spreek uit: pazartesi
+Opslaan als: sali.mp3                        Spreek uit: salı
+Opslaan als: carsamba.mp3                    Spreek uit: çarşamba
+Opslaan als: persembe.mp3                    Spreek uit: perşembe
+Opslaan als: cuma.mp3                        Spreek uit: cuma
+Opslaan als: cumartesi.mp3                   Spreek uit: cumartesi
+
+Opslaan als: ocak.mp3                        Spreek uit: ocak
+Opslaan als: subat.mp3                       Spreek uit: şubat
+Opslaan als: mart.mp3                        Spreek uit: mart
+Opslaan als: nisan.mp3                       Spreek uit: nisan
+Opslaan als: mayis.mp3                       Spreek uit: mayıs
+Opslaan als: haziran.mp3                     Spreek uit: haziran
+
+Opslaan als: saat-kac.mp3                    Spreek uit: saat kaç
+Opslaan als: saat.mp3                        Spreek uit: saat
+Opslaan als: dakika.mp3                      Spreek uit: dakika
+Opslaan als: sabah.mp3                       Spreek uit: sabah
+Opslaan als: aksam.mp3                       Spreek uit: akşam
+Opslaan als: gece.mp3                        Spreek uit: gece
+
+Opslaan als: bugun.mp3                       Spreek uit: bugün
+Opslaan als: yarin.mp3                       Spreek uit: yarın
+Opslaan als: dun.mp3                         Spreek uit: dün
+Opslaan als: simdi.mp3                       Spreek uit: şimdi
+Opslaan als: sonra.mp3                       Spreek uit: sonra
+Opslaan als: once.mp3                        Spreek uit: önce
+
+═══════════════════════════════════════════
+LES 7: Home & Places
+Map: public/voices/turkish/les7/
+═══════════════════════════════════════════
+
+Opslaan als: ev.mp3                          Spreek uit: ev
+Opslaan als: oda.mp3                         Spreek uit: oda
+Opslaan als: mutfak.mp3                      Spreek uit: mutfak
+Opslaan als: banyo.mp3                       Spreek uit: banyo
+Opslaan als: yatak-odasi.mp3                 Spreek uit: yatak odası
+Opslaan als: salon.mp3                       Spreek uit: salon
+
+Opslaan als: kapi.mp3                        Spreek uit: kapı
+Opslaan als: pencere.mp3                     Spreek uit: pencere
+Opslaan als: sandalye.mp3                    Spreek uit: sandalye
+Opslaan als: yatak.mp3                       Spreek uit: yatak
+Opslaan als: dolap.mp3                       Spreek uit: dolap
+Opslaan als: bahce.mp3                       Spreek uit: bahçe
+
+Opslaan als: okul.mp3                        Spreek uit: okul
+Opslaan als: hastane.mp3                     Spreek uit: hastane
+Opslaan als: market.mp3                      Spreek uit: market
+Opslaan als: eczane.mp3                      Spreek uit: eczane
+Opslaan als: park.mp3                        Spreek uit: park
+Opslaan als: restoran.mp3                    Spreek uit: restoran
+
+Opslaan als: sol.mp3                         Spreek uit: sol
+Opslaan als: sag.mp3                         Spreek uit: sağ
+Opslaan als: duz.mp3                         Spreek uit: düz
+Opslaan als: yakin.mp3                       Spreek uit: yakın
+Opslaan als: uzak.mp3                        Spreek uit: uzak
+Opslaan als: karsida.mp3                     Spreek uit: karşıda
+
+Opslaan als: neresi.mp3                      Spreek uit: neresi
+Opslaan als: burada.mp3                      Spreek uit: burada
+Opslaan als: orada.mp3                       Spreek uit: orada
+Opslaan als: icinde.mp3                      Spreek uit: içinde
+Opslaan als: disinda.mp3                     Spreek uit: dışında
+Opslaan als: yaninda.mp3                     Spreek uit: yanında
+
+═══════════════════════════════════════════
+LES 8: Basic Verbs
+Map: public/voices/turkish/les8/
+═══════════════════════════════════════════
+
+Opslaan als: olmak.mp3                       Spreek uit: olmak
+Opslaan als: var.mp3                         Spreek uit: var
+Opslaan als: yok.mp3                         Spreek uit: yok
+Opslaan als: gitmek.mp3                      Spreek uit: gitmek
+Opslaan als: gelmek.mp3                      Spreek uit: gelmek
+Opslaan als: yapmak.mp3                      Spreek uit: yapmak
+
+Opslaan als: istemek.mp3                     Spreek uit: istemek
+Opslaan als: sevmek.mp3                      Spreek uit: sevmek
+Opslaan als: yemek.mp3                       Spreek uit: yemek
+Opslaan als: icmek.mp3                       Spreek uit: içmek
+Opslaan als: almak.mp3                       Spreek uit: almak
+Opslaan als: vermek.mp3                      Spreek uit: vermek
+
+Opslaan als: konusmak.mp3                    Spreek uit: konuşmak
+Opslaan als: anlamak.mp3                     Spreek uit: anlamak
+Opslaan als: bilmek.mp3                      Spreek uit: bilmek
+Opslaan als: okumak.mp3                      Spreek uit: okumak
+Opslaan als: yazmak.mp3                      Spreek uit: yazmak
+Opslaan als: ogrenmek.mp3                    Spreek uit: öğrenmek
+
+Opslaan als: ne.mp3                          Spreek uit: ne
+Opslaan als: kim.mp3                         Spreek uit: kim
+Opslaan als: nere.mp3                        Spreek uit: nere
+Opslaan als: ne-zaman.mp3                    Spreek uit: ne zaman
+Opslaan als: nasil.mp3                       Spreek uit: nasıl
+Opslaan als: ne-kadar.mp3                    Spreek uit: ne kadar
+
+Opslaan als: degil.mp3                       Spreek uit: değil
+Opslaan als: hicbir-sey.mp3                  Spreek uit: hiçbir şey
+Opslaan als: hic.mp3                         Spreek uit: hiç
+Opslaan als: hayir.mp3                       Spreek uit: hayır
+Opslaan als: istemiyorum.mp3                 Spreek uit: istemiyorum
+Opslaan als: bilmiyorum.mp3                  Spreek uit: bilmiyorum
+
+═══════════════════════════════════════════
+LES 10: At Home
+Map: public/voices/turkish/les10/
+═══════════════════════════════════════════
+
+Opslaan als: koridor.mp3                     Spreek uit: koridor
+Opslaan als: balkon.mp3                      Spreek uit: balkon
+Opslaan als: bodrum.mp3                      Spreek uit: bodrum
+Opslaan als: cati.mp3                        Spreek uit: çatı
+Opslaan als: garaj.mp3                       Spreek uit: garaj
+Opslaan als: teras.mp3                       Spreek uit: teras
+
+Opslaan als: koltuk.mp3                      Spreek uit: koltuk
+Opslaan als: sehpa.mp3                       Spreek uit: sehpa
+Opslaan als: kitaplik.mp3                    Spreek uit: kitaplık
+Opslaan als: ayna.mp3                        Spreek uit: ayna
+Opslaan als: hali.mp3                        Spreek uit: halı
+Opslaan als: perde.mp3                       Spreek uit: perde
+
+Opslaan als: buzdolabi.mp3                   Spreek uit: buzdolabı
+Opslaan als: camasir-makinesi.mp3            Spreek uit: çamaşır makinesi
+Opslaan als: firin.mp3                       Spreek uit: fırın
+Opslaan als: supurge.mp3                     Spreek uit: süpürge
+Opslaan als: utu.mp3                         Spreek uit: ütü
+Opslaan als: tabak.mp3                       Spreek uit: tabak
+
+Opslaan als: kira.mp3                        Spreek uit: kira
+Opslaan als: daire.mp3                       Spreek uit: daire
+Opslaan als: kat.mp3                         Spreek uit: kat
+Opslaan als: komsu.mp3                       Spreek uit: komşu
+Opslaan als: adres.mp3                       Spreek uit: adres
+Opslaan als: tasinmak.mp3                    Spreek uit: taşınmak
+
+Opslaan als: temizlemek.mp3                  Spreek uit: temizlemek
+Opslaan als: yikamak.mp3                     Spreek uit: yıkamak
+Opslaan als: pisirmek.mp3                    Spreek uit: pişirmek
+Opslaan als: supurmek.mp3                    Spreek uit: süpürmek
+Opslaan als: bulasiklari-yikamak.mp3         Spreek uit: bulaşıkları yıkamak
+Opslaan als: camasir-yikamak.mp3             Spreek uit: çamaşır yıkamak
+
+═══════════════════════════════════════════
+LES 11: Daily Routine
+Map: public/voices/turkish/les11/
+═══════════════════════════════════════════
+
+Opslaan als: alarm.mp3                       Spreek uit: alarm
+Opslaan als: kahvalti-hazirlamak.mp3         Spreek uit: kahvaltı hazırlamak
+Opslaan als: giyinmek.mp3                    Spreek uit: giyinmek
+Opslaan als: saclarini-taramak.mp3           Spreek uit: saçlarını taramak
+Opslaan als: canta-hazirlamak.mp3            Spreek uit: çanta hazırlamak
+Opslaan als: yola-cikmak.mp3                 Spreek uit: yola çıkmak
+
+Opslaan als: ders.mp3                        Spreek uit: ders
+Opslaan als: odev.mp3                        Spreek uit: ödev
+Opslaan als: sinav.mp3                       Spreek uit: sınav
+Opslaan als: mola.mp3                        Spreek uit: mola
+Opslaan als: mesai.mp3                       Spreek uit: mesai
+Opslaan als: toplanti.mp3                    Spreek uit: toplantı
+
+Opslaan als: aksam-yemegi-pisirmek.mp3       Spreek uit: akşam yemeği pişirmek
+Opslaan als: televizyon-izlemek.mp3          Spreek uit: televizyon izlemek
+Opslaan als: kitap-okumak.mp3                Spreek uit: kitap okumak
+Opslaan als: muzik-dinlemek.mp3              Spreek uit: müzik dinlemek
+Opslaan als: erken-yatmak.mp3                Spreek uit: erken yatmak
+Opslaan als: gec-yatmak.mp3                  Spreek uit: geç yatmak
+
+Opslaan als: gezmek.mp3                      Spreek uit: gezmek
+Opslaan als: alisveris-yapmak.mp3            Spreek uit: alışveriş yapmak
+Opslaan als: arkadas-ziyaret-etmek.mp3       Spreek uit: arkadaş ziyaret etmek
+Opslaan als: piknik-yapmak.mp3               Spreek uit: piknik yapmak
+Opslaan als: sinemaya-gitmek.mp3             Spreek uit: sinemaya gitmek
+Opslaan als: spor-yapmak.mp3                 Spreek uit: spor yapmak
+
+Opslaan als: her-zaman.mp3                   Spreek uit: her zaman
+Opslaan als: genellikle.mp3                  Spreek uit: genellikle
+Opslaan als: bazen.mp3                       Spreek uit: bazen
+Opslaan als: nadiren.mp3                     Spreek uit: nadiren
+Opslaan als: asla.mp3                        Spreek uit: asla
+Opslaan als: her-gun.mp3                     Spreek uit: her gün
+
+═══════════════════════════════════════════
+LES 12: Time & Calendar
+Map: public/voices/turkish/les12/
+═══════════════════════════════════════════
+
+Opslaan als: saat-kac.mp3                    Spreek uit: saat kaç
+Opslaan als: bucuk.mp3                       Spreek uit: buçuk
+Opslaan als: ceyrek.mp3                      Spreek uit: çeyrek
+Opslaan als: gece-yarisi.mp3                 Spreek uit: gece yarısı
+Opslaan als: ogle.mp3                        Spreek uit: öğle
+Opslaan als: tam.mp3                         Spreek uit: tam
+
+Opslaan als: pazar.mp3                       Spreek uit: pazar
+Opslaan als: hafta.mp3                       Spreek uit: hafta
+Opslaan als: hafta-sonu.mp3                  Spreek uit: hafta sonu
+Opslaan als: hafta-ici.mp3                   Spreek uit: hafta içi
+Opslaan als: gecen-hafta.mp3                 Spreek uit: geçen hafta
+Opslaan als: gelecek-hafta.mp3               Spreek uit: gelecek hafta
+
+Opslaan als: temmuz.mp3                      Spreek uit: temmuz
+Opslaan als: agustos.mp3                     Spreek uit: ağustos
+Opslaan als: eylul.mp3                       Spreek uit: eylül
+Opslaan als: ekim.mp3                        Spreek uit: ekim
+Opslaan als: kasim.mp3                       Spreek uit: kasım
+Opslaan als: aralik.mp3                      Spreek uit: aralık
+
+Opslaan als: tarih.mp3                       Spreek uit: tarih
+Opslaan als: yil.mp3                         Spreek uit: yıl
+Opslaan als: yuzyil.mp3                      Spreek uit: yüzyıl
+Opslaan als: dogum-tarihi.mp3                Spreek uit: doğum tarihi
+Opslaan als: gecen-yil.mp3                   Spreek uit: geçen yıl
+Opslaan als: gelecek-yil.mp3                 Spreek uit: gelecek yıl
+
+Opslaan als: randevu.mp3                     Spreek uit: randevu
+Opslaan als: musait-misiniz.mp3              Spreek uit: müsait misiniz
+Opslaan als: ne-zaman.mp3                    Spreek uit: ne zaman
+Opslaan als: saat-kacta.mp3                  Spreek uit: saat kaçta
+Opslaan als: iptal-etmek.mp3                 Spreek uit: iptal etmek
+Opslaan als: degistirmek.mp3                 Spreek uit: değiştirmek
+
+═══════════════════════════════════════════
+LES 13: Weather
+Map: public/voices/turkish/les13/
+═══════════════════════════════════════════
+
+Opslaan als: yagmur.mp3                      Spreek uit: yağmur
+Opslaan als: kar.mp3                         Spreek uit: kar
+Opslaan als: firtina.mp3                     Spreek uit: fırtına
+Opslaan als: sis.mp3                         Spreek uit: sis
+Opslaan als: gunes.mp3                       Spreek uit: güneş
+Opslaan als: bulut.mp3                       Spreek uit: bulut
+
+Opslaan als: derece.mp3                      Spreek uit: derece
+Opslaan als: ilik.mp3                        Spreek uit: ılık
+Opslaan als: serin.mp3                       Spreek uit: serin
+Opslaan als: kavurucu.mp3                    Spreek uit: kavurucu
+Opslaan als: dondurucu.mp3                   Spreek uit: dondurucu
+Opslaan als: nem.mp3                         Spreek uit: nem
+
+Opslaan als: hava-durumu.mp3                 Spreek uit: hava durumu
+Opslaan als: hava-nasil.mp3                  Spreek uit: hava nasıl
+Opslaan als: yagis.mp3                       Spreek uit: yağış
+Opslaan als: acik-hava.mp3                   Spreek uit: açık hava
+Opslaan als: kapali-hava.mp3                 Spreek uit: kapalı hava
+Opslaan als: semsiye.mp3                     Spreek uit: şemsiye
+
+Opslaan als: ilkbahar.mp3                    Spreek uit: ilkbahar
+Opslaan als: yaz.mp3                         Spreek uit: yaz
+Opslaan als: sonbahar.mp3                    Spreek uit: sonbahar
+Opslaan als: kis.mp3                         Spreek uit: kış
+Opslaan als: iklim.mp3                       Spreek uit: iklim
+Opslaan als: mevsim.mp3                      Spreek uit: mevsim
+
+═══════════════════════════════════════════
+LES 14: Directions & Transport
+Map: public/voices/turkish/les14/
+═══════════════════════════════════════════
+
+Opslaan als: donmek.mp3                      Spreek uit: dönmek
+Opslaan als: karsiya-gecmek.mp3              Spreek uit: karşıya geçmek
+Opslaan als: devam-etmek.mp3                 Spreek uit: devam etmek
+Opslaan als: durmak.mp3                      Spreek uit: durmak
+Opslaan als: kosede.mp3                      Spreek uit: köşede
+Opslaan als: karsi-tarafta.mp3               Spreek uit: karşı tarafta
+
+Opslaan als: banka.mp3                       Spreek uit: banka
+Opslaan als: postane.mp3                     Spreek uit: postane
+Opslaan als: kutuphane.mp3                   Spreek uit: kütüphane
+Opslaan als: cami.mp3                        Spreek uit: cami
+Opslaan als: belediye.mp3                    Spreek uit: belediye
+Opslaan als: otogar.mp3                      Spreek uit: otogar
+
+Opslaan als: metro.mp3                       Spreek uit: metro
+Opslaan als: tramvay.mp3                     Spreek uit: tramvay
+Opslaan als: vapur.mp3                       Spreek uit: vapur
+Opslaan als: dolmus.mp3                      Spreek uit: dolmuş
+Opslaan als: durak.mp3                       Spreek uit: durak
+Opslaan als: istasyon.mp3                    Spreek uit: istasyon
+
+Opslaan als: bilet.mp3                       Spreek uit: bilet
+Opslaan als: gidis.mp3                       Spreek uit: gidiş
+Opslaan als: gidis-donus.mp3                 Spreek uit: gidiş dönüş
+Opslaan als: aktarma.mp3                     Spreek uit: aktarma
+Opslaan als: kalkis.mp3                      Spreek uit: kalkış
+Opslaan als: varis.mp3                       Spreek uit: varış
+
+Opslaan als: nasil-gidilir.mp3               Spreek uit: nasıl gidilir
+Opslaan als: ne-kadar-surer.mp3              Spreek uit: ne kadar sürer
+Opslaan als: yuruyerek.mp3                   Spreek uit: yürüyerek
+Opslaan als: arabayla.mp3                    Spreek uit: arabayla
+Opslaan als: otobusle.mp3                    Spreek uit: otobüsle
+Opslaan als: kayboldum.mp3                   Spreek uit: kayboldum
+
+═══════════════════════════════════════════
+LES 15: Shopping
+Map: public/voices/turkish/les15/
+═══════════════════════════════════════════
+
+Opslaan als: firin.mp3                       Spreek uit: fırın
+Opslaan als: kasap.mp3                       Spreek uit: kasap
+Opslaan als: manav.mp3                       Spreek uit: manav
+Opslaan als: kuyumcu.mp3                     Spreek uit: kuyumcu
+Opslaan als: alisveris-merkezi.mp3           Spreek uit: alışveriş merkezi
+Opslaan als: pazar.mp3                       Spreek uit: pazar
+
+Opslaan als: gomlek.mp3                      Spreek uit: gömlek
+Opslaan als: pantolon.mp3                    Spreek uit: pantolon
+Opslaan als: etek.mp3                        Spreek uit: etek
+Opslaan als: ceket.mp3                       Spreek uit: ceket
+Opslaan als: ayakkabi.mp3                    Spreek uit: ayakkabı
+Opslaan als: canta.mp3                       Spreek uit: çanta
+
+Opslaan als: fiyat.mp3                       Spreek uit: fiyat
+Opslaan als: indirim.mp3                     Spreek uit: indirim
+Opslaan als: kasa.mp3                        Spreek uit: kasa
+Opslaan als: nakit.mp3                       Spreek uit: nakit
+Opslaan als: kredi-karti.mp3                 Spreek uit: kredi kartı
+Opslaan als: fis.mp3                         Spreek uit: fiş
+
+Opslaan als: deneyebilir-miyim.mp3           Spreek uit: deneyebilir miyim
+Opslaan als: beden.mp3                       Spreek uit: beden
+Opslaan als: renk.mp3                        Spreek uit: renk
+Opslaan als: bundan-var-mi.mp3               Spreek uit: bundan var mı
+Opslaan als: degistirmek-istiyorum.mp3       Spreek uit: değiştirmek istiyorum
+Opslaan als: iade.mp3                        Spreek uit: iade
+
+Opslaan als: indirim-var-mi.mp3              Spreek uit: indirim var mı
+Opslaan als: cok-pahali.mp3                  Spreek uit: çok pahalı
+Opslaan als: son-fiyat.mp3                   Spreek uit: son fiyat
+Opslaan als: pazarlik.mp3                    Spreek uit: pazarlık
+Opslaan als: uygun-fiyat.mp3                 Spreek uit: uygun fiyat
+Opslaan als: anlasmak.mp3                    Spreek uit: anlaşmak
+
+═══════════════════════════════════════════
+LES 16: Health & Body
+Map: public/voices/turkish/les16/
+═══════════════════════════════════════════
+
+Opslaan als: mide.mp3                        Spreek uit: mide
+Opslaan als: bogaz.mp3                       Spreek uit: boğaz
+Opslaan als: sirt.mp3                        Spreek uit: sırt
+Opslaan als: diz.mp3                         Spreek uit: diz
+Opslaan als: omuz.mp3                        Spreek uit: omuz
+Opslaan als: parmak.mp3                      Spreek uit: parmak
+
+Opslaan als: hasta.mp3                       Spreek uit: hasta
+Opslaan als: ates.mp3                        Spreek uit: ateş
+Opslaan als: bas-agrisi.mp3                  Spreek uit: baş ağrısı
+Opslaan als: grip.mp3                        Spreek uit: grip
+Opslaan als: oksuruk.mp3                     Spreek uit: öksürük
+Opslaan als: alerji.mp3                      Spreek uit: alerji
+
+Opslaan als: doktora-gitmek.mp3              Spreek uit: doktora gitmek
+Opslaan als: muayene.mp3                     Spreek uit: muayene
+Opslaan als: recete.mp3                      Spreek uit: reçete
+Opslaan als: agri.mp3                        Spreek uit: ağrı
+Opslaan als: nefes-almak.mp3                 Spreek uit: nefes almak
+Opslaan als: iyilesmek.mp3                   Spreek uit: iyileşmek
+
+Opslaan als: ilac.mp3                        Spreek uit: ilaç
+Opslaan als: hap.mp3                         Spreek uit: hap
+Opslaan als: merhem.mp3                      Spreek uit: merhem
+Opslaan als: bandaj.mp3                      Spreek uit: bandaj
+Opslaan als: agri-kesici.mp3                 Spreek uit: ağrı kesici
+Opslaan als: gunde-uc-kez.mp3                Spreek uit: günde üç kez
+
+═══════════════════════════════════════════
+LES 17: A2 Grammar
+Map: public/voices/turkish/les17/
+═══════════════════════════════════════════
+
+Opslaan als: gittim.mp3                      Spreek uit: gittim
+Opslaan als: yedim.mp3                       Spreek uit: yedim
+Opslaan als: gordum.mp3                      Spreek uit: gördüm
+Opslaan als: aldim.mp3                       Spreek uit: aldım
+Opslaan als: konustum.mp3                    Spreek uit: konuştum
+Opslaan als: ogrendim.mp3                    Spreek uit: öğrendim
+
+Opslaan als: gidecegim.mp3                   Spreek uit: gideceğim
+Opslaan als: yapacagim.mp3                   Spreek uit: yapacağım
+Opslaan als: gorecegim.mp3                   Spreek uit: göreceğim
+Opslaan als: yiyecegim.mp3                   Spreek uit: yiyeceğim
+Opslaan als: gelecegim.mp3                   Spreek uit: geleceğim
+Opslaan als: calisacagim.mp3                 Spreek uit: çalışacağım
+
+Opslaan als: yapabilirim.mp3                 Spreek uit: yapabilirim
+Opslaan als: yapamam.mp3                     Spreek uit: yapamam
+Opslaan als: yapmaliyim.mp3                  Spreek uit: yapmalıyım
+Opslaan als: yapmam-lazim.mp3                Spreek uit: yapmam lazım
+Opslaan als: yapmamaliyim.mp3                Spreek uit: yapmamalıyım
+Opslaan als: izin-vermek.mp3                 Spreek uit: izin vermek
+
+Opslaan als: daha-buyuk.mp3                  Spreek uit: daha büyük
+Opslaan als: daha-kucuk.mp3                  Spreek uit: daha küçük
+Opslaan als: en-iyi.mp3                      Spreek uit: en iyi
+Opslaan als: en-kotu.mp3                     Spreek uit: en kötü
+Opslaan als: kadar.mp3                       Spreek uit: kadar
+Opslaan als: den-daha.mp3                    Spreek uit: den daha
+
+Opslaan als: ve.mp3                          Spreek uit: ve
+Opslaan als: ama.mp3                         Spreek uit: ama
+Opslaan als: cunku.mp3                       Spreek uit: çünkü
+Opslaan als: bu-yuzden.mp3                   Spreek uit: bu yüzden
+Opslaan als: ya-da.mp3                       Spreek uit: ya da
+Opslaan als: hem-hem.mp3                     Spreek uit: hem ... hem
+

@@ -66,7 +66,7 @@
                             <i class="fa-solid fa-globe text-sun-light text-sm"></i>
                         </div>
                         <div>
-                            <div class="text-sm font-semibold text-bright">10 languages</div>
+                            <div class="text-sm font-semibold text-bright">2 languages</div>
                             <div class="text-xs text-muted">All included with one subscription</div>
                         </div>
                     </div>

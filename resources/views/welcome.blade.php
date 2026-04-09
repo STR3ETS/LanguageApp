@@ -154,7 +154,7 @@
 
         <div class="grid md:grid-cols-3 gap-6 mx-auto">
             @foreach([
-                ['num' => '01', 'icon' => 'fa-lock-open', 'title' => 'Choose your language', 'desc' => 'Select from 10 languages. All included with Premium. Begin with a complimentary trial.', 'color' => 'indigo'],
+                ['num' => '01', 'icon' => 'fa-lock-open', 'title' => 'Choose your language', 'desc' => 'Select from 2 languages. All included with Premium. Begin with a complimentary trial.', 'color' => 'indigo'],
                 ['num' => '02', 'icon' => 'fa-pen-nib', 'title' => 'Learn & practice', 'desc' => 'Complete refined lessons in just 5 minutes. Match, translate, and advance.', 'color' => 'mint'],
                 ['num' => '03', 'icon' => 'fa-chart-simple', 'title' => 'Watch yourself grow', 'desc' => 'Track your XP, build streaks, and unlock new levels every day.', 'color' => 'sun'],
             ] as $step)
@@ -408,7 +408,7 @@
                 <h2 class="font-display text-3xl sm:text-4xl font-bold text-bright tracking-tight mb-5">
                     Learn multiple languages<br><span class="text-gradient italic">at the same time.</span>
                 </h2>
-                <p class="text-soft text-base mb-6 leading-relaxed">With Premium, switch between all 10 languages freely. Each has its own progress, streaks, and level — so you can learn at your own pace.</p>
+                <p class="text-soft text-base mb-6 leading-relaxed">With Premium, switch between all 2 languages freely. Each has its own progress, streaks, and level — so you can learn at your own pace.</p>
                 <ul class="space-y-3">
                     @foreach(['Independent progress per language', 'Switch languages in one tap', 'From A1 beginner to C2 mastery'] as $item)
                         <li class="flex items-center gap-3 text-sm text-text">
@@ -611,7 +611,7 @@
                 <p class="text-sm text-muted mb-6">All languages, all levels</p>
 
                 <ul class="space-y-2.5 mb-8 flex-1">
-                    @foreach(['All 10 languages', 'All levels (A1–C2)', 'Unlimited lessons', 'All exercise types', 'Spaced repetition'] as $feat)
+                    @foreach(['All 2 languages', 'All levels (A1–C2)', 'Unlimited lessons', 'All exercise types', 'Spaced repetition'] as $feat)
                         <li class="flex items-center gap-3 text-sm text-text">
                             <i class="fa-solid fa-circle-check text-xs text-indigo-light"></i>{{ $feat }}
                         </li>

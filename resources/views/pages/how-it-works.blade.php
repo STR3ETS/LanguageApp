@@ -23,10 +23,10 @@
             <div>
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-indigo/10 rounded-full mb-4 text-[10px] font-semibold text-indigo-light uppercase tracking-widest">Step 01</div>
                 <h2 class="font-display text-3xl sm:text-4xl font-bold text-bright tracking-tight mb-5">Pick a language</h2>
-                <p class="text-soft text-base leading-relaxed mb-6">Choose from 10 languages, including French, Spanish, German, Japanese, and more. Each language has its own complete learning path — from absolute beginner (A1) to advanced (C2).</p>
-                <p class="text-soft text-base leading-relaxed mb-6">The free plan lets you learn 1 language at A1 level. With Premium, you unlock all 10 languages and every level. You can even learn multiple languages at the same time.</p>
+                <p class="text-soft text-base leading-relaxed mb-6">Choose from 2 languages, including French, Spanish, German, Japanese, and more. Each language has its own complete learning path — from absolute beginner (A1) to advanced (C2).</p>
+                <p class="text-soft text-base leading-relaxed mb-6">The free plan lets you learn 1 language at A1 level. With Premium, you unlock all 2 languages and every level. You can even learn multiple languages at the same time.</p>
                 <ul class="space-y-3">
-                    @foreach(['10 languages to choose from', 'A1 through C2 levels', 'Switch languages anytime with Premium'] as $item)
+                    @foreach(['2 languages to choose from', 'A1 through C2 levels', 'Switch languages anytime with Premium'] as $item)
                         <li class="flex items-center gap-3 text-sm text-text">
                             <i class="fa-solid fa-circle-check text-xs text-indigo-light"></i>{{ $item }}
                         </li>

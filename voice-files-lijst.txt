@@ -1,0 +1,454 @@
+
+=== les3/ (Family & People) ===
+anne.mp3                              anne
+baba.mp3                              baba
+erkek-kardes.mp3                      erkek kardeş
+kiz-kardes.mp3                        kız kardeş
+ogul.mp3                              oğul
+kiz.mp3                               kız
+dede.mp3                              dede
+babaanne.mp3                          babaanne
+anneanne.mp3                          anneanne
+amca.mp3                              amca
+teyze.mp3                             teyze
+kuzen.mp3                             kuzen
+uzun-boylu.mp3                        uzun boylu
+kisa-boylu.mp3                        kısa boylu
+sari-sacli.mp3                        sarı saçlı
+siyah-sacli.mp3                       siyah saçlı
+mavi-gozlu.mp3                        mavi gözlü
+guzel.mp3                             güzel
+iyi.mp3                               iyi
+komik.mp3                             komik
+sessiz.mp3                            sessiz
+akilli.mp3                            akıllı
+caliskan.mp3                          çalışkan
+tembel.mp3                            tembel
+turkiye.mp3                           Türkiye
+turk.mp3                              Türk
+almanya.mp3                           Almanya
+hollanda.mp3                          Hollanda
+nereli.mp3                            nereli
+nerelisiniz.mp3                       nerelisiniz
+aile.mp3                              aile
+evli.mp3                              evli
+bekar.mp3                             bekâr
+cocuk.mp3                             çocuk
+bebek.mp3                             bebek
+es.mp3                                eş
+
+=== les4/ (Colors & Adjectives) ===
+kirmizi.mp3                           kırmızı
+mavi.mp3                              mavi
+yesil.mp3                             yeşil
+sari.mp3                              sarı
+siyah.mp3                             siyah
+beyaz.mp3                             beyaz
+turuncu.mp3                           turuncu
+mor.mp3                               mor
+pembe.mp3                             pembe
+kahverengi.mp3                        kahverengi
+gri.mp3                               gri
+altin-rengi.mp3                       altın rengi
+buyuk.mp3                             büyük
+kucuk.mp3                             küçük
+yeni.mp3                              yeni
+eski.mp3                              eski
+hos.mp3                               hoş
+cirkin.mp3                            çirkin
+hizli.mp3                             hızlı
+yavas.mp3                             yavaş
+kolay.mp3                             kolay
+zor.mp3                               zor
+pahali.mp3                            pahalı
+ucuz.mp3                              ucuz
+sicak.mp3                             sıcak
+soguk.mp3                             soğuk
+acik.mp3                              açık
+kapali.mp3                            kapalı
+dolu.mp3                              dolu
+bos.mp3                               boş
+
+=== les5/ (Food & Drink) ===
+ekmek.mp3                             ekmek
+pirinc.mp3                            pirinç
+et.mp3                                et
+tavuk.mp3                             tavuk
+balik.mp3                             balık
+yumurta.mp3                           yumurta
+domates.mp3                           domates
+salatalik.mp3                         salatalık
+patates.mp3                           patates
+sogan.mp3                             soğan
+biber.mp3                             biber
+peynir.mp3                            peynir
+elma.mp3                              elma
+portakal.mp3                          portakal
+muz.mp3                               muz
+cilek.mp3                             çilek
+uzum.mp3                              üzüm
+karpuz.mp3                            karpuz
+su.mp3                                su
+cay.mp3                               çay
+kahve.mp3                             kahve
+sut.mp3                               süt
+meyve-suyu.mp3                        meyve suyu
+ayran.mp3                             ayran
+kahvalti.mp3                          kahvaltı
+ogle-yemegi.mp3                       öğle yemeği
+aksam-yemegi.mp3                      akşam yemeği
+atistirmalik.mp3                      atıştırmalık
+tatli.mp3                             tatlı
+corba.mp3                             çorba
+hesap.mp3                             hesap
+menu.mp3                              menü
+garson.mp3                            garson
+siparis.mp3                           sipariş
+masa.mp3                              masa
+afiyet-olsun.mp3                      afiyet olsun
+
+=== les6/ (Daily Life) ===
+uyanmak.mp3                           uyanmak
+kalkmak.mp3                           kalkmak
+yikamak.mp3                           yıkamak
+giyinmek.mp3                          giyinmek
+kahvalti-yapmak.mp3                   kahvaltı yapmak
+evden-cikmak.mp3                      evden çıkmak
+calismak.mp3                          çalışmak
+dinlenmek.mp3                         dinlenmek
+yemek-yemek.mp3                       yemek yemek
+uyumak.mp3                            uyumak
+dus-almak.mp3                         duş almak
+dis-fircalamak.mp3                    diş fırçalamak
+pazartesi.mp3                         pazartesi
+sali.mp3                              salı
+carsamba.mp3                          çarşamba
+persembe.mp3                          perşembe
+cuma.mp3                              cuma
+cumartesi.mp3                         cumartesi
+ocak.mp3                              ocak
+subat.mp3                             şubat
+mart.mp3                              mart
+nisan.mp3                             nisan
+mayis.mp3                             mayıs
+haziran.mp3                           haziran
+saat-kac.mp3                          saat kaç
+saat.mp3                              saat
+dakika.mp3                            dakika
+sabah.mp3                             sabah
+aksam.mp3                             akşam
+gece.mp3                              gece
+bugun.mp3                             bugün
+yarin.mp3                             yarın
+dun.mp3                               dün
+simdi.mp3                             şimdi
+sonra.mp3                             sonra
+once.mp3                              önce
+
+=== les7/ (Home & Places) ===
+ev.mp3                                ev
+oda.mp3                               oda
+mutfak.mp3                            mutfak
+banyo.mp3                             banyo
+yatak-odasi.mp3                       yatak odası
+salon.mp3                             salon
+kapi.mp3                              kapı
+pencere.mp3                           pencere
+sandalye.mp3                          sandalye
+yatak.mp3                             yatak
+dolap.mp3                             dolap
+bahce.mp3                             bahçe
+okul.mp3                              okul
+hastane.mp3                           hastane
+market.mp3                            market
+eczane.mp3                            eczane
+park.mp3                              park
+restoran.mp3                          restoran
+sol.mp3                               sol
+sag.mp3                               sağ
+duz.mp3                               düz
+yakin.mp3                             yakın
+uzak.mp3                              uzak
+karsida.mp3                           karşıda
+neresi.mp3                            neresi
+burada.mp3                            burada
+orada.mp3                             orada
+icinde.mp3                            içinde
+disinda.mp3                           dışında
+yaninda.mp3                           yanında
+
+=== les8/ (Basic Verbs) ===
+olmak.mp3                             olmak
+var.mp3                               var
+yok.mp3                               yok
+gitmek.mp3                            gitmek
+gelmek.mp3                            gelmek
+yapmak.mp3                            yapmak
+istemek.mp3                           istemek
+sevmek.mp3                            sevmek
+yemek.mp3                             yemek
+icmek.mp3                             içmek
+almak.mp3                             almak
+vermek.mp3                            vermek
+konusmak.mp3                          konuşmak
+anlamak.mp3                           anlamak
+bilmek.mp3                            bilmek
+okumak.mp3                            okumak
+yazmak.mp3                            yazmak
+ogrenmek.mp3                          öğrenmek
+ne.mp3                                ne
+kim.mp3                               kim
+nere.mp3                              nere
+ne-zaman.mp3                          ne zaman
+nasil.mp3                             nasıl
+ne-kadar.mp3                          ne kadar
+degil.mp3                             değil
+hicbir-sey.mp3                        hiçbir şey
+hic.mp3                               hiç
+hayir.mp3                             hayır
+istemiyorum.mp3                       istemiyorum
+bilmiyorum.mp3                        bilmiyorum
+
+=== les10/ (At Home) ===
+koridor.mp3                           koridor
+balkon.mp3                            balkon
+bodrum.mp3                            bodrum
+cati.mp3                              çatı
+garaj.mp3                             garaj
+teras.mp3                             teras
+koltuk.mp3                            koltuk
+sehpa.mp3                             sehpa
+kitaplik.mp3                          kitaplık
+ayna.mp3                              ayna
+hali.mp3                              halı
+perde.mp3                             perde
+buzdolabi.mp3                         buzdolabı
+camasir-makinesi.mp3                  çamaşır makinesi
+firin.mp3                             fırın
+supurge.mp3                           süpürge
+utu.mp3                               ütü
+tabak.mp3                             tabak
+kira.mp3                              kira
+daire.mp3                             daire
+kat.mp3                               kat
+komsu.mp3                             komşu
+adres.mp3                             adres
+tasinmak.mp3                          taşınmak
+temizlemek.mp3                        temizlemek
+yikamak.mp3                           yıkamak
+pisirmek.mp3                          pişirmek
+supurmek.mp3                          süpürmek
+bulasiklari-yikamak.mp3               bulaşıkları yıkamak
+camasir-yikamak.mp3                   çamaşır yıkamak
+
+=== les11/ (Daily Routine) ===
+alarm.mp3                             alarm
+kahvalti-hazirlamak.mp3               kahvaltı hazırlamak
+giyinmek.mp3                          giyinmek
+saclarini-taramak.mp3                 saçlarını taramak
+canta-hazirlamak.mp3                  çanta hazırlamak
+yola-cikmak.mp3                       yola çıkmak
+ders.mp3                              ders
+odev.mp3                              ödev
+sinav.mp3                             sınav
+mola.mp3                              mola
+mesai.mp3                             mesai
+toplanti.mp3                          toplantı
+aksam-yemegi-pisirmek.mp3             akşam yemeği pişirmek
+televizyon-izlemek.mp3                televizyon izlemek
+kitap-okumak.mp3                      kitap okumak
+muzik-dinlemek.mp3                    müzik dinlemek
+erken-yatmak.mp3                      erken yatmak
+gec-yatmak.mp3                        geç yatmak
+gezmek.mp3                            gezmek
+alisveris-yapmak.mp3                  alışveriş yapmak
+arkadas-ziyaret-etmek.mp3             arkadaş ziyaret etmek
+piknik-yapmak.mp3                     piknik yapmak
+sinemaya-gitmek.mp3                   sinemaya gitmek
+spor-yapmak.mp3                       spor yapmak
+her-zaman.mp3                         her zaman
+genellikle.mp3                        genellikle
+bazen.mp3                             bazen
+nadiren.mp3                           nadiren
+asla.mp3                              asla
+her-gun.mp3                           her gün
+
+=== les12/ (Time & Calendar) ===
+saat-kac.mp3                          saat kaç
+bucuk.mp3                             buçuk
+ceyrek.mp3                            çeyrek
+gece-yarisi.mp3                       gece yarısı
+ogle.mp3                              öğle
+tam.mp3                               tam
+pazar.mp3                             pazar
+hafta.mp3                             hafta
+hafta-sonu.mp3                        hafta sonu
+hafta-ici.mp3                         hafta içi
+gecen-hafta.mp3                       geçen hafta
+gelecek-hafta.mp3                     gelecek hafta
+temmuz.mp3                            temmuz
+agustos.mp3                           ağustos
+eylul.mp3                             eylül
+ekim.mp3                              ekim
+kasim.mp3                             kasım
+aralik.mp3                            aralık
+tarih.mp3                             tarih
+yil.mp3                               yıl
+yuzyil.mp3                            yüzyıl
+dogum-tarihi.mp3                      doğum tarihi
+gecen-yil.mp3                         geçen yıl
+gelecek-yil.mp3                       gelecek yıl
+randevu.mp3                           randevu
+musait-misiniz.mp3                    müsait misiniz
+ne-zaman.mp3                          ne zaman
+saat-kacta.mp3                        saat kaçta
+iptal-etmek.mp3                       iptal etmek
+degistirmek.mp3                       değiştirmek
+
+=== les13/ (Weather) ===
+yagmur.mp3                            yağmur
+kar.mp3                               kar
+firtina.mp3                           fırtına
+sis.mp3                               sis
+gunes.mp3                             güneş
+bulut.mp3                             bulut
+derece.mp3                            derece
+ilik.mp3                              ılık
+serin.mp3                             serin
+kavurucu.mp3                          kavurucu
+dondurucu.mp3                         dondurucu
+nem.mp3                               nem
+hava-durumu.mp3                       hava durumu
+hava-nasil.mp3                        hava nasıl
+yagis.mp3                             yağış
+acik-hava.mp3                         açık hava
+kapali-hava.mp3                       kapalı hava
+semsiye.mp3                           şemsiye
+ilkbahar.mp3                          ilkbahar
+yaz.mp3                               yaz
+sonbahar.mp3                          sonbahar
+kis.mp3                               kış
+iklim.mp3                             iklim
+mevsim.mp3                            mevsim
+
+=== les14/ (Directions & Transport) ===
+donmek.mp3                            dönmek
+karsiya-gecmek.mp3                    karşıya geçmek
+devam-etmek.mp3                       devam etmek
+durmak.mp3                            durmak
+kosede.mp3                            köşede
+karsi-tarafta.mp3                     karşı tarafta
+banka.mp3                             banka
+postane.mp3                           postane
+kutuphane.mp3                         kütüphane
+cami.mp3                              cami
+belediye.mp3                          belediye
+otogar.mp3                            otogar
+metro.mp3                             metro
+tramvay.mp3                           tramvay
+vapur.mp3                             vapur
+dolmus.mp3                            dolmuş
+durak.mp3                             durak
+istasyon.mp3                          istasyon
+bilet.mp3                             bilet
+gidis.mp3                             gidiş
+gidis-donus.mp3                       gidiş dönüş
+aktarma.mp3                           aktarma
+kalkis.mp3                            kalkış
+varis.mp3                             varış
+nasil-gidilir.mp3                     nasıl gidilir
+ne-kadar-surer.mp3                    ne kadar sürer
+yuruyerek.mp3                         yürüyerek
+arabayla.mp3                          arabayla
+otobusle.mp3                          otobüsle
+kayboldum.mp3                         kayboldum
+
+=== les15/ (Shopping) ===
+firin.mp3                             fırın
+kasap.mp3                             kasap
+manav.mp3                             manav
+kuyumcu.mp3                           kuyumcu
+alisveris-merkezi.mp3                 alışveriş merkezi
+pazar.mp3                             pazar
+gomlek.mp3                            gömlek
+pantolon.mp3                          pantolon
+etek.mp3                              etek
+ceket.mp3                             ceket
+ayakkabi.mp3                          ayakkabı
+canta.mp3                             çanta
+fiyat.mp3                             fiyat
+indirim.mp3                           indirim
+kasa.mp3                              kasa
+nakit.mp3                             nakit
+kredi-karti.mp3                       kredi kartı
+fis.mp3                               fiş
+deneyebilir-miyim.mp3                 deneyebilir miyim
+beden.mp3                             beden
+renk.mp3                              renk
+bundan-var-mi.mp3                     bundan var mı
+degistirmek-istiyorum.mp3             değiştirmek istiyorum
+iade.mp3                              iade
+indirim-var-mi.mp3                    indirim var mı
+cok-pahali.mp3                        çok pahalı
+son-fiyat.mp3                         son fiyat
+pazarlik.mp3                          pazarlık
+uygun-fiyat.mp3                       uygun fiyat
+anlasmak.mp3                          anlaşmak
+
+=== les16/ (Health & Body) ===
+mide.mp3                              mide
+bogaz.mp3                             boğaz
+sirt.mp3                              sırt
+diz.mp3                               diz
+omuz.mp3                              omuz
+parmak.mp3                            parmak
+hasta.mp3                             hasta
+ates.mp3                              ateş
+bas-agrisi.mp3                        baş ağrısı
+grip.mp3                              grip
+oksuruk.mp3                           öksürük
+alerji.mp3                            alerji
+doktora-gitmek.mp3                    doktora gitmek
+muayene.mp3                           muayene
+recete.mp3                            reçete
+agri.mp3                              ağrı
+nefes-almak.mp3                       nefes almak
+iyilesmek.mp3                         iyileşmek
+ilac.mp3                              ilaç
+hap.mp3                               hap
+merhem.mp3                            merhem
+bandaj.mp3                            bandaj
+agri-kesici.mp3                       ağrı kesici
+gunde-uc-kez.mp3                      günde üç kez
+
+=== les17/ (A2 Grammar) ===
+gittim.mp3                            gittim
+yedim.mp3                             yedim
+gordum.mp3                            gördüm
+aldim.mp3                             aldım
+konustum.mp3                          konuştum
+ogrendim.mp3                          öğrendim
+gidecegim.mp3                         gideceğim
+yapacagim.mp3                         yapacağım
+gorecegim.mp3                         göreceğim
+yiyecegim.mp3                         yiyeceğim
+gelecegim.mp3                         geleceğim
+calisacagim.mp3                       çalışacağım
+yapabilirim.mp3                       yapabilirim
+yapamam.mp3                           yapamam
+yapmaliyim.mp3                        yapmalıyım
+yapmam-lazim.mp3                      yapmam lazım
+yapmamaliyim.mp3                      yapmamalıyım
+izin-vermek.mp3                       izin vermek
+daha-buyuk.mp3                        daha büyük
+daha-kucuk.mp3                        daha küçük
+en-iyi.mp3                            en iyi
+en-kotu.mp3                           en kötü
+kadar.mp3                             kadar
+den-daha.mp3                          den daha
+ve.mp3                                ve
+ama.mp3                               ama
+cunku.mp3                             çünkü
+bu-yuzden.mp3                         bu yüzden
+ya-da.mp3                             ya da
+hem-hem.mp3                           hem ... hem

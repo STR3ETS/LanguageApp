@@ -19,12 +19,12 @@
         }
 
         $cefrMeta = [
-            'A1' => ['label' => 'Beginner', 'icon' => 'fa-seedling', 'color' => 'mint'],
-            'A2' => ['label' => 'Elementary', 'icon' => 'fa-leaf', 'color' => 'sky'],
-            'B1' => ['label' => 'Intermediate', 'icon' => 'fa-tree', 'color' => 'indigo'],
-            'B2' => ['label' => 'Upper Intermediate', 'icon' => 'fa-mountain', 'color' => 'sun'],
-            'C1' => ['label' => 'Advanced', 'icon' => 'fa-crown', 'color' => 'rose'],
-            'C2' => ['label' => 'Mastery', 'icon' => 'fa-gem', 'color' => 'indigo'],
+            'A1' => ['label' => __('ui.a1_beginner'), 'icon' => 'fa-seedling', 'color' => 'mint'],
+            'A2' => ['label' => __('ui.a2_elementary'), 'icon' => 'fa-leaf', 'color' => 'sky'],
+            'B1' => ['label' => __('ui.b1_intermediate'), 'icon' => 'fa-tree', 'color' => 'indigo'],
+            'B2' => ['label' => __('ui.b2_upper_intermediate'), 'icon' => 'fa-mountain', 'color' => 'sun'],
+            'C1' => ['label' => __('ui.c1_advanced'), 'icon' => 'fa-crown', 'color' => 'rose'],
+            'C2' => ['label' => __('ui.c2_mastery'), 'icon' => 'fa-gem', 'color' => 'indigo'],
         ];
 
         $globalLessonNum = 0;
@@ -46,17 +46,17 @@
                             <x-flag :code="$language->flag_code" size="lg" />
                         </div>
                         <div>
-                            <h1 class="font-display text-2xl font-bold text-bright">{{ $language->name }}</h1>
+                            <h1 class="font-display text-2xl font-bold text-bright">{{ trans_lang($language->slug) }}</h1>
                             <div class="flex items-center gap-3 mt-1.5">
                                 <div class="w-28 bg-white/10 rounded-full h-1.5">
                                     <div class="bg-gradient-to-r from-indigo to-indigo-light rounded-full h-1.5" style="width: {{ $overallPercent }}%"></div>
                                 </div>
-                                <span class="text-xs text-soft">{{ $totalCompleted }}/{{ $totalLessons }} levels · {{ $overallPercent }}%</span>
+                                <span class="text-xs text-soft">{{ $totalCompleted }}/{{ $totalLessons }} {{ __('ui.levels') }} · {{ $overallPercent }}%</span>
                             </div>
                         </div>
                     </div>
                     <a href="{{ route('learn.index') }}" class="text-xs text-soft hover:text-indigo-light transition-colors flex items-center gap-1.5 cursor-pointer shrink-0">
-                        <i class="fa-solid fa-arrow-left text-[9px]"></i> All languages
+                        <i class="fa-solid fa-arrow-left text-[9px]"></i> {{ __('ui.all_languages_link') }}
                     </a>
                 </div>
             </div>
@@ -93,17 +93,17 @@
                                     <h2 class="font-display text-xl font-bold {{ $cefrLocked ? 'text-muted' : 'text-bright' }}">{{ $cefr }} — {{ $meta['label'] }}</h2>
                                     @if($cefrLocked)
                                         <span class="text-[10px] px-2 py-0.5 bg-elevated rounded-full text-muted">
-                                            <i class="fa-solid fa-lock text-[8px] mr-0.5"></i> Complete {{ array_keys($cefrStats)[array_search($cefr, array_keys($cefrStats)) - 1] }} first
+                                            <i class="fa-solid fa-lock text-[8px] mr-0.5"></i> {{ __('ui.complete_first', ['cefr' => array_keys($cefrStats)[array_search($cefr, array_keys($cefrStats)) - 1]]) }}
                                         </span>
                                     @elseif($cefrComplete)
-                                        <span class="text-[10px] px-2.5 py-0.5 bg-mint/10 rounded-full text-mint-light font-semibold">Completed</span>
+                                        <span class="text-[10px] px-2.5 py-0.5 bg-mint/10 rounded-full text-mint-light font-semibold">{{ __('ui.completed_label') }}</span>
                                     @endif
                                 </div>
                                 <div class="flex items-center gap-2 mt-1.5">
                                     <div class="w-32 bg-elevated rounded-full h-1.5">
                                         <div class="bg-{{ $cefrComplete ? 'mint' : $meta['color'] }} rounded-full h-1.5 transition-all" style="width: {{ $cefrStats[$cefr]['percent'] }}%"></div>
                                     </div>
-                                    <span class="text-[11px] text-muted">{{ $cefrStats[$cefr]['done'] }}/{{ $cefrStats[$cefr]['total'] }} levels</span>
+                                    <span class="text-[11px] text-muted">{{ $cefrStats[$cefr]['done'] }}/{{ $cefrStats[$cefr]['total'] }} {{ __('ui.levels') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -119,35 +119,61 @@
                                     $isLevelComplete = $completedInLevel === $levelTotal && $levelTotal > 0;
                                     $levelPercent = $levelTotal > 0 ? round(($completedInLevel / $levelTotal) * 100) : 0;
                                     $hasUnlocked = $levelLessons->contains(fn($l) => $unlockedLessonIds->contains($l->id) || $completedLessonIds->contains($l->id));
+                                    $isExam = Str::contains($level->name, 'Exam');
                                 @endphp
 
-                                <div class="glass-card rounded-2xl overflow-hidden {{ $isLevelComplete ? 'border-mint/10' : '' }}" x-data="{ open: {{ ($hasUnlocked && !$isLevelComplete) ? 'true' : 'false' }} }">
+                                <div class="rounded-2xl overflow-hidden {{ $isExam ? 'border border-sun/20 bg-sun/[0.03]' : 'glass-card' }} {{ $isLevelComplete ? 'border-mint/10' : '' }}" x-data="{ open: {{ ($hasUnlocked && !$isLevelComplete) ? 'true' : 'false' }} }">
                                     {{-- Lesson header --}}
                                     <button @click="open = !open" class="w-full px-5 py-4 flex items-center gap-4 cursor-pointer hover:bg-elevated/20 transition-colors duration-200 focus:outline-none">
-                                        {{-- Number badge --}}
-                                        <div class="w-11 h-11 rounded-xl {{ $isLevelComplete ? 'bg-mint/15' : ($hasUnlocked ? 'bg-' . $meta['color'] . '/15' : 'bg-elevated/80') }} flex items-center justify-center shrink-0">
-                                            @if($isLevelComplete)
-                                                <i class="fa-solid fa-circle-check text-mint-light text-sm"></i>
-                                            @elseif(!$hasUnlocked)
-                                                <i class="fa-solid fa-lock text-muted text-[10px]"></i>
-                                            @else
-                                                <span class="text-sm font-display font-bold text-{{ $meta['color'] }}-light">{{ $globalLessonNum }}</span>
-                                            @endif
-                                        </div>
+                                        {{-- Badge --}}
+                                        @if($isExam)
+                                            <div class="w-11 h-11 rounded-xl {{ $isLevelComplete ? 'bg-mint/15' : ($hasUnlocked ? 'bg-sun/15' : 'bg-elevated/80') }} flex items-center justify-center shrink-0">
+                                                @if($isLevelComplete)
+                                                    <i class="fa-solid fa-circle-check text-mint-light text-sm"></i>
+                                                @elseif(!$hasUnlocked)
+                                                    <i class="fa-solid fa-lock text-muted text-[10px]"></i>
+                                                @else
+                                                    <i class="fa-solid fa-award text-sun-light text-sm"></i>
+                                                @endif
+                                            </div>
+                                        @else
+                                            <div class="w-11 h-11 rounded-xl {{ $isLevelComplete ? 'bg-mint/15' : ($hasUnlocked ? 'bg-' . $meta['color'] . '/15' : 'bg-elevated/80') }} flex items-center justify-center shrink-0">
+                                                @if($isLevelComplete)
+                                                    <i class="fa-solid fa-circle-check text-mint-light text-sm"></i>
+                                                @elseif(!$hasUnlocked)
+                                                    <i class="fa-solid fa-lock text-muted text-[10px]"></i>
+                                                @else
+                                                    <span class="text-sm font-display font-bold text-{{ $meta['color'] }}-light">{{ $globalLessonNum }}</span>
+                                                @endif
+                                            </div>
+                                        @endif
 
                                         <div class="flex-1 text-left min-w-0">
                                             <div class="flex items-center gap-2">
-                                                <h3 class="font-display font-bold text-bright text-sm">Les {{ $globalLessonNum }}: {{ $level->name }}</h3>
+                                                @php
+                                                    $titleKey = 'ui.lesson_title_' . Str::slug($level->name, '_');
+                                                    $levelTitle = __($titleKey) !== $titleKey ? __($titleKey) : $level->name;
+                                                @endphp
+                                                @if($isExam)
+                                                    <h3 class="font-display font-bold text-sun-light text-sm"><i class="fa-solid fa-award text-[10px] mr-1"></i>{{ $cefr }} {{ __('ui.final_exam') }}</h3>
+                                                    <span class="text-[9px] px-2 py-0.5 bg-sun/10 text-sun-light rounded-full font-semibold">{{ __('ui.exam') }}</span>
+                                                @else
+                                                    <h3 class="font-display font-bold text-bright text-sm">{{ __('ui.les') }} {{ $globalLessonNum }}: {{ $levelTitle }}</h3>
+                                                @endif
                                             </div>
+                                            @php
+                                                $descKey = 'ui.lesson_desc_' . Str::slug($level->name, '_');
+                                                $desc = __($descKey) !== $descKey ? __($descKey) : $level->description;
+                                            @endphp
                                             <div class="text-[11px] text-muted mt-0.5">
-                                                @if($level->description){{ $level->description }} · @endif{{ $completedInLevel }}/{{ $levelTotal }} levels
+                                                @if($desc){{ $desc }} · @endif{{ $completedInLevel }}/{{ $levelTotal }} {{ __('ui.levels') }}
                                             </div>
                                         </div>
 
                                         {{-- Progress --}}
                                         <div class="hidden sm:flex items-center gap-3 shrink-0">
                                             @if($isLevelComplete)
-                                                <span class="text-[10px] px-2 py-0.5 bg-mint/10 text-mint-light rounded-full font-semibold">Done</span>
+                                                <span class="text-[10px] px-2 py-0.5 bg-mint/10 text-mint-light rounded-full font-semibold">{{ __('ui.done') }}</span>
                                             @elseif($levelPercent > 0)
                                                 <div class="flex items-center gap-2">
                                                     <div class="w-16 bg-elevated rounded-full h-1.5">
@@ -171,6 +197,8 @@
                                                         $isUnlocked = $unlockedLessonIds->contains($lesson->id) || $isCompleted;
                                                         $isLocked = !$isUnlocked;
                                                         $levelNum = $lessonIndex + 1;
+                                                        $ltKey = 'ui.level_title_' . Str::slug($lesson->title, '_');
+                                                        $levelLabel = __($ltKey) !== $ltKey ? __($ltKey) : $lesson->title;
                                                         $isNext = $isUnlocked && !$isCompleted;
                                                         $isLast = $loop->last;
                                                         $nextIsCompleted = !$isLast && $completedLessonIds->contains($levelLessons[$lessonIndex + 1]->id ?? 0);
@@ -183,9 +211,9 @@
                                                                 <i class="fa-solid fa-lock text-muted text-[9px]"></i>
                                                             </div>
                                                             <div class="flex-1 min-w-0">
-                                                                <div class="text-sm text-muted">Level {{ $levelNum }}: {{ $lesson->title }}</div>
+                                                                <div class="text-sm text-muted">{{ __('ui.level') }} {{ $levelNum }}: {{ $levelLabel }}</div>
                                                                 <div class="text-[10px] text-muted flex items-center gap-2">
-                                                                    <span>{{ ucfirst($lesson->type) }}</span>
+                                                                    <span>{{ __('ui.' . $lesson->type) }}</span>
                                                                     <span>+{{ $lesson->xp_reward }} XP</span>
                                                                 </div>
                                                             </div>
@@ -200,22 +228,22 @@
                                                                 @endif
                                                             </div>
                                                             <div class="flex-1 min-w-0">
-                                                                <div class="text-sm font-medium {{ $isNext ? 'text-bright' : 'text-text' }} group-hover:text-bright transition-colors">Level {{ $levelNum }}: {{ $lesson->title }}</div>
+                                                                <div class="text-sm font-medium {{ $isNext ? 'text-bright' : 'text-text' }} group-hover:text-bright transition-colors">{{ __('ui.level') }} {{ $levelNum }}: {{ $levelLabel }}</div>
                                                                 <div class="text-[10px] text-muted flex items-center gap-2">
-                                                                    <span>{{ ucfirst($lesson->type) }}</span>
+                                                                    <span>{{ __('ui.' . $lesson->type) }}</span>
                                                                     <span>+{{ $lesson->xp_reward }} XP</span>
                                                                     @if($isCompleted)
-                                                                        <span class="text-mint-light"><i class="fa-solid fa-eye text-[8px] mr-0.5"></i>Review</span>
+                                                                        <span class="text-mint-light"><i class="fa-solid fa-eye text-[8px] mr-0.5"></i>{{ __('ui.review') }}</span>
                                                                     @endif
                                                                 </div>
                                                             </div>
                                                             @if($isNext)
                                                                 <div class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo/10 rounded-full text-[10px] text-indigo-light font-semibold group-hover:bg-indigo/15 transition-colors">
-                                                                    <i class="fa-solid fa-play text-[7px]"></i> Start
+                                                                    <i class="fa-solid fa-play text-[7px]"></i> {{ __('ui.start') }}
                                                                 </div>
                                                             @elseif($isCompleted)
                                                                 <div class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 bg-mint/10 rounded-full text-[10px] text-mint-light font-semibold group-hover:bg-mint/15 transition-colors">
-                                                                    <i class="fa-solid fa-eye text-[7px]"></i> Review
+                                                                    <i class="fa-solid fa-eye text-[7px]"></i> {{ __('ui.review') }}
                                                                 </div>
                                                             @else
                                                                 <i class="fa-solid fa-chevron-right text-[9px] text-subtle group-hover:text-indigo-light group-hover:translate-x-0.5 transition-all duration-200 shrink-0"></i>

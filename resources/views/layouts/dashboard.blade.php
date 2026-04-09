@@ -35,21 +35,21 @@
 
             {{-- Navigation --}}
             <nav id="tour-sidebar" class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
-                <div class="text-[10px] text-muted uppercase tracking-widest font-semibold px-3 mb-2">Main</div>
+                <div class="text-[10px] text-muted uppercase tracking-widest font-semibold px-3 mb-2">{{ __('ui.main') }}</div>
 
                 <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 {{ request()->routeIs('dashboard') ? 'bg-indigo/10 text-indigo-light' : 'text-soft hover:text-bright hover:bg-elevated/50' }}">
                     <i class="fa-solid fa-house text-xs w-5 text-center {{ request()->routeIs('dashboard') ? 'text-indigo-light' : 'text-muted' }}"></i>
-                    Dashboard
+                    {{ __('ui.dashboard') }}
                 </a>
 
                 <a href="{{ route('learn.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 {{ request()->routeIs('learn.*') ? 'bg-indigo/10 text-indigo-light' : 'text-soft hover:text-bright hover:bg-elevated/50' }}">
                     <i class="fa-solid fa-graduation-cap text-xs w-5 text-center {{ request()->routeIs('learn.*') ? 'text-indigo-light' : 'text-muted' }}"></i>
-                    Learn
+                    {{ __('ui.learn') }}
                 </a>
 
                 <a href="{{ route('languages.index') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 {{ request()->routeIs('languages.*') ? 'bg-indigo/10 text-indigo-light' : 'text-soft hover:text-bright hover:bg-elevated/50' }}">
                     <i class="fa-solid fa-globe text-xs w-5 text-center {{ request()->routeIs('languages.*') ? 'text-indigo-light' : 'text-muted' }}"></i>
-                    Languages
+                    {{ __('ui.languages') }}
                 </a>
 
                 {{-- Active languages --}}
@@ -57,40 +57,40 @@
                     $sidebarSubs = auth()->user()->subscriptions()->active()->with('language')->get();
                 @endphp
                 @if($sidebarSubs->isNotEmpty())
-                    <div class="text-[10px] text-muted uppercase tracking-widest font-semibold px-3 mt-6 mb-2">Your languages</div>
+                    <div class="text-[10px] text-muted uppercase tracking-widest font-semibold px-3 mt-6 mb-2">{{ __('ui.your_languages') }}</div>
 
                     @foreach($sidebarSubs as $sub)
                         <a href="{{ route('learn.language', $sub->language->slug) }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 {{ request()->is('learn/' . $sub->language->slug) ? 'bg-indigo/10 text-indigo-light' : 'text-soft hover:text-bright hover:bg-elevated/50' }}">
                             <div class="w-5 flex justify-center">
                                 <x-flag :code="$sub->language->flag_code" size="sm" />
                             </div>
-                            {{ $sub->language->name }}
+                            {{ trans_lang($sub->language->slug) }}
                         </a>
                     @endforeach
                 @endif
 
-                <div class="text-[10px] text-muted uppercase tracking-widest font-semibold px-3 mt-6 mb-2">Account</div>
+                <div class="text-[10px] text-muted uppercase tracking-widest font-semibold px-3 mt-6 mb-2">{{ __('ui.account') }}</div>
 
                 <a href="{{ route('profile.edit') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 {{ request()->routeIs('profile.*') ? 'bg-indigo/10 text-indigo-light' : 'text-soft hover:text-bright hover:bg-elevated/50' }}">
                     <i class="fa-solid fa-user-gear text-xs w-5 text-center {{ request()->routeIs('profile.*') ? 'text-indigo-light' : 'text-muted' }}"></i>
-                    Profile
+                    {{ __('ui.profile') }}
                 </a>
 
                 <a href="{{ route('pricing') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-soft hover:text-bright hover:bg-elevated/50 transition-all duration-200">
                     <i class="fa-solid fa-crown text-xs w-5 text-center text-indigo-light"></i>
-                    Upgrade
+                    {{ __('ui.upgrade') }}
                 </a>
 
                 <div class="border-t border-border/20 mt-4 pt-4">
                     @if(auth()->user()->is_admin)
                         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-soft hover:text-bright hover:bg-elevated/50 transition-all duration-200">
                             <i class="fa-solid fa-shield-halved text-xs w-5 text-center text-rose-light"></i>
-                            Admin panel
+                            {{ __('ui.admin_panel') }}
                         </a>
                     @endif
                     <a href="{{ url('/') }}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-soft hover:text-bright hover:bg-elevated/50 transition-all duration-200">
                         <i class="fa-solid fa-arrow-up-right-from-square text-xs w-5 text-center text-muted"></i>
-                        Back to website
+                        {{ __('ui.back_to_website') }}
                     </a>
                 </div>
             </nav>
@@ -101,7 +101,7 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-1.5 text-xs font-semibold">
                             <i class="fa-solid fa-fire-flame-curved text-sun-light text-[11px]"></i>
-                            <span class="text-sun-light">{{ auth()->user()->streak->current_streak ?? 0 }} days</span>
+                            <span class="text-sun-light">{{ auth()->user()->streak->current_streak ?? 0 }} {{ __('ui.days') }}</span>
                         </div>
                         <div class="flex items-center gap-1.5 text-xs font-semibold">
                             <i class="fa-solid fa-bolt text-indigo-light text-[11px]"></i>
@@ -118,11 +118,51 @@
                         <i class="fa-solid fa-crown text-indigo-light text-xs"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <div class="text-xs font-semibold text-indigo-light">Get Premium</div>
-                        <div class="text-[10px] text-muted">All languages & levels</div>
+                        <div class="text-xs font-semibold text-indigo-light">{{ __('ui.get_premium') }}</div>
+                        <div class="text-[10px] text-muted">{{ __('ui.all_languages_levels') }}</div>
                     </div>
                     <i class="fa-solid fa-arrow-right text-[9px] text-indigo-light/50 group-hover:text-indigo-light group-hover:translate-x-0.5 transition-all duration-200"></i>
                 </a>
+            </div>
+
+            {{-- Language selector --}}
+            @php
+                $uiLangFlags = ['en' => 'gb', 'nl' => 'nl', 'tr' => 'tr'];
+                $uiLangCurrent = auth()->user()->ui_language ?? 'en';
+                $uiLangName = \App\Services\TranslationService::availableLanguages()[$uiLangCurrent] ?? 'English';
+                $uiLangFlag = $uiLangFlags[$uiLangCurrent] ?? 'gb';
+            @endphp
+            <div class="px-4 py-3 border-t border-border/20 relative" x-data="{ langOpen: false }" @click.away="langOpen = false">
+                <button @click="langOpen = !langOpen" class="w-full flex items-center gap-2.5 px-3 py-2 rounded-full hover:bg-elevated/50 transition-all duration-200 cursor-pointer focus:outline-none">
+                    <img src="https://flagcdn.com/w20/{{ $uiLangFlag }}.png" alt="" class="w-4 h-3 rounded-sm">
+                    <span class="text-sm text-soft">{{ $uiLangName }}</span>
+                    <i class="fa-solid fa-chevron-down text-[8px] text-muted transition-transform duration-200 ml-auto" :class="langOpen && 'rotate-180'"></i>
+                </button>
+                <div x-show="langOpen"
+                     x-transition:enter="transition ease-out duration-150"
+                     x-transition:enter-start="opacity-0 -translate-y-1"
+                     x-transition:enter-end="opacity-100 translate-y-0"
+                     x-transition:leave="transition ease-in duration-100"
+                     x-transition:leave-start="opacity-100"
+                     x-transition:leave-end="opacity-0"
+                     class="absolute bottom-full left-4 right-4 mb-2 glass rounded-xl overflow-hidden py-1 shadow-lg"
+                     x-cloak>
+                    @foreach(\App\Services\TranslationService::availableLanguages() as $code => $name)
+                        <form action="{{ route('settings.language') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="ui_language" value="{{ $code }}">
+                            <button type="submit" class="w-full text-left px-4 py-2.5 text-sm flex items-center justify-between cursor-pointer transition-colors duration-150 {{ $uiLangCurrent === $code ? 'text-indigo-light font-semibold' : 'text-soft hover:text-bright hover:bg-elevated/60' }}">
+                                <div class="flex items-center gap-2.5">
+                                    <img src="https://flagcdn.com/w20/{{ $uiLangFlags[$code] ?? 'gb' }}.png" alt="" class="w-4 h-3 rounded-sm">
+                                    {{ $name }}
+                                </div>
+                                @if($uiLangCurrent === $code)
+                                    <i class="fa-solid fa-check text-[9px] text-indigo-light"></i>
+                                @endif
+                            </button>
+                        </form>
+                    @endforeach
+                </div>
             </div>
 
             {{-- User --}}

@@ -9,8 +9,8 @@
 <x-page-hero
     title="Choose your"
     highlight="language."
-    subtitle="10 languages. From absolute beginner to advanced. Start free with A1 or unlock everything with Premium."
-    badge="10 languages available"
+    subtitle="2 languages. From absolute beginner to advanced. Start free with A1 or unlock everything with Premium."
+    badge="2 languages available"
     badge-icon="fa-solid fa-globe"
     badge-color="sky"
 />
@@ -57,7 +57,7 @@
                 </h2>
                 <p class="text-soft text-base leading-relaxed mb-6">Every language follows the CEFR framework — the European standard for language proficiency. You start at A1 (complete beginner) and work your way up through structured levels.</p>
                 <p class="text-soft text-base leading-relaxed mb-6">Each level introduces harder vocabulary, more complex grammar, and longer sentences. You earn XP with every exercise and unlock the next level when you're ready.</p>
-                <p class="text-soft text-base leading-relaxed">The free plan includes A1 for 1 language. Premium unlocks all levels (A1–C2) for all 10 languages.</p>
+                <p class="text-soft text-base leading-relaxed">The free plan includes A1 for 1 language. Premium unlocks all levels (A1–C2) for all 2 languages.</p>
             </div>
             <div class="space-y-3">
                 @foreach([
@@ -127,7 +127,7 @@
                     </div>
                 </div>
                 <ul class="space-y-2.5">
-                    @foreach(['All 10 languages', 'All levels A1–C2', 'All exercise types', 'Spaced repetition', 'Priority support'] as $feat)
+                    @foreach(['All 2 languages', 'All levels A1–C2', 'All exercise types', 'Spaced repetition', 'Priority support'] as $feat)
                         <li class="flex items-center gap-3 text-sm text-text">
                             <i class="fa-solid fa-circle-check text-xs text-indigo-light"></i>{{ $feat }}
                         </li>

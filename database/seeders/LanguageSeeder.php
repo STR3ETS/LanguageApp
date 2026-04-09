@@ -10,106 +10,8 @@ class LanguageSeeder extends Seeder
     public function run(): void
     {
         $languages = [
-            [
-                'name' => 'Dutch',
-                'slug' => 'dutch',
-                'native_name' => 'Nederlands',
-                'flag_emoji' => "\u{1F1F3}\u{1F1F1}",
-                'flag_code' => 'nl',
-                'description' => 'The language of the Netherlands and Belgium. Open the door to Dutch culture and business.',
-                'price_monthly' => 8.99,
-                'sort_order' => 1,
-            ],
-            [
-                'name' => 'German',
-                'slug' => 'german',
-                'native_name' => 'Deutsch',
-                'flag_emoji' => "\u{1F1E9}\u{1F1EA}",
-                'flag_code' => 'de',
-                'description' => "Europe's most spoken native language. Key to business, engineering and culture.",
-                'price_monthly' => 8.99,
-                'sort_order' => 2,
-            ],
-            [
-                'name' => 'French',
-                'slug' => 'french',
-                'native_name' => "Fran\u{00E7}ais",
-                'flag_emoji' => "\u{1F1EB}\u{1F1F7}",
-                'flag_code' => 'fr',
-                'description' => 'The language of culture, cuisine and diplomacy. Spoken across five continents.',
-                'price_monthly' => 8.99,
-                'sort_order' => 3,
-            ],
-            [
-                'name' => 'Spanish',
-                'slug' => 'spanish',
-                'native_name' => "Espa\u{00F1}ol",
-                'flag_emoji' => "\u{1F1EA}\u{1F1F8}",
-                'flag_code' => 'es',
-                'description' => 'The most popular language to learn. Spoken by over 500 million people worldwide.',
-                'price_monthly' => 8.99,
-                'sort_order' => 4,
-            ],
-            [
-                'name' => 'Portuguese',
-                'slug' => 'portuguese',
-                'native_name' => "Portugu\u{00EA}s",
-                'flag_emoji' => "\u{1F1F5}\u{1F1F9}",
-                'flag_code' => 'pt',
-                'description' => "From Lisbon to S\u{00E3}o Paulo. A global language with a warm rhythm.",
-                'price_monthly' => 8.99,
-                'sort_order' => 5,
-            ],
-            [
-                'name' => 'Italian',
-                'slug' => 'italian',
-                'native_name' => 'Italiano',
-                'flag_emoji' => "\u{1F1EE}\u{1F1F9}",
-                'flag_code' => 'it',
-                'description' => 'The language of art, music and la dolce vita. Beautiful and expressive.',
-                'price_monthly' => 8.99,
-                'sort_order' => 6,
-            ],
-            [
-                'name' => 'Turkish',
-                'slug' => 'turkish',
-                'native_name' => "T\u{00FC}rk\u{00E7}e",
-                'flag_emoji' => "\u{1F1F9}\u{1F1F7}",
-                'flag_code' => 'tr',
-                'description' => 'Bridge between Europe and Asia. A fascinating language with a rich history.',
-                'price_monthly' => 8.99,
-                'sort_order' => 7,
-            ],
-            [
-                'name' => 'Russian',
-                'slug' => 'russian',
-                'native_name' => "\u{0420}\u{0443}\u{0441}\u{0441}\u{043A}\u{0438}\u{0439}",
-                'flag_emoji' => "\u{1F1F7}\u{1F1FA}",
-                'flag_code' => 'ru',
-                'description' => 'Spoken by 250 million people. Unlock Russian literature, science and culture.',
-                'price_monthly' => 8.99,
-                'sort_order' => 8,
-            ],
-            [
-                'name' => 'Japanese',
-                'slug' => 'japanese',
-                'native_name' => "\u{65E5}\u{672C}\u{8A9E}",
-                'flag_emoji' => "\u{1F1EF}\u{1F1F5}",
-                'flag_code' => 'jp',
-                'description' => 'Discover a rich culture through its language. From anime to business.',
-                'price_monthly' => 8.99,
-                'sort_order' => 10,
-            ],
-            [
-                'name' => 'Chinese',
-                'slug' => 'chinese',
-                'native_name' => "\u{4E2D}\u{6587}",
-                'flag_emoji' => "\u{1F1E8}\u{1F1F3}",
-                'flag_code' => 'cn',
-                'description' => 'The most spoken language on earth. Essential for global business and travel.',
-                'price_monthly' => 8.99,
-                'sort_order' => 11,
-            ],
+            ['name' => 'Dutch', 'slug' => 'dutch', 'native_name' => 'Nederlands', 'flag_emoji' => "\u{1F1F3}\u{1F1F1}", 'flag_code' => 'nl', 'description' => 'The language of the Netherlands and Belgium. Open the door to Dutch culture and business.', 'price_monthly' => 8.99, 'sort_order' => 1],
+            ['name' => 'Turkish', 'slug' => 'turkish', 'native_name' => "T\u{00FC}rk\u{00E7}e", 'flag_emoji' => "\u{1F1F9}\u{1F1F7}", 'flag_code' => 'tr', 'description' => 'Bridge between Europe and Asia. A fascinating language with a rich history.', 'price_monthly' => 8.99, 'sort_order' => 2],
         ];
 
         foreach ($languages as $langData) {
@@ -120,7 +22,15 @@ class LanguageSeeder extends Seeder
 
     private function seedCurriculum(Language $language): void
     {
-        $curriculum = $this->getCurriculum();
+        $fullCurriculum = $this->getCurriculum();
+
+        // Per-language curriculum
+        $curriculum = match($language->slug) {
+            'turkish' => array_merge($this->getTurkishA1(), $this->getTurkishA2()),
+            'dutch' => [],
+            default => $fullCurriculum,
+        };
+
         $xpCumulative = 0;
 
         foreach ($curriculum as $levelIndex => $level) {
@@ -146,407 +56,356 @@ class LanguageSeeder extends Seeder
         }
     }
 
+    private function getTurkishA1(): array
+    {
+        return [
+            ['name'=>'Greetings','cefr'=>'A1','description'=>'Say hello, goodbye and introduce yourself.','lessons'=>[
+                ['title'=>'TR A1 Greetings 1','type'=>'vocabulary','xp'=>10,'description'=>'Basic hello and goodbye.'],
+                ['title'=>'TR A1 Greetings 2','type'=>'vocabulary','xp'=>10,'description'=>'Time-based greetings.'],
+                ['title'=>'TR A1 Introductions 1','type'=>'vocabulary','xp'=>10,'description'=>'Introduce yourself.'],
+                ['title'=>'TR A1 Introductions 2','type'=>'conversation','xp'=>10,'description'=>'Ask about others.'],
+                ['title'=>'TR A1 Polite 1','type'=>'vocabulary','xp'=>15,'description'=>'Please, thank you, sorry.'],
+                ['title'=>'TR A1 Polite 2','type'=>'conversation','xp'=>15,'description'=>'Formal politeness.'],
+            ]],
+            ['name'=>'Numbers','cefr'=>'A1','description'=>'Count, tell your age, use numbers daily.','lessons'=>[
+                ['title'=>'TR A1 Singles','type'=>'vocabulary','xp'=>10,'description'=>'Numbers one to ten.'],
+                ['title'=>'TR A1 Tens','type'=>'vocabulary','xp'=>10,'description'=>'Ten, twenty, thirty to hundred.'],
+                ['title'=>'TR A1 Hundreds','type'=>'vocabulary','xp'=>10,'description'=>'Hundreds and thousands.'],
+                ['title'=>'TR A1 Ordinals','type'=>'vocabulary','xp'=>10,'description'=>'First, second, third.'],
+                ['title'=>'TR A1 Age and counting','type'=>'conversation','xp'=>15,'description'=>'How old are you?'],
+            ]],
+            ['name'=>'Family & People','cefr'=>'A1','description'=>'Talk about family and describe people.','lessons'=>[
+                ['title'=>'TR A1 Family 1','type'=>'vocabulary','xp'=>10,'description'=>'Close family members.'],
+                ['title'=>'TR A1 Family 2','type'=>'vocabulary','xp'=>10,'description'=>'Extended family.'],
+                ['title'=>'TR A1 Appearance','type'=>'vocabulary','xp'=>10,'description'=>'Describe how people look.'],
+                ['title'=>'TR A1 Personality','type'=>'vocabulary','xp'=>10,'description'=>'Basic character traits.'],
+                ['title'=>'TR A1 Nationalities','type'=>'vocabulary','xp'=>10,'description'=>'Countries and nationalities.'],
+                ['title'=>'TR A1 My family','type'=>'conversation','xp'=>15,'description'=>'Talk about your family.'],
+            ]],
+            ['name'=>'Colors & Adjectives','cefr'=>'A1','description'=>'Describe objects and the world around you.','lessons'=>[
+                ['title'=>'TR A1 Colors','type'=>'vocabulary','xp'=>10,'description'=>'Basic colors.'],
+                ['title'=>'TR A1 More colors','type'=>'vocabulary','xp'=>10,'description'=>'More colors and shades.'],
+                ['title'=>'TR A1 Adjectives 1','type'=>'vocabulary','xp'=>10,'description'=>'Size and quality.'],
+                ['title'=>'TR A1 Adjectives 2','type'=>'vocabulary','xp'=>10,'description'=>'Speed, temperature, difficulty.'],
+                ['title'=>'TR A1 Opposites','type'=>'vocabulary','xp'=>15,'description'=>'Hot/cold, big/small.'],
+            ]],
+            ['name'=>'Food & Drink','cefr'=>'A1','description'=>'Order food, name ingredients, eat out.','lessons'=>[
+                ['title'=>'TR A1 Food 1','type'=>'vocabulary','xp'=>10,'description'=>'Bread, rice, meat, eggs.'],
+                ['title'=>'TR A1 Food 2','type'=>'vocabulary','xp'=>10,'description'=>'Vegetables and sides.'],
+                ['title'=>'TR A1 Fruits','type'=>'vocabulary','xp'=>10,'description'=>'Common fruits.'],
+                ['title'=>'TR A1 Drinks','type'=>'vocabulary','xp'=>10,'description'=>'Water, tea, coffee, juice.'],
+                ['title'=>'TR A1 Meals','type'=>'vocabulary','xp'=>10,'description'=>'Breakfast, lunch, dinner.'],
+                ['title'=>'TR A1 Restaurant','type'=>'conversation','xp'=>15,'description'=>'Order at a restaurant.'],
+            ]],
+            ['name'=>'Daily Life','cefr'=>'A1','description'=>'Routine, time, days and months.','lessons'=>[
+                ['title'=>'TR A1 Routine 1','type'=>'vocabulary','xp'=>10,'description'=>'Morning routine verbs.'],
+                ['title'=>'TR A1 Routine 2','type'=>'vocabulary','xp'=>10,'description'=>'Evening routine verbs.'],
+                ['title'=>'TR A1 Days','type'=>'vocabulary','xp'=>10,'description'=>'Days of the week.'],
+                ['title'=>'TR A1 Months','type'=>'vocabulary','xp'=>10,'description'=>'Months of the year.'],
+                ['title'=>'TR A1 Time','type'=>'vocabulary','xp'=>15,'description'=>'Telling time.'],
+                ['title'=>'TR A1 My day','type'=>'conversation','xp'=>15,'description'=>'Describe your typical day.'],
+            ]],
+            ['name'=>'Home & Places','cefr'=>'A1','description'=>'Your home, rooms, and places in town.','lessons'=>[
+                ['title'=>'TR A1 House 1','type'=>'vocabulary','xp'=>10,'description'=>'Rooms in the house.'],
+                ['title'=>'TR A1 House 2','type'=>'vocabulary','xp'=>10,'description'=>'Furniture and objects.'],
+                ['title'=>'TR A1 Places','type'=>'vocabulary','xp'=>10,'description'=>'Places in town.'],
+                ['title'=>'TR A1 Directions','type'=>'conversation','xp'=>15,'description'=>'Left, right, straight.'],
+                ['title'=>'TR A1 Where is it','type'=>'conversation','xp'=>15,'description'=>'Ask and give directions.'],
+            ]],
+            ['name'=>'Basic Verbs','cefr'=>'A1','description'=>'Essential verbs for everyday communication.','lessons'=>[
+                ['title'=>'TR A1 Verbs 1','type'=>'grammar','xp'=>15,'description'=>'To be, to have, to go.'],
+                ['title'=>'TR A1 Verbs 2','type'=>'grammar','xp'=>15,'description'=>'To want, to like, to eat.'],
+                ['title'=>'TR A1 Verbs 3','type'=>'grammar','xp'=>15,'description'=>'To speak, to understand, to know.'],
+                ['title'=>'TR A1 Questions','type'=>'grammar','xp'=>15,'description'=>'What, where, how, when.'],
+                ['title'=>'TR A1 Negation','type'=>'grammar','xp'=>15,'description'=>'Not, no, never.'],
+            ]],
+            ['name'=>'A1 Exam','cefr'=>'A1','description'=>'Test all your A1 Turkish knowledge.','lessons'=>[
+                ['title'=>'A1 Final Exam','type'=>'grammar','xp'=>50,'description'=>'Complete A1 exam.'],
+            ]],
+        ];
+    }
+
+    private function getTurkishA2(): array
+    {
+        return [
+            ['name'=>'At Home','cefr'=>'A2','description'=>'Your home, rooms and furniture.','lessons'=>[
+                ['title'=>'TR A2 Rooms','type'=>'vocabulary','xp'=>10,'description'=>'Rooms in the house.'],
+                ['title'=>'TR A2 Furniture','type'=>'vocabulary','xp'=>10,'description'=>'Tables, chairs, beds.'],
+                ['title'=>'TR A2 Household items','type'=>'vocabulary','xp'=>10,'description'=>'Everyday objects at home.'],
+                ['title'=>'TR A2 My home','type'=>'conversation','xp'=>15,'description'=>'Describe where you live.'],
+                ['title'=>'TR A2 Housework','type'=>'vocabulary','xp'=>10,'description'=>'Cleaning, cooking, washing.'],
+            ]],
+            ['name'=>'Daily Routine','cefr'=>'A2','description'=>'Describe your day from morning to night.','lessons'=>[
+                ['title'=>'TR A2 Morning routine','type'=>'vocabulary','xp'=>10,'description'=>'Wake up, shower, breakfast.'],
+                ['title'=>'TR A2 Work and school','type'=>'vocabulary','xp'=>10,'description'=>'Study, work, commute.'],
+                ['title'=>'TR A2 Evening routine','type'=>'vocabulary','xp'=>10,'description'=>'Dinner, relax, sleep.'],
+                ['title'=>'TR A2 Weekend activities','type'=>'conversation','xp'=>15,'description'=>'What do you do on weekends?'],
+                ['title'=>'TR A2 Describing habits','type'=>'grammar','xp'=>15,'description'=>'Always, sometimes, never.'],
+            ]],
+            ['name'=>'Time & Calendar','cefr'=>'A2','description'=>'Tell time, make appointments.','lessons'=>[
+                ['title'=>'TR A2 Telling time','type'=>'vocabulary','xp'=>10,'description'=>'Hours, minutes, quarter.'],
+                ['title'=>'TR A2 Days and weeks','type'=>'vocabulary','xp'=>10,'description'=>'Days, weeks, weekends.'],
+                ['title'=>'TR A2 Months and seasons','type'=>'vocabulary','xp'=>10,'description'=>'All months and four seasons.'],
+                ['title'=>'TR A2 Dates and years','type'=>'vocabulary','xp'=>10,'description'=>'Dates, years, centuries.'],
+                ['title'=>'TR A2 Making appointments','type'=>'conversation','xp'=>15,'description'=>'Schedule meetings and plans.'],
+            ]],
+            ['name'=>'Weather','cefr'=>'A2','description'=>'Talk about weather and climate.','lessons'=>[
+                ['title'=>'TR A2 Weather words','type'=>'vocabulary','xp'=>10,'description'=>'Sun, rain, snow, wind.'],
+                ['title'=>'TR A2 Temperature','type'=>'vocabulary','xp'=>10,'description'=>'Hot, cold, warm, cool.'],
+                ['title'=>'TR A2 Weather forecast','type'=>'conversation','xp'=>15,'description'=>'What will the weather be?'],
+                ['title'=>'TR A2 Seasons and climate','type'=>'vocabulary','xp'=>10,'description'=>'Seasonal weather patterns.'],
+            ]],
+            ['name'=>'Directions & Transport','cefr'=>'A2','description'=>'Get around town and travel.','lessons'=>[
+                ['title'=>'TR A2 Directions','type'=>'vocabulary','xp'=>10,'description'=>'Left, right, straight, turn.'],
+                ['title'=>'TR A2 Places in town','type'=>'vocabulary','xp'=>10,'description'=>'Bank, post office, station.'],
+                ['title'=>'TR A2 Public transport','type'=>'vocabulary','xp'=>10,'description'=>'Bus, metro, tram, ferry.'],
+                ['title'=>'TR A2 Buying tickets','type'=>'conversation','xp'=>15,'description'=>'One ticket to... please.'],
+                ['title'=>'TR A2 Asking directions','type'=>'conversation','xp'=>15,'description'=>'How do I get to...?'],
+            ]],
+            ['name'=>'Shopping','cefr'=>'A2','description'=>'Buy things, talk about prices.','lessons'=>[
+                ['title'=>'TR A2 Shops','type'=>'vocabulary','xp'=>10,'description'=>'Bakery, pharmacy, market.'],
+                ['title'=>'TR A2 Clothing','type'=>'vocabulary','xp'=>10,'description'=>'Shirt, pants, shoes, jacket.'],
+                ['title'=>'TR A2 Prices and money','type'=>'vocabulary','xp'=>10,'description'=>'Lira, expensive, cheap, discount.'],
+                ['title'=>'TR A2 At the store','type'=>'conversation','xp'=>15,'description'=>'Can I try this on?'],
+                ['title'=>'TR A2 Bargaining','type'=>'conversation','xp'=>15,'description'=>'Is there a discount?'],
+            ]],
+            ['name'=>'Health & Body','cefr'=>'A2','description'=>'Talk about health and visit the doctor.','lessons'=>[
+                ['title'=>'TR A2 Body parts','type'=>'vocabulary','xp'=>10,'description'=>'Head, stomach, back, throat.'],
+                ['title'=>'TR A2 Illness','type'=>'vocabulary','xp'=>10,'description'=>'Sick, fever, headache, cold.'],
+                ['title'=>'TR A2 At the doctor','type'=>'conversation','xp'=>15,'description'=>'I have a headache since...'],
+                ['title'=>'TR A2 At the pharmacy','type'=>'conversation','xp'=>15,'description'=>'I need medicine for...'],
+            ]],
+            ['name'=>'A2 Grammar','cefr'=>'A2','description'=>'Essential A2 grammar structures.','lessons'=>[
+                ['title'=>'TR A2 Past tense','type'=>'grammar','xp'=>15,'description'=>'I went, I ate, I saw.'],
+                ['title'=>'TR A2 Future tense','type'=>'grammar','xp'=>15,'description'=>'I will go, I will eat.'],
+                ['title'=>'TR A2 Can and must','type'=>'grammar','xp'=>15,'description'=>'I can, I must, I should.'],
+                ['title'=>'TR A2 Comparisons','type'=>'grammar','xp'=>15,'description'=>'Bigger, smaller, the best.'],
+                ['title'=>'TR A2 Conjunctions','type'=>'grammar','xp'=>15,'description'=>'And, but, because, so.'],
+            ]],
+            ['name'=>'A2 Exam','cefr'=>'A2','description'=>'Test all your A2 knowledge.','lessons'=>[
+                ['title'=>'A2 Final Exam','type'=>'grammar','xp'=>50,'description'=>'Complete A2 exam.'],
+            ]],
+        ];
+    }
+
     private function getCurriculum(): array
     {
         return [
-            // ═══ MODULE 1: FOUNDATIONS (A1.1) ═══
-            [
-                'name' => 'Hello World',
-                'cefr' => 'A1',
-                'description' => 'Greetings, introductions and making a first impression.',
-                'lessons' => [
-                    ['title' => 'Greetings', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Say hello and goodbye.'],
-                    ['title' => 'Introductions', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Introduce yourself.'],
-                    ['title' => 'Yes and no', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Basic agreement and disagreement.'],
-                    ['title' => 'Basic phrases', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Essential everyday phrases.'],
-                ],
-            ],
-            [
-                'name' => 'Counting',
-                'cefr' => 'A1',
-                'description' => 'Learn to count and use numbers.',
-                'lessons' => [
-                    ['title' => 'Numbers 1-10', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Count from one to ten.'],
-                    ['title' => 'Numbers 11-20', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Count to twenty.'],
-                    ['title' => 'The alphabet', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Letters and spelling.'],
-                ],
-            ],
-
-            // ═══ MODULE 2: PEOPLE & DESCRIPTIONS (A1.2) ═══
-            [
-                'name' => 'Family',
-                'cefr' => 'A1',
-                'description' => 'Talk about your family and relationships.',
-                'lessons' => [
-                    ['title' => 'Family members', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Parents, siblings and children.'],
-                    ['title' => 'More family', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Extended family members.'],
-                    ['title' => 'Describing people', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Describe appearance and character.'],
-                ],
-            ],
-            [
-                'name' => 'Colors & Shapes',
-                'cefr' => 'A1',
-                'description' => 'Describe the world around you with colors.',
-                'lessons' => [
-                    ['title' => 'Colors', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Basic colors.'],
-                    ['title' => 'More colors', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Extended color palette.'],
-                    ['title' => 'Adjectives', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Big, small, good, bad.'],
-                    ['title' => 'More adjectives', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Fast, slow, easy, difficult.'],
-                ],
-            ],
-
-            // ═══ MODULE 3: DAILY LIFE (A1.3) ═══
-            [
-                'name' => 'Food & Drink',
-                'cefr' => 'A1',
-                'description' => 'Order food and talk about meals.',
-                'lessons' => [
-                    ['title' => 'Food basics', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Essential food items.'],
-                    ['title' => 'More food', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Meat, fish, eggs and more.'],
-                    ['title' => 'Fruits', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Common fruits.'],
-                    ['title' => 'Drinks', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Beverages and refreshments.'],
-                    ['title' => 'Meals', 'type' => 'conversation', 'xp' => 15, 'description' => 'Breakfast, lunch and dinner.'],
-                ],
-            ],
-            [
-                'name' => 'Eating Out',
-                'cefr' => 'A1',
-                'description' => 'Navigate restaurants and cafes.',
-                'lessons' => [
-                    ['title' => 'At the restaurant', 'type' => 'conversation', 'xp' => 15, 'description' => 'Order like a local.'],
-                ],
-            ],
-
-            // ═══ MODULE 4: HOME & ROUTINE (A2.1) ═══
-            [
-                'name' => 'At Home',
-                'cefr' => 'A2',
-                'description' => 'Talk about your home and daily life.',
-                'lessons' => [
-                    ['title' => 'The house', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Rooms in the house.'],
-                    ['title' => 'Furniture', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Common furniture items.'],
-                    ['title' => 'Daily routine', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Wake up, work, sleep.'],
-                ],
-            ],
-            [
-                'name' => 'Time & Calendar',
-                'cefr' => 'A2',
-                'description' => 'Tell time and talk about schedules.',
-                'lessons' => [
-                    ['title' => 'Telling time', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'What time is it?'],
-                    ['title' => 'Days of the week', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Monday through Sunday.'],
-                    ['title' => 'Months', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'January through December.'],
-                ],
-            ],
-
-            // ═══ MODULE 5: GETTING AROUND (A2.2) ═══
-            [
-                'name' => 'Weather & Seasons',
-                'cefr' => 'A2',
-                'description' => 'Talk about the weather and seasons.',
-                'lessons' => [
-                    ['title' => 'Weather', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Sun, rain, wind and snow.'],
-                    ['title' => 'Seasons', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Spring, summer, autumn, winter.'],
-                ],
-            ],
-            [
-                'name' => 'Navigation',
-                'cefr' => 'A2',
-                'description' => 'Ask for directions and find your way.',
-                'lessons' => [
-                    ['title' => 'Directions', 'type' => 'conversation', 'xp' => 15, 'description' => 'Left, right, straight ahead.'],
-                    ['title' => 'Places in town', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Streets, shops, parks.'],
-                ],
-            ],
-            [
-                'name' => 'Transport',
-                'cefr' => 'A2',
-                'description' => 'Get around by car, bus, train and plane.',
-                'lessons' => [
-                    ['title' => 'Transport', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Vehicles and transport.'],
-                    ['title' => 'At the station', 'type' => 'conversation', 'xp' => 15, 'description' => 'Buy tickets and check schedules.'],
-                ],
-            ],
-            [
-                'name' => 'Shopping',
-                'cefr' => 'A2',
-                'description' => 'Buy things and talk about prices.',
-                'lessons' => [
-                    ['title' => 'Shopping basics', 'type' => 'conversation', 'xp' => 15, 'description' => 'Buy, sell, price.'],
-                    ['title' => 'Clothing', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Shirts, pants, shoes.'],
-                ],
-            ],
-
-            // ═══ MODULE 6: BODY & HEALTH (B1.1) ═══
-            [
-                'name' => 'The Body',
-                'cefr' => 'B1',
-                'description' => 'Learn body parts and talk about health.',
-                'lessons' => [
-                    ['title' => 'Body parts', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Head, hands, feet.'],
-                    ['title' => 'More body parts', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Arms, legs, back.'],
-                    ['title' => 'At the doctor', 'type' => 'conversation', 'xp' => 15, 'description' => 'Describe symptoms.'],
-                ],
-            ],
-            [
-                'name' => 'Feelings',
-                'cefr' => 'B1',
-                'description' => 'Express your emotions and mood.',
-                'lessons' => [
-                    ['title' => 'Feelings', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Happy, sad, tired, angry.'],
-                    ['title' => 'Emotions', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Love, fear, joy, surprise.'],
-                ],
-            ],
-
-            // ═══ MODULE 7: HOBBIES & SOCIAL (B1.2) ═══
-            [
-                'name' => 'Free Time',
-                'cefr' => 'B1',
-                'description' => 'Talk about hobbies and activities.',
-                'lessons' => [
-                    ['title' => 'Hobbies', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Read, cook, dance, swim.'],
-                    ['title' => 'Sports', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Football, tennis, running.'],
-                    ['title' => 'Music and art', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Music, movies, books.'],
-                ],
-            ],
-            [
-                'name' => 'Social Life',
-                'cefr' => 'B1',
-                'description' => 'Make plans and hang out.',
-                'lessons' => [
-                    ['title' => 'Making plans', 'type' => 'conversation', 'xp' => 15, 'description' => 'Invite friends and make plans.'],
-                    ['title' => 'Technology', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Phone, internet, messages.'],
-                    ['title' => 'Opinions', 'type' => 'conversation', 'xp' => 15, 'description' => 'Express likes and preferences.'],
-                    ['title' => 'Conversation phrases', 'type' => 'conversation', 'xp' => 15, 'description' => 'Sound natural in conversation.'],
-                ],
-            ],
-
-            // ═══ MODULE 8: TRAVEL (B1.3) ═══
-            [
-                'name' => 'At the Airport',
-                'cefr' => 'B1',
-                'description' => 'Navigate airports and flights.',
-                'lessons' => [
-                    ['title' => 'At the airport', 'type' => 'conversation', 'xp' => 15, 'description' => 'Flights, boarding, luggage.'],
-                    ['title' => 'Booking', 'type' => 'conversation', 'xp' => 15, 'description' => 'Reserve, cancel, confirm.'],
-                ],
-            ],
-            [
-                'name' => 'Accommodation',
-                'cefr' => 'B1',
-                'description' => 'Book and navigate hotels.',
-                'lessons' => [
-                    ['title' => 'At the hotel', 'type' => 'conversation', 'xp' => 15, 'description' => 'Check in and ask for help.'],
-                    ['title' => 'Sightseeing', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Museums, beaches, mountains.'],
-                    ['title' => 'Emergencies', 'type' => 'conversation', 'xp' => 15, 'description' => 'Get help in urgent situations.'],
-                ],
-            ],
-
-            // ═══ MODULE 9: NATURE & WORLD (B1.4) ═══
-            [
-                'name' => 'Nature',
-                'cefr' => 'B1',
-                'description' => 'Talk about nature, animals and the environment.',
-                'lessons' => [
-                    ['title' => 'Nature', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Trees, flowers, rivers, sky.'],
-                    ['title' => 'Animals', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Dogs, cats, birds and more.'],
-                ],
-            ],
-
-            // ═══ MODULE 10: WORK & STUDY (B1.5) ═══
-            [
-                'name' => 'Education',
-                'cefr' => 'B1',
-                'description' => 'Talk about school and learning.',
-                'lessons' => [
-                    ['title' => 'At school', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Teachers, students, exams.'],
-                    ['title' => 'Professions', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Doctor, lawyer, engineer.'],
-                    ['title' => 'At the office', 'type' => 'conversation', 'xp' => 15, 'description' => 'Meetings, emails, deadlines.'],
-                ],
-            ],
-
-            // ═══ MODULE 11: GRAMMAR POWER (B1.6) ═══
-            [
-                'name' => 'Essential Verbs 1',
-                'cefr' => 'B1',
-                'description' => 'Master the most common verbs.',
-                'lessons' => [
-                    ['title' => 'Common verbs 1', 'type' => 'grammar', 'xp' => 15, 'description' => 'To be, to have, to go.'],
-                    ['title' => 'Common verbs 2', 'type' => 'grammar', 'xp' => 15, 'description' => 'To want, to know, to speak.'],
-                    ['title' => 'Common verbs 3', 'type' => 'grammar', 'xp' => 15, 'description' => 'To give, to think, to believe.'],
-                ],
-            ],
-            [
-                'name' => 'Tenses',
-                'cefr' => 'B1',
-                'description' => 'Talk about past, present and future.',
-                'lessons' => [
-                    ['title' => 'Past tense basics', 'type' => 'grammar', 'xp' => 20, 'description' => 'Talk about what happened.'],
-                    ['title' => 'Future tense', 'type' => 'grammar', 'xp' => 20, 'description' => 'Talk about what will happen.'],
-                ],
-            ],
-
-            // ═══ B2: UPPER INTERMEDIATE ═══
-
-            [
-                'name' => 'Work & Career',
-                'cefr' => 'B2',
-                'description' => 'Professional language for the workplace.',
-                'lessons' => [
-                    ['title' => 'Job interviews', 'type' => 'conversation', 'xp' => 15, 'description' => 'Answer common interview questions.'],
-                    ['title' => 'The workplace', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Colleagues, deadlines, projects.'],
-                    ['title' => 'Writing emails', 'type' => 'grammar', 'xp' => 15, 'description' => 'Formal and informal emails.'],
-                    ['title' => 'Presentations', 'type' => 'conversation', 'xp' => 15, 'description' => 'Present ideas clearly.'],
-                ],
-            ],
-            [
-                'name' => 'Media & News',
-                'cefr' => 'B2',
-                'description' => 'Understand news articles and media.',
-                'lessons' => [
-                    ['title' => 'Reading the news', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Headlines, articles, opinions.'],
-                    ['title' => 'Politics', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Government, elections, policy.'],
-                    ['title' => 'Economy', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Money, markets, trade.'],
-                ],
-            ],
-            [
-                'name' => 'Relationships',
-                'cefr' => 'B2',
-                'description' => 'Talk about complex relationships and feelings.',
-                'lessons' => [
-                    ['title' => 'Describing personality', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Ambitious, generous, stubborn.'],
-                    ['title' => 'Conflict and resolution', 'type' => 'conversation', 'xp' => 15, 'description' => 'Disagree politely and find solutions.'],
-                    ['title' => 'Life events', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Marriage, moving, milestones.'],
-                ],
-            ],
-            [
-                'name' => 'Health & Wellness',
-                'cefr' => 'B2',
-                'description' => 'Discuss health topics in depth.',
-                'lessons' => [
-                    ['title' => 'Mental health', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Stress, anxiety, balance.'],
-                    ['title' => 'Fitness & diet', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Exercise, nutrition, lifestyle.'],
-                    ['title' => 'Medical conversations', 'type' => 'conversation', 'xp' => 15, 'description' => 'Explain symptoms in detail.'],
-                ],
-            ],
-            [
-                'name' => 'Advanced Grammar 1',
-                'cefr' => 'B2',
-                'description' => 'Complex sentence structures.',
-                'lessons' => [
-                    ['title' => 'Conditional sentences', 'type' => 'grammar', 'xp' => 20, 'description' => 'If I were you, I would...'],
-                    ['title' => 'Passive voice', 'type' => 'grammar', 'xp' => 20, 'description' => 'The book was written by...'],
-                    ['title' => 'Reported speech', 'type' => 'grammar', 'xp' => 20, 'description' => 'She said that she was...'],
-                ],
-            ],
-            [
-                'name' => 'Culture & Society',
-                'cefr' => 'B2',
-                'description' => 'Discuss cultural topics and traditions.',
-                'lessons' => [
-                    ['title' => 'Traditions', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Festivals, holidays, customs.'],
-                    ['title' => 'Art & literature', 'type' => 'vocabulary', 'xp' => 10, 'description' => 'Books, paintings, music.'],
-                    ['title' => 'Debating', 'type' => 'conversation', 'xp' => 15, 'description' => 'Argue your point persuasively.'],
-                ],
-            ],
-
-            // ═══ C1: ADVANCED ═══
-
-            [
-                'name' => 'Abstract Thinking',
-                'cefr' => 'C1',
-                'description' => 'Express complex and abstract ideas.',
-                'lessons' => [
-                    ['title' => 'Philosophy', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Truth, existence, meaning.'],
-                    ['title' => 'Hypotheticals', 'type' => 'grammar', 'xp' => 20, 'description' => 'What if scenarios and speculation.'],
-                    ['title' => 'Nuanced opinions', 'type' => 'conversation', 'xp' => 15, 'description' => 'Express subtle differences in meaning.'],
-                ],
-            ],
-            [
-                'name' => 'Academic Language',
-                'cefr' => 'C1',
-                'description' => 'Language for academic and research contexts.',
-                'lessons' => [
-                    ['title' => 'Academic vocabulary', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Research, analysis, methodology.'],
-                    ['title' => 'Writing essays', 'type' => 'grammar', 'xp' => 20, 'description' => 'Structure arguments logically.'],
-                    ['title' => 'Citing and referencing', 'type' => 'grammar', 'xp' => 15, 'description' => 'According to, based on, as stated by.'],
-                ],
-            ],
-            [
-                'name' => 'Business Advanced',
-                'cefr' => 'C1',
-                'description' => 'High-level professional communication.',
-                'lessons' => [
-                    ['title' => 'Negotiations', 'type' => 'conversation', 'xp' => 20, 'description' => 'Reach agreements and compromises.'],
-                    ['title' => 'Legal language', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Contracts, terms, regulations.'],
-                    ['title' => 'Financial reports', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Revenue, profit, investment.'],
-                ],
-            ],
-            [
-                'name' => 'Idiomatic Expressions',
-                'cefr' => 'C1',
-                'description' => 'Sound natural with idioms and expressions.',
-                'lessons' => [
-                    ['title' => 'Common idioms', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Break the ice, piece of cake.'],
-                    ['title' => 'Slang and colloquial', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Informal everyday language.'],
-                    ['title' => 'Proverbs and sayings', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Traditional wisdom in language.'],
-                ],
-            ],
-            [
-                'name' => 'Advanced Grammar 2',
-                'cefr' => 'C1',
-                'description' => 'Master the most complex structures.',
-                'lessons' => [
-                    ['title' => 'Subjunctive mood', 'type' => 'grammar', 'xp' => 20, 'description' => 'Wishes, doubts, and demands.'],
-                    ['title' => 'Complex connectors', 'type' => 'grammar', 'xp' => 20, 'description' => 'Nevertheless, whereas, albeit.'],
-                    ['title' => 'Inversion and emphasis', 'type' => 'grammar', 'xp' => 20, 'description' => 'Not only did he... but also...'],
-                ],
-            ],
-
-            // ═══ C2: MASTERY ═══
-
-            [
-                'name' => 'Literary Language',
-                'cefr' => 'C2',
-                'description' => 'Appreciate and discuss literature.',
-                'lessons' => [
-                    ['title' => 'Literary analysis', 'type' => 'vocabulary', 'xp' => 20, 'description' => 'Metaphor, irony, symbolism.'],
-                    ['title' => 'Poetry and prose', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Rhythm, tone, narrative voice.'],
-                    ['title' => 'Critical writing', 'type' => 'grammar', 'xp' => 20, 'description' => 'Write reviews and critiques.'],
-                ],
-            ],
-            [
-                'name' => 'Rhetoric & Persuasion',
-                'cefr' => 'C2',
-                'description' => 'Master the art of persuasive communication.',
-                'lessons' => [
-                    ['title' => 'Rhetorical devices', 'type' => 'vocabulary', 'xp' => 20, 'description' => 'Analogy, repetition, contrast.'],
-                    ['title' => 'Public speaking', 'type' => 'conversation', 'xp' => 20, 'description' => 'Deliver compelling speeches.'],
-                    ['title' => 'Persuasive writing', 'type' => 'grammar', 'xp' => 20, 'description' => 'Convince through written argument.'],
-                ],
-            ],
-            [
-                'name' => 'Specialized Vocabulary',
-                'cefr' => 'C2',
-                'description' => 'Domain-specific language mastery.',
-                'lessons' => [
-                    ['title' => 'Science & technology', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Innovation, algorithms, research.'],
-                    ['title' => 'Law & governance', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Legislation, rights, democracy.'],
-                    ['title' => 'Medicine', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Diagnosis, treatment, prognosis.'],
-                    ['title' => 'Environment', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Climate, sustainability, ecology.'],
-                ],
-            ],
-            [
-                'name' => 'Native-Level Expression',
-                'cefr' => 'C2',
-                'description' => 'Express yourself with native-level fluency.',
-                'lessons' => [
-                    ['title' => 'Humor and sarcasm', 'type' => 'conversation', 'xp' => 20, 'description' => 'Understand and use wit.'],
-                    ['title' => 'Regional variations', 'type' => 'vocabulary', 'xp' => 15, 'description' => 'Dialects and regional expressions.'],
-                    ['title' => 'Improvisation', 'type' => 'conversation', 'xp' => 20, 'description' => 'Think on your feet in any situation.'],
-                    ['title' => 'Mastery review', 'type' => 'conversation', 'xp' => 25, 'description' => 'Prove your fluency across all topics.'],
-                ],
-            ],
+            // A1
+            ['name'=>'Hello World','cefr'=>'A1','description'=>'Greetings and first impressions.','lessons'=>[
+                ['title'=>'Greetings','type'=>'vocabulary','xp'=>10,'description'=>'Say hello and goodbye.'],
+                ['title'=>'More greetings','type'=>'vocabulary','xp'=>10,'description'=>'Formal and informal.'],
+                ['title'=>'Introductions','type'=>'vocabulary','xp'=>10,'description'=>'Introduce yourself.'],
+                ['title'=>'About yourself','type'=>'conversation','xp'=>10,'description'=>'Where are you from?'],
+                ['title'=>'Basic phrases','type'=>'vocabulary','xp'=>15,'description'=>'Essential phrases.'],
+                ['title'=>'Polite expressions','type'=>'conversation','xp'=>15,'description'=>'Please, thank you.'],
+            ]],
+            ['name'=>'Counting','cefr'=>'A1','description'=>'Numbers and the alphabet.','lessons'=>[
+                ['title'=>'Numbers 1-10','type'=>'vocabulary','xp'=>10,'description'=>'One to ten.'],
+                ['title'=>'Numbers 11-20','type'=>'vocabulary','xp'=>10,'description'=>'Count to twenty.'],
+                ['title'=>'Big numbers','type'=>'vocabulary','xp'=>10,'description'=>'Hundreds, thousands.'],
+                ['title'=>'The alphabet','type'=>'vocabulary','xp'=>15,'description'=>'Letters and spelling.'],
+                ['title'=>'Spelling practice','type'=>'grammar','xp'=>15,'description'=>'Spell words out.'],
+            ]],
+            ['name'=>'Family','cefr'=>'A1','description'=>'Your family.','lessons'=>[
+                ['title'=>'Family members','type'=>'vocabulary','xp'=>10,'description'=>'Parents, siblings.'],
+                ['title'=>'More family','type'=>'vocabulary','xp'=>10,'description'=>'Extended family.'],
+                ['title'=>'Describing people','type'=>'vocabulary','xp'=>15,'description'=>'Tall, short, young.'],
+                ['title'=>'My family','type'=>'conversation','xp'=>15,'description'=>'Talk about family.'],
+                ['title'=>'Ages and birthdays','type'=>'vocabulary','xp'=>10,'description'=>'How old are you?'],
+            ]],
+            ['name'=>'Colors & Adjectives','cefr'=>'A1','description'=>'Describe the world.','lessons'=>[
+                ['title'=>'Colors','type'=>'vocabulary','xp'=>10,'description'=>'Basic colors.'],
+                ['title'=>'More colors','type'=>'vocabulary','xp'=>10,'description'=>'Extended palette.'],
+                ['title'=>'Adjectives','type'=>'vocabulary','xp'=>15,'description'=>'Big, small, good.'],
+                ['title'=>'More adjectives','type'=>'vocabulary','xp'=>15,'description'=>'Fast, slow, easy.'],
+                ['title'=>'Describing objects','type'=>'conversation','xp'=>15,'description'=>'What does it look like?'],
+            ]],
+            ['name'=>'Food & Drink','cefr'=>'A1','description'=>'Food and restaurants.','lessons'=>[
+                ['title'=>'Food basics','type'=>'vocabulary','xp'=>10,'description'=>'Essential food.'],
+                ['title'=>'More food','type'=>'vocabulary','xp'=>10,'description'=>'Meat, fish, eggs.'],
+                ['title'=>'Fruits','type'=>'vocabulary','xp'=>10,'description'=>'Common fruits.'],
+                ['title'=>'Drinks','type'=>'vocabulary','xp'=>10,'description'=>'Beverages.'],
+                ['title'=>'Meals','type'=>'conversation','xp'=>15,'description'=>'Breakfast, lunch, dinner.'],
+                ['title'=>'At the restaurant','type'=>'conversation','xp'=>15,'description'=>'Order food.'],
+            ]],
+            ['name'=>'A1 Exam','cefr'=>'A1','description'=>'Test your A1 knowledge.','lessons'=>[
+                ['title'=>'A1 Final Exam','type'=>'grammar','xp'=>50,'description'=>'Complete A1 exam.'],
+            ]],
+            // A2
+            ['name'=>'At Home','cefr'=>'A2','description'=>'Home and daily life.','lessons'=>[
+                ['title'=>'The house','type'=>'vocabulary','xp'=>10,'description'=>'Rooms.'],
+                ['title'=>'Furniture','type'=>'vocabulary','xp'=>10,'description'=>'Common furniture.'],
+                ['title'=>'Daily routine','type'=>'vocabulary','xp'=>15,'description'=>'Wake, work, sleep.'],
+                ['title'=>'Morning routine','type'=>'conversation','xp'=>15,'description'=>'Your morning.'],
+                ['title'=>'Housework','type'=>'vocabulary','xp'=>10,'description'=>'Clean, cook, wash.'],
+            ]],
+            ['name'=>'Time & Calendar','cefr'=>'A2','description'=>'Time and schedules.','lessons'=>[
+                ['title'=>'Telling time','type'=>'vocabulary','xp'=>15,'description'=>'What time is it?'],
+                ['title'=>'Days of the week','type'=>'vocabulary','xp'=>10,'description'=>'Monday-Sunday.'],
+                ['title'=>'Months','type'=>'vocabulary','xp'=>10,'description'=>'January-December.'],
+                ['title'=>'Seasons','type'=>'vocabulary','xp'=>10,'description'=>'Spring, summer.'],
+                ['title'=>'Making appointments','type'=>'conversation','xp'=>15,'description'=>'Schedule.'],
+            ]],
+            ['name'=>'Weather & Nature','cefr'=>'A2','description'=>'Weather and outdoors.','lessons'=>[
+                ['title'=>'Weather','type'=>'vocabulary','xp'=>10,'description'=>'Sun, rain, wind.'],
+                ['title'=>'Outdoor activities','type'=>'vocabulary','xp'=>10,'description'=>'Park, beach.'],
+                ['title'=>'Nature walk','type'=>'conversation','xp'=>15,'description'=>'Describe outdoors.'],
+            ]],
+            ['name'=>'Getting Around','cefr'=>'A2','description'=>'Streets and transport.','lessons'=>[
+                ['title'=>'Directions','type'=>'conversation','xp'=>15,'description'=>'Left, right.'],
+                ['title'=>'Places in town','type'=>'vocabulary','xp'=>10,'description'=>'Shops, parks.'],
+                ['title'=>'Transport','type'=>'vocabulary','xp'=>10,'description'=>'Car, bus, train.'],
+                ['title'=>'At the station','type'=>'conversation','xp'=>15,'description'=>'Buy tickets.'],
+            ]],
+            ['name'=>'Shopping','cefr'=>'A2','description'=>'Buy things.','lessons'=>[
+                ['title'=>'Shopping basics','type'=>'conversation','xp'=>15,'description'=>'Buy, sell, price.'],
+                ['title'=>'Clothing','type'=>'vocabulary','xp'=>10,'description'=>'Shirts, pants.'],
+                ['title'=>'At the market','type'=>'conversation','xp'=>15,'description'=>'Bargain.'],
+            ]],
+            ['name'=>'A2 Exam','cefr'=>'A2','description'=>'Test A2 knowledge.','lessons'=>[
+                ['title'=>'A2 Final Exam','type'=>'grammar','xp'=>50,'description'=>'Complete A2 exam.'],
+            ]],
+            // B1
+            ['name'=>'The Body','cefr'=>'B1','description'=>'Body and health.','lessons'=>[
+                ['title'=>'Body parts','type'=>'vocabulary','xp'=>10,'description'=>'Head, hands, feet.'],
+                ['title'=>'More body parts','type'=>'vocabulary','xp'=>10,'description'=>'Arms, legs, back.'],
+                ['title'=>'At the doctor','type'=>'conversation','xp'=>15,'description'=>'Describe symptoms.'],
+                ['title'=>'Staying healthy','type'=>'vocabulary','xp'=>10,'description'=>'Exercise, diet.'],
+            ]],
+            ['name'=>'Feelings','cefr'=>'B1','description'=>'Emotions.','lessons'=>[
+                ['title'=>'Feelings','type'=>'vocabulary','xp'=>10,'description'=>'Happy, sad, angry.'],
+                ['title'=>'Emotions','type'=>'vocabulary','xp'=>15,'description'=>'Love, fear, joy.'],
+                ['title'=>'Giving advice','type'=>'conversation','xp'=>15,'description'=>'You should.'],
+            ]],
+            ['name'=>'Free Time','cefr'=>'B1','description'=>'Hobbies.','lessons'=>[
+                ['title'=>'Hobbies','type'=>'vocabulary','xp'=>10,'description'=>'Read, cook, swim.'],
+                ['title'=>'Sports','type'=>'vocabulary','xp'=>10,'description'=>'Football, tennis.'],
+                ['title'=>'Music and art','type'=>'vocabulary','xp'=>10,'description'=>'Music, movies.'],
+                ['title'=>'Weekend plans','type'=>'conversation','xp'=>15,'description'=>'What are you doing?'],
+            ]],
+            ['name'=>'Social Life','cefr'=>'B1','description'=>'Plans and socializing.','lessons'=>[
+                ['title'=>'Making plans','type'=>'conversation','xp'=>15,'description'=>'Invite friends.'],
+                ['title'=>'Technology','type'=>'vocabulary','xp'=>10,'description'=>'Phone, internet.'],
+                ['title'=>'Opinions','type'=>'conversation','xp'=>15,'description'=>'I think, I believe.'],
+                ['title'=>'Conversation phrases','type'=>'conversation','xp'=>15,'description'=>'Sound natural.'],
+            ]],
+            ['name'=>'Travel','cefr'=>'B1','description'=>'Airports and hotels.','lessons'=>[
+                ['title'=>'At the airport','type'=>'conversation','xp'=>15,'description'=>'Flights, boarding.'],
+                ['title'=>'At the hotel','type'=>'conversation','xp'=>15,'description'=>'Check in.'],
+                ['title'=>'Sightseeing','type'=>'vocabulary','xp'=>10,'description'=>'Museums, beaches.'],
+                ['title'=>'Emergencies','type'=>'conversation','xp'=>15,'description'=>'Get help.'],
+            ]],
+            ['name'=>'Nature & Animals','cefr'=>'B1','description'=>'Nature and animals.','lessons'=>[
+                ['title'=>'Nature','type'=>'vocabulary','xp'=>10,'description'=>'Trees, rivers.'],
+                ['title'=>'Animals','type'=>'vocabulary','xp'=>10,'description'=>'Dogs, cats, birds.'],
+            ]],
+            ['name'=>'Work & Education','cefr'=>'B1','description'=>'School and careers.','lessons'=>[
+                ['title'=>'At school','type'=>'vocabulary','xp'=>10,'description'=>'Teachers, exams.'],
+                ['title'=>'Professions','type'=>'vocabulary','xp'=>10,'description'=>'Doctor, lawyer.'],
+                ['title'=>'At the office','type'=>'conversation','xp'=>15,'description'=>'Meetings, emails.'],
+            ]],
+            ['name'=>'Essential Grammar','cefr'=>'B1','description'=>'Core grammar.','lessons'=>[
+                ['title'=>'Common verbs 1','type'=>'grammar','xp'=>15,'description'=>'Be, have, go.'],
+                ['title'=>'Common verbs 2','type'=>'grammar','xp'=>15,'description'=>'Want, know, speak.'],
+                ['title'=>'Common verbs 3','type'=>'grammar','xp'=>15,'description'=>'Give, think.'],
+                ['title'=>'Past tense basics','type'=>'grammar','xp'=>20,'description'=>'What happened.'],
+                ['title'=>'Future tense','type'=>'grammar','xp'=>20,'description'=>'What will happen.'],
+            ]],
+            ['name'=>'B1 Exam','cefr'=>'B1','description'=>'Test B1.','lessons'=>[
+                ['title'=>'B1 Final Exam','type'=>'grammar','xp'=>50,'description'=>'Complete B1 exam.'],
+            ]],
+            // B2
+            ['name'=>'Work & Career','cefr'=>'B2','description'=>'Professional language.','lessons'=>[
+                ['title'=>'Job interviews','type'=>'conversation','xp'=>15,'description'=>'Interview questions.'],
+                ['title'=>'The workplace','type'=>'vocabulary','xp'=>10,'description'=>'Colleagues, deadlines.'],
+                ['title'=>'Writing emails','type'=>'grammar','xp'=>15,'description'=>'Formal emails.'],
+                ['title'=>'Presentations','type'=>'conversation','xp'=>15,'description'=>'Present ideas.'],
+            ]],
+            ['name'=>'Media & News','cefr'=>'B2','description'=>'News and media.','lessons'=>[
+                ['title'=>'Reading the news','type'=>'vocabulary','xp'=>15,'description'=>'Headlines.'],
+                ['title'=>'Politics','type'=>'vocabulary','xp'=>10,'description'=>'Government, elections.'],
+                ['title'=>'Economy','type'=>'vocabulary','xp'=>10,'description'=>'Money, markets.'],
+            ]],
+            ['name'=>'Relationships','cefr'=>'B2','description'=>'Complex relationships.','lessons'=>[
+                ['title'=>'Describing personality','type'=>'vocabulary','xp'=>10,'description'=>'Ambitious, generous.'],
+                ['title'=>'Conflict and resolution','type'=>'conversation','xp'=>15,'description'=>'Disagree politely.'],
+                ['title'=>'Life events','type'=>'vocabulary','xp'=>10,'description'=>'Marriage, milestones.'],
+            ]],
+            ['name'=>'Health & Wellness','cefr'=>'B2','description'=>'Health in depth.','lessons'=>[
+                ['title'=>'Mental health','type'=>'vocabulary','xp'=>15,'description'=>'Stress, anxiety.'],
+                ['title'=>'Fitness & diet','type'=>'vocabulary','xp'=>10,'description'=>'Exercise, nutrition.'],
+                ['title'=>'Medical conversations','type'=>'conversation','xp'=>15,'description'=>'Explain symptoms.'],
+            ]],
+            ['name'=>'Advanced Grammar 1','cefr'=>'B2','description'=>'Complex structures.','lessons'=>[
+                ['title'=>'Conditional sentences','type'=>'grammar','xp'=>20,'description'=>'If I were you.'],
+                ['title'=>'Passive voice','type'=>'grammar','xp'=>20,'description'=>'Was written by.'],
+                ['title'=>'Reported speech','type'=>'grammar','xp'=>20,'description'=>'She said that.'],
+            ]],
+            ['name'=>'Culture & Society','cefr'=>'B2','description'=>'Culture and traditions.','lessons'=>[
+                ['title'=>'Traditions','type'=>'vocabulary','xp'=>10,'description'=>'Festivals, customs.'],
+                ['title'=>'Art & literature','type'=>'vocabulary','xp'=>10,'description'=>'Books, paintings.'],
+                ['title'=>'Debating','type'=>'conversation','xp'=>15,'description'=>'Argue persuasively.'],
+            ]],
+            ['name'=>'B2 Exam','cefr'=>'B2','description'=>'Test B2.','lessons'=>[
+                ['title'=>'B2 Final Exam','type'=>'grammar','xp'=>50,'description'=>'Complete B2 exam.'],
+            ]],
+            // C1
+            ['name'=>'Abstract Thinking','cefr'=>'C1','description'=>'Complex abstract ideas.','lessons'=>[
+                ['title'=>'Philosophy','type'=>'vocabulary','xp'=>15,'description'=>'Truth, existence.'],
+                ['title'=>'Hypotheticals','type'=>'grammar','xp'=>20,'description'=>'What if.'],
+                ['title'=>'Nuanced opinions','type'=>'conversation','xp'=>15,'description'=>'Subtle meanings.'],
+            ]],
+            ['name'=>'Academic Language','cefr'=>'C1','description'=>'Academic contexts.','lessons'=>[
+                ['title'=>'Academic vocabulary','type'=>'vocabulary','xp'=>15,'description'=>'Research, analysis.'],
+                ['title'=>'Writing essays','type'=>'grammar','xp'=>20,'description'=>'Structure arguments.'],
+                ['title'=>'Citing and referencing','type'=>'grammar','xp'=>15,'description'=>'According to.'],
+            ]],
+            ['name'=>'Business Advanced','cefr'=>'C1','description'=>'High-level professional.','lessons'=>[
+                ['title'=>'Negotiations','type'=>'conversation','xp'=>20,'description'=>'Reach agreements.'],
+                ['title'=>'Legal language','type'=>'vocabulary','xp'=>15,'description'=>'Contracts, terms.'],
+                ['title'=>'Financial reports','type'=>'vocabulary','xp'=>15,'description'=>'Revenue, profit.'],
+            ]],
+            ['name'=>'Idiomatic Expressions','cefr'=>'C1','description'=>'Idioms and slang.','lessons'=>[
+                ['title'=>'Common idioms','type'=>'vocabulary','xp'=>15,'description'=>'Break the ice.'],
+                ['title'=>'Slang and colloquial','type'=>'vocabulary','xp'=>15,'description'=>'Informal language.'],
+                ['title'=>'Proverbs and sayings','type'=>'vocabulary','xp'=>15,'description'=>'Traditional wisdom.'],
+            ]],
+            ['name'=>'Advanced Grammar 2','cefr'=>'C1','description'=>'Most complex structures.','lessons'=>[
+                ['title'=>'Subjunctive mood','type'=>'grammar','xp'=>20,'description'=>'Wishes, doubts.'],
+                ['title'=>'Complex connectors','type'=>'grammar','xp'=>20,'description'=>'Nevertheless.'],
+                ['title'=>'Inversion and emphasis','type'=>'grammar','xp'=>20,'description'=>'Not only but also.'],
+            ]],
+            ['name'=>'C1 Exam','cefr'=>'C1','description'=>'Test C1.','lessons'=>[
+                ['title'=>'C1 Final Exam','type'=>'grammar','xp'=>50,'description'=>'Complete C1 exam.'],
+            ]],
+            // C2
+            ['name'=>'Literary Language','cefr'=>'C2','description'=>'Literature and analysis.','lessons'=>[
+                ['title'=>'Literary analysis','type'=>'vocabulary','xp'=>20,'description'=>'Metaphor, irony.'],
+                ['title'=>'Poetry and prose','type'=>'vocabulary','xp'=>15,'description'=>'Rhythm, tone.'],
+                ['title'=>'Critical writing','type'=>'grammar','xp'=>20,'description'=>'Reviews, critiques.'],
+                ['title'=>'Creative writing','type'=>'grammar','xp'=>20,'description'=>'Short stories.'],
+            ]],
+            ['name'=>'Rhetoric & Persuasion','cefr'=>'C2','description'=>'Persuasive communication.','lessons'=>[
+                ['title'=>'Rhetorical devices','type'=>'vocabulary','xp'=>20,'description'=>'Analogy, contrast.'],
+                ['title'=>'Public speaking','type'=>'conversation','xp'=>20,'description'=>'Compelling speeches.'],
+                ['title'=>'Persuasive writing','type'=>'grammar','xp'=>20,'description'=>'Convince through text.'],
+            ]],
+            ['name'=>'Specialized Vocabulary','cefr'=>'C2','description'=>'Domain-specific.','lessons'=>[
+                ['title'=>'Science & technology','type'=>'vocabulary','xp'=>15,'description'=>'AI, algorithms.'],
+                ['title'=>'Law & governance','type'=>'vocabulary','xp'=>15,'description'=>'Legislation, rights.'],
+                ['title'=>'Medicine','type'=>'vocabulary','xp'=>15,'description'=>'Diagnosis, treatment.'],
+                ['title'=>'Environment','type'=>'vocabulary','xp'=>15,'description'=>'Climate, ecology.'],
+            ]],
+            ['name'=>'Native-Level Expression','cefr'=>'C2','description'=>'Full fluency.','lessons'=>[
+                ['title'=>'Humor and sarcasm','type'=>'conversation','xp'=>20,'description'=>'Understand wit.'],
+                ['title'=>'Regional variations','type'=>'vocabulary','xp'=>15,'description'=>'Dialects.'],
+                ['title'=>'Improvisation','type'=>'conversation','xp'=>20,'description'=>'Think on feet.'],
+                ['title'=>'Mastery review','type'=>'conversation','xp'=>25,'description'=>'Prove fluency.'],
+            ]],
+            ['name'=>'C2 Final Exam','cefr'=>'C2','description'=>'The ultimate test.','lessons'=>[
+                ['title'=>'C2 Final Exam','type'=>'grammar','xp'=>50,'description'=>'Ultimate mastery.'],
+            ]],
         ];
     }
 }

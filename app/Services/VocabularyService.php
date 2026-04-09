@@ -152,30 +152,53 @@ class VocabularyService
         $bank = $this->getBank($language);
         $key = strtolower(trim($lessonSlug));
 
+        // Find the vocabulary set
+        $words = null;
+
         // Direct match
         if (isset($bank[$key])) {
-            return $bank[$key];
+            $words = $bank[$key];
         }
 
         // Map lesson title to bank key
-        $mappedKey = self::LESSON_KEY_MAP[$key] ?? null;
-        if ($mappedKey && isset($bank[$mappedKey])) {
-            return $bank[$mappedKey];
-        }
+        if (!$words) {
+            $mappedKey = self::LESSON_KEY_MAP[$key] ?? null;
+            if ($mappedKey && isset($bank[$mappedKey])) {
+                $words = $bank[$mappedKey];
 
-        // Keyword search: find a bank key that shares a word with the lesson title
-        $titleWords = explode(' ', $key);
-        foreach ($bank as $bankKey => $pairs) {
-            foreach ($titleWords as $word) {
-                if (strlen($word) > 3 && str_contains($bankKey, $word)) {
-                    return $pairs;
+                // If this lesson title differs from the mapped key, it shares a category
+                // Use a different slice of words based on the lesson title hash
+                if ($mappedKey !== $key && count($words) >= 6) {
+                    $offset = abs(crc32($key)) % max(1, count($words) - 5);
+                    $words = array_values(array_slice($words, $offset, 6));
+                    // If we got less than 6 (near end), wrap around
+                    if (count($words) < 6) {
+                        $words = array_merge($words, array_slice($bank[$mappedKey], 0, 10 - count($words)));
+                    }
                 }
             }
         }
 
-        // Last resort: return a random set (not always the first one)
-        $keys = array_keys($bank);
-        return $bank[$keys[crc32($key) % count($keys)]] ?? [];
+        // Keyword search
+        if (!$words) {
+            $titleWords = explode(' ', $key);
+            foreach ($bank as $bankKey => $pairs) {
+                foreach ($titleWords as $word) {
+                    if (strlen($word) > 3 && str_contains($bankKey, $word)) {
+                        $words = $pairs;
+                        break 2;
+                    }
+                }
+            }
+        }
+
+        // Last resort
+        if (!$words) {
+            $keys = array_keys($bank);
+            $words = $bank[$keys[abs(crc32($key)) % count($keys)]] ?? [];
+        }
+
+        return array_values(array_slice($words, 0, 10));
     }
 
     public function getBank(string $language): array
@@ -2343,48 +2366,107 @@ class VocabularyService
     private function turkish(): array
     {
         return [
-            // === A1 ===
-            'greetings' => [
+            'tr a1 greetings 1' => [
                 ['word' => 'merhaba', 'translation' => 'hello'],
                 ['word' => 'hosca kal', 'translation' => 'goodbye'],
+                ['word' => 'selam', 'translation' => 'hi (informal)'],
+                ['word' => 'bay bay', 'translation' => 'bye bye'],
+                ['word' => 'hos geldiniz', 'translation' => 'welcome'],
+                ['word' => 'hos bulduk', 'translation' => 'thank you (reply to welcome)'],
+            ],
+            'tr a1 greetings 2' => [
                 ['word' => 'gunaydin', 'translation' => 'good morning'],
+                ['word' => 'iyi gunler', 'translation' => 'good day'],
                 ['word' => 'iyi aksamlar', 'translation' => 'good evening'],
                 ['word' => 'iyi geceler', 'translation' => 'good night'],
                 ['word' => 'gorusuruz', 'translation' => 'see you later'],
+                ['word' => 'yarin gorusuruz', 'translation' => 'see you tomorrow'],
             ],
-            'introductions' => [
+            'tr a1 introductions 1' => [
                 ['word' => 'benim adim', 'translation' => 'my name is'],
-                ['word' => 'adiniz ne?', 'translation' => 'what is your name?'],
+                ['word' => 'adiniz ne', 'translation' => 'what is your name'],
                 ['word' => 'memnun oldum', 'translation' => 'nice to meet you'],
-                ['word' => 'nasilsiniz?', 'translation' => 'how are you?'],
-                ['word' => 'iyiyim', 'translation' => "I'm fine"],
-                ['word' => 'tesekkur ederim', 'translation' => 'thank you'],
+                ['word' => 'ben', 'translation' => 'I / me'],
+                ['word' => 'sen', 'translation' => 'you (informal)'],
+                ['word' => 'siz', 'translation' => 'you (formal)'],
             ],
-            'numbers 1-10' => [
+            'tr a1 introductions 2' => [
+                ['word' => 'nasilsiniz', 'translation' => 'how are you (formal)'],
+                ['word' => 'nasilsin', 'translation' => 'how are you (informal)'],
+                ['word' => 'iyiyim', 'translation' => 'I am fine'],
+                ['word' => 'cok iyiyim', 'translation' => 'I am very well'],
+                ['word' => 'fena degil', 'translation' => 'not bad'],
+                ['word' => 'siz nasilsiniz', 'translation' => 'and you? (formal)'],
+            ],
+            'tr a1 polite 1' => [
+                ['word' => 'tesekkur ederim', 'translation' => 'thank you'],
+                ['word' => 'tesekkurler', 'translation' => 'thanks'],
+                ['word' => 'lutfen', 'translation' => 'please'],
+                ['word' => 'rica ederim', 'translation' => 'you are welcome'],
+                ['word' => 'ozur dilerim', 'translation' => 'I am sorry'],
+                ['word' => 'affedersiniz', 'translation' => 'excuse me'],
+            ],
+            'tr a1 polite 2' => [
+                ['word' => 'tabii', 'translation' => 'of course'],
+                ['word' => 'bir sey degil', 'translation' => 'no problem'],
+                ['word' => 'sag olun', 'translation' => 'thank you (informal)'],
+                ['word' => 'pardon', 'translation' => 'pardon'],
+                ['word' => 'izninizle', 'translation' => 'with your permission'],
+                ['word' => 'buyurun', 'translation' => 'please (go ahead / here you are)'],
+            ],
+            'tr a1 singles' => [
                 ['word' => 'bir', 'translation' => 'one'],
                 ['word' => 'iki', 'translation' => 'two'],
                 ['word' => 'uc', 'translation' => 'three'],
                 ['word' => 'dort', 'translation' => 'four'],
                 ['word' => 'bes', 'translation' => 'five'],
                 ['word' => 'alti', 'translation' => 'six'],
+                ['word' => 'yedi', 'translation' => 'seven'],
+                ['word' => 'sekiz', 'translation' => 'eight'],
+                ['word' => 'dokuz', 'translation' => 'nine'],
+                ['word' => 'on', 'translation' => 'ten'],
             ],
-            'basic phrases' => [
-                ['word' => 'lutfen', 'translation' => 'please'],
-                ['word' => 'evet', 'translation' => 'yes'],
-                ['word' => 'hayir', 'translation' => 'no'],
-                ['word' => 'affedersiniz', 'translation' => 'excuse me'],
-                ['word' => 'anlamadim', 'translation' => "I don't understand"],
-                ['word' => 'ne kadar?', 'translation' => 'how much?'],
+            'tr a1 tens' => [
+                ['word' => 'on', 'translation' => 'ten'],
+                ['word' => 'yirmi', 'translation' => 'twenty'],
+                ['word' => 'otuz', 'translation' => 'thirty'],
+                ['word' => 'kirk', 'translation' => 'forty'],
+                ['word' => 'elli', 'translation' => 'fifty'],
+                ['word' => 'altmis', 'translation' => 'sixty'],
+                ['word' => 'yetmis', 'translation' => 'seventy'],
+                ['word' => 'seksen', 'translation' => 'eighty'],
+                ['word' => 'doksan', 'translation' => 'ninety'],
+                ['word' => 'yuz', 'translation' => 'hundred'],
             ],
-            'food basics' => [
-                ['word' => 'su', 'translation' => 'water'],
-                ['word' => 'ekmek', 'translation' => 'bread'],
-                ['word' => 'sut', 'translation' => 'milk'],
-                ['word' => 'kahve', 'translation' => 'coffee'],
-                ['word' => 'peynir', 'translation' => 'cheese'],
-                ['word' => 'cay', 'translation' => 'tea'],
+            'tr a1 hundreds' => [
+                ['word' => 'yuz', 'translation' => 'hundred'],
+                ['word' => 'iki yuz', 'translation' => 'two hundred'],
+                ['word' => 'bes yuz', 'translation' => 'five hundred'],
+                ['word' => 'bin', 'translation' => 'thousand'],
+                ['word' => 'iki bin', 'translation' => 'two thousand'],
+                ['word' => 'on bin', 'translation' => 'ten thousand'],
+                ['word' => 'yuz bin', 'translation' => 'hundred thousand'],
+                ['word' => 'milyon', 'translation' => 'million'],
+                ['word' => 'milyar', 'translation' => 'billion'],
+                ['word' => 'sifir', 'translation' => 'zero'],
             ],
-            'family members' => [
+            'tr a1 ordinals' => [
+                ['word' => 'birinci', 'translation' => 'first'],
+                ['word' => 'ikinci', 'translation' => 'second'],
+                ['word' => 'ucuncu', 'translation' => 'third'],
+                ['word' => 'dorduncu', 'translation' => 'fourth'],
+                ['word' => 'besinci', 'translation' => 'fifth'],
+                ['word' => 'sonuncu', 'translation' => 'last'],
+            ],
+            'tr a1 age and counting' => [
+                ['word' => 'kac yasindasiniz', 'translation' => 'how old are you'],
+                ['word' => 'yasindayim', 'translation' => 'I am ... years old'],
+                ['word' => 'dogum gunu', 'translation' => 'birthday'],
+                ['word' => 'yas', 'translation' => 'age'],
+                ['word' => 'genc', 'translation' => 'young'],
+                ['word' => 'yasli', 'translation' => 'old (person)'],
+            ],
+            'tr a1 family 1' => [
                 ['word' => 'anne', 'translation' => 'mother'],
                 ['word' => 'baba', 'translation' => 'father'],
                 ['word' => 'erkek kardes', 'translation' => 'brother'],
@@ -2392,7 +2474,47 @@ class VocabularyService
                 ['word' => 'ogul', 'translation' => 'son'],
                 ['word' => 'kiz', 'translation' => 'daughter'],
             ],
-            'colors' => [
+            'tr a1 family 2' => [
+                ['word' => 'dede', 'translation' => 'grandfather'],
+                ['word' => 'babaanne', 'translation' => 'grandmother (paternal)'],
+                ['word' => 'anneanne', 'translation' => 'grandmother (maternal)'],
+                ['word' => 'amca', 'translation' => 'uncle (paternal)'],
+                ['word' => 'teyze', 'translation' => 'aunt (maternal)'],
+                ['word' => 'kuzen', 'translation' => 'cousin'],
+            ],
+            'tr a1 appearance' => [
+                ['word' => 'uzun boylu', 'translation' => 'tall'],
+                ['word' => 'kisa boylu', 'translation' => 'short (height)'],
+                ['word' => 'sari sacli', 'translation' => 'blonde'],
+                ['word' => 'siyah sacli', 'translation' => 'dark-haired'],
+                ['word' => 'mavi gozlu', 'translation' => 'blue-eyed'],
+                ['word' => 'guzel', 'translation' => 'beautiful / handsome'],
+            ],
+            'tr a1 personality' => [
+                ['word' => 'iyi', 'translation' => 'good / kind'],
+                ['word' => 'komik', 'translation' => 'funny'],
+                ['word' => 'sessiz', 'translation' => 'quiet'],
+                ['word' => 'akilli', 'translation' => 'smart'],
+                ['word' => 'caliskan', 'translation' => 'hardworking'],
+                ['word' => 'tembel', 'translation' => 'lazy'],
+            ],
+            'tr a1 nationalities' => [
+                ['word' => 'turkiye', 'translation' => 'Turkey'],
+                ['word' => 'turk', 'translation' => 'Turkish (person)'],
+                ['word' => 'almanya', 'translation' => 'Germany'],
+                ['word' => 'hollanda', 'translation' => 'Netherlands'],
+                ['word' => 'nereli', 'translation' => 'where from'],
+                ['word' => 'nerelisiniz', 'translation' => 'where are you from'],
+            ],
+            'tr a1 my family' => [
+                ['word' => 'aile', 'translation' => 'family'],
+                ['word' => 'evli', 'translation' => 'married'],
+                ['word' => 'bekar', 'translation' => 'single'],
+                ['word' => 'cocuk', 'translation' => 'child'],
+                ['word' => 'bebek', 'translation' => 'baby'],
+                ['word' => 'es', 'translation' => 'spouse'],
+            ],
+            'tr a1 colors' => [
                 ['word' => 'kirmizi', 'translation' => 'red'],
                 ['word' => 'mavi', 'translation' => 'blue'],
                 ['word' => 'yesil', 'translation' => 'green'],
@@ -2400,25 +2522,103 @@ class VocabularyService
                 ['word' => 'siyah', 'translation' => 'black'],
                 ['word' => 'beyaz', 'translation' => 'white'],
             ],
-
-            // === A2 ===
-            'the house' => [
-                ['word' => 'ev', 'translation' => 'house'],
-                ['word' => 'oda', 'translation' => 'room'],
-                ['word' => 'mutfak', 'translation' => 'kitchen'],
-                ['word' => 'banyo', 'translation' => 'bathroom'],
-                ['word' => 'yatak odasi', 'translation' => 'bedroom'],
-                ['word' => 'bahce', 'translation' => 'garden'],
+            'tr a1 more colors' => [
+                ['word' => 'turuncu', 'translation' => 'orange'],
+                ['word' => 'mor', 'translation' => 'purple'],
+                ['word' => 'pembe', 'translation' => 'pink'],
+                ['word' => 'kahverengi', 'translation' => 'brown'],
+                ['word' => 'gri', 'translation' => 'grey'],
+                ['word' => 'altin rengi', 'translation' => 'golden'],
             ],
-            'daily routine' => [
+            'tr a1 adjectives 1' => [
+                ['word' => 'buyuk', 'translation' => 'big'],
+                ['word' => 'kucuk', 'translation' => 'small'],
+                ['word' => 'yeni', 'translation' => 'new'],
+                ['word' => 'eski', 'translation' => 'old (thing)'],
+                ['word' => 'hos', 'translation' => 'nice / pleasant'],
+                ['word' => 'cirkin', 'translation' => 'ugly'],
+            ],
+            'tr a1 adjectives 2' => [
+                ['word' => 'hizli', 'translation' => 'fast'],
+                ['word' => 'yavas', 'translation' => 'slow'],
+                ['word' => 'kolay', 'translation' => 'easy'],
+                ['word' => 'zor', 'translation' => 'difficult'],
+                ['word' => 'pahali', 'translation' => 'expensive'],
+                ['word' => 'ucuz', 'translation' => 'cheap'],
+            ],
+            'tr a1 opposites' => [
+                ['word' => 'sicak', 'translation' => 'hot'],
+                ['word' => 'soguk', 'translation' => 'cold'],
+                ['word' => 'acik', 'translation' => 'open / light'],
+                ['word' => 'kapali', 'translation' => 'closed / dark'],
+                ['word' => 'dolu', 'translation' => 'full'],
+                ['word' => 'bos', 'translation' => 'empty'],
+            ],
+            'tr a1 food 1' => [
+                ['word' => 'ekmek', 'translation' => 'bread'],
+                ['word' => 'pirinc', 'translation' => 'rice'],
+                ['word' => 'et', 'translation' => 'meat'],
+                ['word' => 'tavuk', 'translation' => 'chicken'],
+                ['word' => 'balik', 'translation' => 'fish'],
+                ['word' => 'yumurta', 'translation' => 'egg'],
+            ],
+            'tr a1 food 2' => [
+                ['word' => 'domates', 'translation' => 'tomato'],
+                ['word' => 'salatalik', 'translation' => 'cucumber'],
+                ['word' => 'patates', 'translation' => 'potato'],
+                ['word' => 'sogan', 'translation' => 'onion'],
+                ['word' => 'biber', 'translation' => 'pepper'],
+                ['word' => 'peynir', 'translation' => 'cheese'],
+            ],
+            'tr a1 fruits' => [
+                ['word' => 'elma', 'translation' => 'apple'],
+                ['word' => 'portakal', 'translation' => 'orange (fruit)'],
+                ['word' => 'muz', 'translation' => 'banana'],
+                ['word' => 'cilek', 'translation' => 'strawberry'],
+                ['word' => 'uzum', 'translation' => 'grape'],
+                ['word' => 'karpuz', 'translation' => 'watermelon'],
+            ],
+            'tr a1 drinks' => [
+                ['word' => 'su', 'translation' => 'water'],
+                ['word' => 'cay', 'translation' => 'tea'],
+                ['word' => 'kahve', 'translation' => 'coffee'],
+                ['word' => 'sut', 'translation' => 'milk'],
+                ['word' => 'meyve suyu', 'translation' => 'juice'],
+                ['word' => 'ayran', 'translation' => 'ayran (yogurt drink)'],
+            ],
+            'tr a1 meals' => [
+                ['word' => 'kahvalti', 'translation' => 'breakfast'],
+                ['word' => 'ogle yemegi', 'translation' => 'lunch'],
+                ['word' => 'aksam yemegi', 'translation' => 'dinner'],
+                ['word' => 'atistirmalik', 'translation' => 'snack'],
+                ['word' => 'tatli', 'translation' => 'dessert'],
+                ['word' => 'corba', 'translation' => 'soup'],
+            ],
+            'tr a1 restaurant' => [
+                ['word' => 'hesap', 'translation' => 'bill / check'],
+                ['word' => 'menu', 'translation' => 'menu'],
+                ['word' => 'garson', 'translation' => 'waiter'],
+                ['word' => 'siparis', 'translation' => 'order'],
+                ['word' => 'masa', 'translation' => 'table'],
+                ['word' => 'afiyet olsun', 'translation' => 'enjoy your meal'],
+            ],
+            'tr a1 routine 1' => [
                 ['word' => 'uyanmak', 'translation' => 'to wake up'],
+                ['word' => 'kalkmak', 'translation' => 'to get up'],
+                ['word' => 'yikamak', 'translation' => 'to wash'],
+                ['word' => 'giyinmek', 'translation' => 'to get dressed'],
                 ['word' => 'kahvalti yapmak', 'translation' => 'to have breakfast'],
-                ['word' => 'calismak', 'translation' => 'to work'],
-                ['word' => 'uyumak', 'translation' => 'to sleep'],
-                ['word' => 'yemek yemek', 'translation' => 'to eat'],
-                ['word' => 'dus almak', 'translation' => 'to take a shower'],
+                ['word' => 'evden cikmak', 'translation' => 'to leave the house'],
             ],
-            'days of the week' => [
+            'tr a1 routine 2' => [
+                ['word' => 'calismak', 'translation' => 'to work'],
+                ['word' => 'dinlenmek', 'translation' => 'to rest'],
+                ['word' => 'yemek yemek', 'translation' => 'to eat'],
+                ['word' => 'uyumak', 'translation' => 'to sleep'],
+                ['word' => 'dus almak', 'translation' => 'to take a shower'],
+                ['word' => 'dis fircalamak', 'translation' => 'to brush teeth'],
+            ],
+            'tr a1 days' => [
                 ['word' => 'pazartesi', 'translation' => 'Monday'],
                 ['word' => 'sali', 'translation' => 'Tuesday'],
                 ['word' => 'carsamba', 'translation' => 'Wednesday'],
@@ -2426,226 +2626,418 @@ class VocabularyService
                 ['word' => 'cuma', 'translation' => 'Friday'],
                 ['word' => 'cumartesi', 'translation' => 'Saturday'],
             ],
-            'weather' => [
-                ['word' => 'gunesli', 'translation' => 'sunny'],
-                ['word' => 'yagmurlu', 'translation' => 'rainy'],
-                ['word' => 'soguk', 'translation' => 'cold'],
-                ['word' => 'sicak', 'translation' => 'hot'],
-                ['word' => 'ruzgarli', 'translation' => 'windy'],
-                ['word' => 'bulutlu', 'translation' => 'cloudy'],
+            'tr a1 months' => [
+                ['word' => 'ocak', 'translation' => 'January'],
+                ['word' => 'subat', 'translation' => 'February'],
+                ['word' => 'mart', 'translation' => 'March'],
+                ['word' => 'nisan', 'translation' => 'April'],
+                ['word' => 'mayis', 'translation' => 'May'],
+                ['word' => 'haziran', 'translation' => 'June'],
             ],
-            'transport' => [
-                ['word' => 'araba', 'translation' => 'car'],
-                ['word' => 'otobus', 'translation' => 'bus'],
-                ['word' => 'tren', 'translation' => 'train'],
-                ['word' => 'ucak', 'translation' => 'airplane'],
-                ['word' => 'bisiklet', 'translation' => 'bicycle'],
-                ['word' => 'taksi', 'translation' => 'taxi'],
+            'tr a1 time' => [
+                ['word' => 'saat kac', 'translation' => 'what time is it'],
+                ['word' => 'saat', 'translation' => 'hour / clock'],
+                ['word' => 'dakika', 'translation' => 'minute'],
+                ['word' => 'sabah', 'translation' => 'morning'],
+                ['word' => 'aksam', 'translation' => 'evening'],
+                ['word' => 'gece', 'translation' => 'night'],
             ],
-
-            // === B1 ===
-            'body parts' => [
-                ['word' => 'bas', 'translation' => 'head'],
-                ['word' => 'goz', 'translation' => 'eye'],
-                ['word' => 'kulak', 'translation' => 'ear'],
-                ['word' => 'el', 'translation' => 'hand'],
-                ['word' => 'ayak', 'translation' => 'foot'],
-                ['word' => 'kalp', 'translation' => 'heart'],
+            'tr a1 my day' => [
+                ['word' => 'bugun', 'translation' => 'today'],
+                ['word' => 'yarin', 'translation' => 'tomorrow'],
+                ['word' => 'dun', 'translation' => 'yesterday'],
+                ['word' => 'simdi', 'translation' => 'now'],
+                ['word' => 'sonra', 'translation' => 'later / after'],
+                ['word' => 'once', 'translation' => 'before / ago'],
             ],
-            'feelings' => [
-                ['word' => 'mutlu', 'translation' => 'happy'],
-                ['word' => 'uzgun', 'translation' => 'sad'],
-                ['word' => 'kizgin', 'translation' => 'angry'],
-                ['word' => 'yorgun', 'translation' => 'tired'],
-                ['word' => 'heyecanli', 'translation' => 'excited'],
-                ['word' => 'endiseli', 'translation' => 'worried'],
+            'tr a1 house 1' => [
+                ['word' => 'ev', 'translation' => 'house / home'],
+                ['word' => 'oda', 'translation' => 'room'],
+                ['word' => 'mutfak', 'translation' => 'kitchen'],
+                ['word' => 'banyo', 'translation' => 'bathroom'],
+                ['word' => 'yatak odasi', 'translation' => 'bedroom'],
+                ['word' => 'salon', 'translation' => 'living room'],
             ],
-            'hobbies' => [
-                ['word' => 'okumak', 'translation' => 'to read'],
-                ['word' => 'yuzmek', 'translation' => 'to swim'],
-                ['word' => 'futbol', 'translation' => 'football'],
-                ['word' => 'muzik dinlemek', 'translation' => 'to listen to music'],
-                ['word' => 'resim yapmak', 'translation' => 'to paint'],
-                ['word' => 'seyahat etmek', 'translation' => 'to travel'],
+            'tr a1 house 2' => [
+                ['word' => 'kapi', 'translation' => 'door'],
+                ['word' => 'pencere', 'translation' => 'window'],
+                ['word' => 'sandalye', 'translation' => 'chair'],
+                ['word' => 'yatak', 'translation' => 'bed'],
+                ['word' => 'dolap', 'translation' => 'cupboard / closet'],
+                ['word' => 'bahce', 'translation' => 'garden'],
             ],
-            'animals' => [
-                ['word' => 'kopek', 'translation' => 'dog'],
-                ['word' => 'kedi', 'translation' => 'cat'],
-                ['word' => 'kus', 'translation' => 'bird'],
-                ['word' => 'balik', 'translation' => 'fish'],
-                ['word' => 'at', 'translation' => 'horse'],
-                ['word' => 'tavsan', 'translation' => 'rabbit'],
+            'tr a1 places' => [
+                ['word' => 'okul', 'translation' => 'school'],
+                ['word' => 'hastane', 'translation' => 'hospital'],
+                ['word' => 'market', 'translation' => 'supermarket'],
+                ['word' => 'eczane', 'translation' => 'pharmacy'],
+                ['word' => 'park', 'translation' => 'park'],
+                ['word' => 'restoran', 'translation' => 'restaurant'],
             ],
-            'professions' => [
-                ['word' => 'doktor', 'translation' => 'doctor'],
-                ['word' => 'ogretmen', 'translation' => 'teacher'],
-                ['word' => 'muhendis', 'translation' => 'engineer'],
-                ['word' => 'avukat', 'translation' => 'lawyer'],
-                ['word' => 'asci', 'translation' => 'cook'],
-                ['word' => 'polis', 'translation' => 'police officer'],
+            'tr a1 directions' => [
+                ['word' => 'sol', 'translation' => 'left'],
+                ['word' => 'sag', 'translation' => 'right'],
+                ['word' => 'duz', 'translation' => 'straight'],
+                ['word' => 'yakin', 'translation' => 'near'],
+                ['word' => 'uzak', 'translation' => 'far'],
+                ['word' => 'karsida', 'translation' => 'across / opposite'],
             ],
-            'common verbs' => [
+            'tr a1 where is it' => [
+                ['word' => 'neresi', 'translation' => 'which place'],
+                ['word' => 'burada', 'translation' => 'here'],
+                ['word' => 'orada', 'translation' => 'there'],
+                ['word' => 'icinde', 'translation' => 'inside'],
+                ['word' => 'disinda', 'translation' => 'outside'],
+                ['word' => 'yaninda', 'translation' => 'next to'],
+            ],
+            'tr a1 verbs 1' => [
                 ['word' => 'olmak', 'translation' => 'to be'],
-                ['word' => 'yapmak', 'translation' => 'to do / to make'],
+                ['word' => 'var', 'translation' => 'there is / to have'],
+                ['word' => 'yok', 'translation' => 'there is not / to not have'],
                 ['word' => 'gitmek', 'translation' => 'to go'],
                 ['word' => 'gelmek', 'translation' => 'to come'],
+                ['word' => 'yapmak', 'translation' => 'to do / to make'],
+            ],
+            'tr a1 verbs 2' => [
                 ['word' => 'istemek', 'translation' => 'to want'],
+                ['word' => 'sevmek', 'translation' => 'to love / to like'],
+                ['word' => 'yemek', 'translation' => 'to eat'],
+                ['word' => 'icmek', 'translation' => 'to drink'],
+                ['word' => 'almak', 'translation' => 'to take / to buy'],
+                ['word' => 'vermek', 'translation' => 'to give'],
+            ],
+            'tr a1 verbs 3' => [
+                ['word' => 'konusmak', 'translation' => 'to speak / to talk'],
+                ['word' => 'anlamak', 'translation' => 'to understand'],
                 ['word' => 'bilmek', 'translation' => 'to know'],
+                ['word' => 'okumak', 'translation' => 'to read'],
+                ['word' => 'yazmak', 'translation' => 'to write'],
+                ['word' => 'ogrenmek', 'translation' => 'to learn'],
             ],
-
-            // === B2 ===
-            'job interviews' => [
-                ['word' => 'basvuru', 'translation' => 'application'],
-                ['word' => 'deneyim', 'translation' => 'experience'],
-                ['word' => 'maas', 'translation' => 'salary'],
-                ['word' => 'is gorusmesi', 'translation' => 'job interview'],
-                ['word' => 'kariyer', 'translation' => 'career'],
-                ['word' => 'nitelik', 'translation' => 'qualification'],
+            'tr a1 questions' => [
+                ['word' => 'ne', 'translation' => 'what'],
+                ['word' => 'kim', 'translation' => 'who'],
+                ['word' => 'nere', 'translation' => 'where (colloquial)'],
+                ['word' => 'ne zaman', 'translation' => 'when'],
+                ['word' => 'nasil', 'translation' => 'how'],
+                ['word' => 'ne kadar', 'translation' => 'how much'],
             ],
-            'the workplace' => [
+            'tr a1 negation' => [
+                ['word' => 'degil', 'translation' => 'not (to be)'],
+                ['word' => 'hicbir sey', 'translation' => 'nothing'],
+                ['word' => 'hic', 'translation' => 'never / none at all'],
+                ['word' => 'hayir', 'translation' => 'no'],
+                ['word' => 'istemiyorum', 'translation' => 'I do not want'],
+                ['word' => 'bilmiyorum', 'translation' => 'I do not know'],
+            ],
+            'tr a2 rooms' => [
+                ['word' => 'koridor', 'translation' => 'hallway'],
+                ['word' => 'balkon', 'translation' => 'balcony'],
+                ['word' => 'bodrum', 'translation' => 'basement'],
+                ['word' => 'cati', 'translation' => 'roof / attic'],
+                ['word' => 'garaj', 'translation' => 'garage'],
+                ['word' => 'teras', 'translation' => 'terrace'],
+            ],
+            'tr a2 furniture' => [
+                ['word' => 'koltuk', 'translation' => 'armchair / sofa'],
+                ['word' => 'sehpa', 'translation' => 'coffee table'],
+                ['word' => 'kitaplik', 'translation' => 'bookshelf'],
+                ['word' => 'ayna', 'translation' => 'mirror'],
+                ['word' => 'hali', 'translation' => 'carpet'],
+                ['word' => 'perde', 'translation' => 'curtain'],
+            ],
+            'tr a2 household items' => [
+                ['word' => 'buzdolabi', 'translation' => 'refrigerator'],
+                ['word' => 'camasir makinesi', 'translation' => 'washing machine'],
+                ['word' => 'firin', 'translation' => 'oven'],
+                ['word' => 'supurge', 'translation' => 'vacuum cleaner'],
+                ['word' => 'utu', 'translation' => 'iron'],
+                ['word' => 'tabak', 'translation' => 'plate'],
+            ],
+            'tr a2 my home' => [
+                ['word' => 'kira', 'translation' => 'rent'],
+                ['word' => 'daire', 'translation' => 'apartment'],
+                ['word' => 'kat', 'translation' => 'floor / story'],
+                ['word' => 'komsu', 'translation' => 'neighbor'],
+                ['word' => 'adres', 'translation' => 'address'],
+                ['word' => 'tasinmak', 'translation' => 'to move (house)'],
+            ],
+            'tr a2 housework' => [
+                ['word' => 'temizlemek', 'translation' => 'to clean'],
+                ['word' => 'yikamak', 'translation' => 'to wash'],
+                ['word' => 'pisirmek', 'translation' => 'to cook'],
+                ['word' => 'supurmek', 'translation' => 'to sweep'],
+                ['word' => 'bulasiklari yikamak', 'translation' => 'to wash dishes'],
+                ['word' => 'camasir yikamak', 'translation' => 'to do laundry'],
+            ],
+            'tr a2 morning routine' => [
+                ['word' => 'alarm', 'translation' => 'alarm'],
+                ['word' => 'kahvalti hazirlamak', 'translation' => 'to prepare breakfast'],
+                ['word' => 'giyinmek', 'translation' => 'to get dressed'],
+                ['word' => 'saclarini taramak', 'translation' => 'to comb hair'],
+                ['word' => 'canta hazirlamak', 'translation' => 'to prepare bag'],
+                ['word' => 'yola cikmak', 'translation' => 'to set off'],
+            ],
+            'tr a2 work and school' => [
+                ['word' => 'ders', 'translation' => 'lesson / class'],
+                ['word' => 'odev', 'translation' => 'homework'],
+                ['word' => 'sinav', 'translation' => 'exam'],
+                ['word' => 'mola', 'translation' => 'break'],
+                ['word' => 'mesai', 'translation' => 'working hours'],
                 ['word' => 'toplanti', 'translation' => 'meeting'],
-                ['word' => 'proje', 'translation' => 'project'],
-                ['word' => 'son tarih', 'translation' => 'deadline'],
-                ['word' => 'is arkadasi', 'translation' => 'colleague'],
-                ['word' => 'rapor', 'translation' => 'report'],
-                ['word' => 'sunum', 'translation' => 'presentation'],
             ],
-            'reading the news' => [
-                ['word' => 'haber', 'translation' => 'news'],
-                ['word' => 'gazete', 'translation' => 'newspaper'],
-                ['word' => 'baslik', 'translation' => 'headline'],
-                ['word' => 'makale', 'translation' => 'article'],
-                ['word' => 'yorum', 'translation' => 'comment'],
-                ['word' => 'kaynak', 'translation' => 'source'],
+            'tr a2 evening routine' => [
+                ['word' => 'aksam yemegi pisirmek', 'translation' => 'to cook dinner'],
+                ['word' => 'televizyon izlemek', 'translation' => 'to watch TV'],
+                ['word' => 'kitap okumak', 'translation' => 'to read a book'],
+                ['word' => 'muzik dinlemek', 'translation' => 'to listen to music'],
+                ['word' => 'erken yatmak', 'translation' => 'to go to bed early'],
+                ['word' => 'gec yatmak', 'translation' => 'to go to bed late'],
             ],
-            'politics' => [
-                ['word' => 'hukumet', 'translation' => 'government'],
-                ['word' => 'secim', 'translation' => 'election'],
-                ['word' => 'yasa', 'translation' => 'law'],
-                ['word' => 'parti', 'translation' => 'party'],
-                ['word' => 'demokrasi', 'translation' => 'democracy'],
-                ['word' => 'politika', 'translation' => 'policy'],
+            'tr a2 weekend activities' => [
+                ['word' => 'gezmek', 'translation' => 'to go for a walk'],
+                ['word' => 'alisveris yapmak', 'translation' => 'to go shopping'],
+                ['word' => 'arkadas ziyaret etmek', 'translation' => 'to visit friends'],
+                ['word' => 'piknik yapmak', 'translation' => 'to have a picnic'],
+                ['word' => 'sinemaya gitmek', 'translation' => 'to go to the cinema'],
+                ['word' => 'spor yapmak', 'translation' => 'to exercise'],
             ],
-            'describing personality' => [
-                ['word' => 'hirslı', 'translation' => 'ambitious'],
-                ['word' => 'comert', 'translation' => 'generous'],
-                ['word' => 'inatci', 'translation' => 'stubborn'],
-                ['word' => 'guvenilir', 'translation' => 'reliable'],
-                ['word' => 'alçakgonullu', 'translation' => 'humble'],
-                ['word' => 'sabırlı', 'translation' => 'patient'],
+            'tr a2 describing habits' => [
+                ['word' => 'her zaman', 'translation' => 'always'],
+                ['word' => 'genellikle', 'translation' => 'usually'],
+                ['word' => 'bazen', 'translation' => 'sometimes'],
+                ['word' => 'nadiren', 'translation' => 'rarely'],
+                ['word' => 'asla', 'translation' => 'never'],
+                ['word' => 'her gun', 'translation' => 'every day'],
             ],
-            'mental health' => [
-                ['word' => 'stres', 'translation' => 'stress'],
-                ['word' => 'kaygi', 'translation' => 'anxiety'],
-                ['word' => 'denge', 'translation' => 'balance'],
-                ['word' => 'terapi', 'translation' => 'therapy'],
-                ['word' => 'ozguven', 'translation' => 'self-confidence'],
-                ['word' => 'farkindalik', 'translation' => 'awareness'],
+            'tr a2 telling time' => [
+                ['word' => 'saat kac', 'translation' => 'what time is it'],
+                ['word' => 'bucuk', 'translation' => 'half past'],
+                ['word' => 'ceyrek', 'translation' => 'quarter'],
+                ['word' => 'gece yarisi', 'translation' => 'midnight'],
+                ['word' => 'ogle', 'translation' => 'noon'],
+                ['word' => 'tam', 'translation' => 'exactly / sharp'],
             ],
-            'conditional sentences' => [
-                ['word' => 'eger', 'translation' => 'if'],
-                ['word' => 'olsaydi', 'translation' => 'would have been'],
-                ['word' => 'yapabilirdim', 'translation' => 'I could have done'],
-                ['word' => 'keske', 'translation' => 'I wish'],
-                ['word' => 'belki', 'translation' => 'maybe'],
-                ['word' => 'muhtemelen', 'translation' => 'probably'],
+            'tr a2 days and weeks' => [
+                ['word' => 'pazar', 'translation' => 'Sunday'],
+                ['word' => 'hafta', 'translation' => 'week'],
+                ['word' => 'hafta sonu', 'translation' => 'weekend'],
+                ['word' => 'hafta ici', 'translation' => 'weekday'],
+                ['word' => 'gecen hafta', 'translation' => 'last week'],
+                ['word' => 'gelecek hafta', 'translation' => 'next week'],
             ],
-            'traditions' => [
-                ['word' => 'bayram', 'translation' => 'holiday / festival'],
-                ['word' => 'gelenek', 'translation' => 'tradition'],
-                ['word' => 'kultur', 'translation' => 'culture'],
-                ['word' => 'dugun', 'translation' => 'wedding'],
-                ['word' => 'adet', 'translation' => 'custom'],
-                ['word' => 'miras', 'translation' => 'heritage'],
+            'tr a2 months and seasons' => [
+                ['word' => 'temmuz', 'translation' => 'July'],
+                ['word' => 'agustos', 'translation' => 'August'],
+                ['word' => 'eylul', 'translation' => 'September'],
+                ['word' => 'ekim', 'translation' => 'October'],
+                ['word' => 'kasim', 'translation' => 'November'],
+                ['word' => 'aralik', 'translation' => 'December'],
             ],
-
-            // === C1 ===
-            'philosophy' => [
-                ['word' => 'gerceklik', 'translation' => 'reality'],
-                ['word' => 'varlik', 'translation' => 'existence'],
-                ['word' => 'ahlak', 'translation' => 'morality'],
-                ['word' => 'ozgurluk', 'translation' => 'freedom'],
-                ['word' => 'bilinc', 'translation' => 'consciousness'],
-                ['word' => 'adalet', 'translation' => 'justice'],
+            'tr a2 dates and years' => [
+                ['word' => 'tarih', 'translation' => 'date'],
+                ['word' => 'yil', 'translation' => 'year'],
+                ['word' => 'yuzyil', 'translation' => 'century'],
+                ['word' => 'dogum tarihi', 'translation' => 'date of birth'],
+                ['word' => 'gecen yil', 'translation' => 'last year'],
+                ['word' => 'gelecek yil', 'translation' => 'next year'],
             ],
-            'academic vocabulary' => [
-                ['word' => 'arastirma', 'translation' => 'research'],
-                ['word' => 'analiz', 'translation' => 'analysis'],
-                ['word' => 'yontem', 'translation' => 'methodology'],
-                ['word' => 'hipotez', 'translation' => 'hypothesis'],
-                ['word' => 'kanitlamak', 'translation' => 'to prove'],
-                ['word' => 'sonuc', 'translation' => 'conclusion'],
+            'tr a2 making appointments' => [
+                ['word' => 'randevu', 'translation' => 'appointment'],
+                ['word' => 'musait misiniz', 'translation' => 'are you available'],
+                ['word' => 'ne zaman', 'translation' => 'when'],
+                ['word' => 'saat kacta', 'translation' => 'at what time'],
+                ['word' => 'iptal etmek', 'translation' => 'to cancel'],
+                ['word' => 'degistirmek', 'translation' => 'to change / reschedule'],
             ],
-            'negotiations' => [
-                ['word' => 'anlasma', 'translation' => 'agreement'],
-                ['word' => 'uzlasma', 'translation' => 'compromise'],
-                ['word' => 'teklif', 'translation' => 'offer / proposal'],
-                ['word' => 'kosul', 'translation' => 'condition'],
-                ['word' => 'muzakere', 'translation' => 'negotiation'],
-                ['word' => 'imzalamak', 'translation' => 'to sign'],
+            'tr a2 weather words' => [
+                ['word' => 'yagmur', 'translation' => 'rain'],
+                ['word' => 'kar', 'translation' => 'snow'],
+                ['word' => 'firtina', 'translation' => 'storm'],
+                ['word' => 'sis', 'translation' => 'fog'],
+                ['word' => 'gunes', 'translation' => 'sun'],
+                ['word' => 'bulut', 'translation' => 'cloud'],
             ],
-            'common idioms' => [
-                ['word' => 'gozden dusmek', 'translation' => 'to fall from grace'],
-                ['word' => 'isi pisirmek', 'translation' => 'to seal the deal'],
-                ['word' => 'can kulagi ile dinlemek', 'translation' => 'to listen very carefully'],
-                ['word' => 'goz yummak', 'translation' => 'to turn a blind eye'],
-                ['word' => 'ayagi yere basmak', 'translation' => 'to be realistic'],
-                ['word' => 'el ustunde tutmak', 'translation' => 'to cherish'],
+            'tr a2 temperature' => [
+                ['word' => 'derece', 'translation' => 'degree'],
+                ['word' => 'ilik', 'translation' => 'warm'],
+                ['word' => 'serin', 'translation' => 'cool'],
+                ['word' => 'kavurucu', 'translation' => 'scorching'],
+                ['word' => 'dondurucu', 'translation' => 'freezing'],
+                ['word' => 'nem', 'translation' => 'humidity'],
             ],
-            'subjunctive mood' => [
-                ['word' => 'gereklilik', 'translation' => 'necessity'],
-                ['word' => 'zorunluluk', 'translation' => 'obligation'],
-                ['word' => 'dilek', 'translation' => 'wish'],
-                ['word' => 'suphe', 'translation' => 'doubt'],
-                ['word' => 'oneri', 'translation' => 'suggestion'],
-                ['word' => 'talep', 'translation' => 'demand'],
+            'tr a2 weather forecast' => [
+                ['word' => 'hava durumu', 'translation' => 'weather forecast'],
+                ['word' => 'hava nasil', 'translation' => 'how is the weather'],
+                ['word' => 'yagis', 'translation' => 'precipitation'],
+                ['word' => 'acik hava', 'translation' => 'clear sky'],
+                ['word' => 'kapali hava', 'translation' => 'overcast'],
+                ['word' => 'semsiye', 'translation' => 'umbrella'],
             ],
-
-            // === C2 ===
-            'literary analysis' => [
-                ['word' => 'metafor', 'translation' => 'metaphor'],
-                ['word' => 'ironi', 'translation' => 'irony'],
-                ['word' => 'sembolizm', 'translation' => 'symbolism'],
-                ['word' => 'anlatici', 'translation' => 'narrator'],
-                ['word' => 'alegori', 'translation' => 'allegory'],
-                ['word' => 'tema', 'translation' => 'theme'],
+            'tr a2 seasons and climate' => [
+                ['word' => 'ilkbahar', 'translation' => 'spring'],
+                ['word' => 'yaz', 'translation' => 'summer'],
+                ['word' => 'sonbahar', 'translation' => 'autumn'],
+                ['word' => 'kis', 'translation' => 'winter'],
+                ['word' => 'iklim', 'translation' => 'climate'],
+                ['word' => 'mevsim', 'translation' => 'season'],
             ],
-            'rhetorical devices' => [
-                ['word' => 'benzetme', 'translation' => 'analogy'],
-                ['word' => 'tekrar', 'translation' => 'repetition'],
-                ['word' => 'tezat', 'translation' => 'contrast'],
-                ['word' => 'abartma', 'translation' => 'exaggeration'],
-                ['word' => 'iknа', 'translation' => 'persuasion'],
-                ['word' => 'retorik', 'translation' => 'rhetoric'],
+            'tr a2 directions' => [
+                ['word' => 'donmek', 'translation' => 'to turn'],
+                ['word' => 'karsiya gecmek', 'translation' => 'to cross'],
+                ['word' => 'devam etmek', 'translation' => 'to continue'],
+                ['word' => 'durmak', 'translation' => 'to stop'],
+                ['word' => 'kosede', 'translation' => 'at the corner'],
+                ['word' => 'karsi tarafta', 'translation' => 'on the other side'],
             ],
-            'science & technology' => [
-                ['word' => 'yapay zeka', 'translation' => 'artificial intelligence'],
-                ['word' => 'algoritma', 'translation' => 'algorithm'],
-                ['word' => 'inovasyon', 'translation' => 'innovation'],
-                ['word' => 'veri', 'translation' => 'data'],
-                ['word' => 'surdurulebilirlik', 'translation' => 'sustainability'],
-                ['word' => 'biyoteknoloji', 'translation' => 'biotechnology'],
+            'tr a2 places in town' => [
+                ['word' => 'banka', 'translation' => 'bank'],
+                ['word' => 'postane', 'translation' => 'post office'],
+                ['word' => 'kutuphane', 'translation' => 'library'],
+                ['word' => 'cami', 'translation' => 'mosque'],
+                ['word' => 'belediye', 'translation' => 'municipality'],
+                ['word' => 'otogar', 'translation' => 'bus station'],
             ],
-            'humor and sarcasm' => [
-                ['word' => 'espri', 'translation' => 'joke / wit'],
-                ['word' => 'alaysı', 'translation' => 'sarcastic'],
-                ['word' => 'kinaye', 'translation' => 'innuendo'],
-                ['word' => 'saçmalik', 'translation' => 'absurdity'],
-                ['word' => 'nükte', 'translation' => 'witticism'],
-                ['word' => 'parodi', 'translation' => 'parody'],
+            'tr a2 public transport' => [
+                ['word' => 'metro', 'translation' => 'metro / subway'],
+                ['word' => 'tramvay', 'translation' => 'tram'],
+                ['word' => 'vapur', 'translation' => 'ferry'],
+                ['word' => 'dolmus', 'translation' => 'shared taxi'],
+                ['word' => 'durak', 'translation' => 'stop (bus/tram)'],
+                ['word' => 'istasyon', 'translation' => 'station'],
             ],
-            'mastery review' => [
-                ['word' => 'elestirel dusunme', 'translation' => 'critical thinking'],
-                ['word' => 'perspektif', 'translation' => 'perspective'],
-                ['word' => 'sentez', 'translation' => 'synthesis'],
-                ['word' => 'nuans', 'translation' => 'nuance'],
-                ['word' => 'yetkinlik', 'translation' => 'proficiency'],
-                ['word' => 'hakimiyet', 'translation' => 'mastery'],
+            'tr a2 buying tickets' => [
+                ['word' => 'bilet', 'translation' => 'ticket'],
+                ['word' => 'gidis', 'translation' => 'one way'],
+                ['word' => 'gidis donus', 'translation' => 'round trip'],
+                ['word' => 'aktarma', 'translation' => 'transfer'],
+                ['word' => 'kalkis', 'translation' => 'departure'],
+                ['word' => 'varis', 'translation' => 'arrival'],
+            ],
+            'tr a2 asking directions' => [
+                ['word' => 'nasil gidilir', 'translation' => 'how to get there'],
+                ['word' => 'ne kadar surer', 'translation' => 'how long does it take'],
+                ['word' => 'yuruyerek', 'translation' => 'on foot / walking'],
+                ['word' => 'arabayla', 'translation' => 'by car'],
+                ['word' => 'otobusle', 'translation' => 'by bus'],
+                ['word' => 'kayboldum', 'translation' => 'I am lost'],
+            ],
+            'tr a2 shops' => [
+                ['word' => 'firin', 'translation' => 'bakery'],
+                ['word' => 'kasap', 'translation' => 'butcher'],
+                ['word' => 'manav', 'translation' => 'greengrocer'],
+                ['word' => 'kuyumcu', 'translation' => 'jeweler'],
+                ['word' => 'alisveris merkezi', 'translation' => 'shopping mall'],
+                ['word' => 'pazar', 'translation' => 'market / bazaar'],
+            ],
+            'tr a2 clothing' => [
+                ['word' => 'gomlek', 'translation' => 'shirt'],
+                ['word' => 'pantolon', 'translation' => 'pants'],
+                ['word' => 'etek', 'translation' => 'skirt'],
+                ['word' => 'ceket', 'translation' => 'jacket'],
+                ['word' => 'ayakkabi', 'translation' => 'shoes'],
+                ['word' => 'canta', 'translation' => 'bag'],
+            ],
+            'tr a2 prices and money' => [
+                ['word' => 'fiyat', 'translation' => 'price'],
+                ['word' => 'indirim', 'translation' => 'discount'],
+                ['word' => 'kasa', 'translation' => 'cash register'],
+                ['word' => 'nakit', 'translation' => 'cash'],
+                ['word' => 'kredi karti', 'translation' => 'credit card'],
+                ['word' => 'fis', 'translation' => 'receipt'],
+            ],
+            'tr a2 at the store' => [
+                ['word' => 'deneyebilir miyim', 'translation' => 'can I try this on'],
+                ['word' => 'beden', 'translation' => 'size'],
+                ['word' => 'renk', 'translation' => 'color'],
+                ['word' => 'bundan var mi', 'translation' => 'do you have this'],
+                ['word' => 'degistirmek istiyorum', 'translation' => 'I want to exchange'],
+                ['word' => 'iade', 'translation' => 'return / refund'],
+            ],
+            'tr a2 bargaining' => [
+                ['word' => 'indirim var mi', 'translation' => 'is there a discount'],
+                ['word' => 'cok pahali', 'translation' => 'too expensive'],
+                ['word' => 'son fiyat', 'translation' => 'final price'],
+                ['word' => 'pazarlik', 'translation' => 'bargaining'],
+                ['word' => 'uygun fiyat', 'translation' => 'reasonable price'],
+                ['word' => 'anlasmak', 'translation' => 'to agree / deal'],
+            ],
+            'tr a2 body parts' => [
+                ['word' => 'mide', 'translation' => 'stomach'],
+                ['word' => 'bogaz', 'translation' => 'throat'],
+                ['word' => 'sirt', 'translation' => 'back'],
+                ['word' => 'diz', 'translation' => 'knee'],
+                ['word' => 'omuz', 'translation' => 'shoulder'],
+                ['word' => 'parmak', 'translation' => 'finger / toe'],
+            ],
+            'tr a2 illness' => [
+                ['word' => 'hasta', 'translation' => 'sick / ill'],
+                ['word' => 'ates', 'translation' => 'fever'],
+                ['word' => 'bas agrisi', 'translation' => 'headache'],
+                ['word' => 'grip', 'translation' => 'flu'],
+                ['word' => 'oksuruk', 'translation' => 'cough'],
+                ['word' => 'alerji', 'translation' => 'allergy'],
+            ],
+            'tr a2 at the doctor' => [
+                ['word' => 'doktora gitmek', 'translation' => 'to go to the doctor'],
+                ['word' => 'muayene', 'translation' => 'examination'],
+                ['word' => 'recete', 'translation' => 'prescription'],
+                ['word' => 'agri', 'translation' => 'pain'],
+                ['word' => 'nefes almak', 'translation' => 'to breathe'],
+                ['word' => 'iyilesmek', 'translation' => 'to recover'],
+            ],
+            'tr a2 at the pharmacy' => [
+                ['word' => 'ilac', 'translation' => 'medicine'],
+                ['word' => 'hap', 'translation' => 'pill'],
+                ['word' => 'merhem', 'translation' => 'ointment'],
+                ['word' => 'bandaj', 'translation' => 'bandage'],
+                ['word' => 'agri kesici', 'translation' => 'painkiller'],
+                ['word' => 'gunde uc kez', 'translation' => 'three times a day'],
+            ],
+            'tr a2 past tense' => [
+                ['word' => 'gittim', 'translation' => 'I went'],
+                ['word' => 'yedim', 'translation' => 'I ate'],
+                ['word' => 'gordum', 'translation' => 'I saw'],
+                ['word' => 'aldim', 'translation' => 'I bought'],
+                ['word' => 'konustum', 'translation' => 'I spoke'],
+                ['word' => 'ogrendim', 'translation' => 'I learned'],
+            ],
+            'tr a2 future tense' => [
+                ['word' => 'gidecegim', 'translation' => 'I will go'],
+                ['word' => 'yapacagim', 'translation' => 'I will do'],
+                ['word' => 'gorecegim', 'translation' => 'I will see'],
+                ['word' => 'yiyecegim', 'translation' => 'I will eat'],
+                ['word' => 'gelecegim', 'translation' => 'I will come'],
+                ['word' => 'calisacagim', 'translation' => 'I will work'],
+            ],
+            'tr a2 can and must' => [
+                ['word' => 'yapabilirim', 'translation' => 'I can do'],
+                ['word' => 'yapamam', 'translation' => 'I cannot do'],
+                ['word' => 'yapmaliyim', 'translation' => 'I must do'],
+                ['word' => 'yapmam lazim', 'translation' => 'I need to do'],
+                ['word' => 'yapmamaliyim', 'translation' => 'I must not do'],
+                ['word' => 'izin vermek', 'translation' => 'to allow'],
+            ],
+            'tr a2 comparisons' => [
+                ['word' => 'daha buyuk', 'translation' => 'bigger'],
+                ['word' => 'daha kucuk', 'translation' => 'smaller'],
+                ['word' => 'en iyi', 'translation' => 'the best'],
+                ['word' => 'en kotu', 'translation' => 'the worst'],
+                ['word' => 'kadar', 'translation' => 'as much as'],
+                ['word' => 'den daha', 'translation' => 'more than'],
+            ],
+            'tr a2 conjunctions' => [
+                ['word' => 've', 'translation' => 'and'],
+                ['word' => 'ama', 'translation' => 'but'],
+                ['word' => 'cunku', 'translation' => 'because'],
+                ['word' => 'bu yuzden', 'translation' => 'therefore'],
+                ['word' => 'ya da', 'translation' => 'or'],
+                ['word' => 'hem ... hem', 'translation' => 'both ... and'],
             ],
         ];
     }
 
-    private function russian(): array
+        private function russian(): array
     {
         return [
             // === A1 ===

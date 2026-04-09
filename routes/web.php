@@ -40,6 +40,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/subscribe/{language}', [SubscriptionController::class, 'store'])->name('subscribe');
     Route::delete('/subscribe/{language}', [SubscriptionController::class, 'destroy'])->name('unsubscribe');
 
+    // UI Language
+    Route::post('/settings/language', function () {
+        request()->validate(['ui_language' => 'required|in:en,nl,tr']);
+        auth()->user()->update(['ui_language' => request('ui_language')]);
+        return back();
+    })->name('settings.language');
+
     // Tour
     Route::post('/tour/complete', function () {
         auth()->user()->update(['tour_completed' => true]);

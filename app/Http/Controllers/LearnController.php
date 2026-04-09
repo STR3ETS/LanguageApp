@@ -6,13 +6,15 @@ use App\Models\Language;
 use App\Models\Lesson;
 use App\Models\Streak;
 use App\Models\UserProgress;
+use App\Services\TranslationService;
 use App\Services\VocabularyService;
 use Illuminate\Http\Request;
 
 class LearnController extends Controller
 {
     public function __construct(
-        private VocabularyService $vocabulary
+        private VocabularyService $vocabulary,
+        private TranslationService $translator,
     ) {}
 
     public function index(Request $request)
@@ -184,8 +186,38 @@ class LearnController extends Controller
             ->first();
 
         // Generate the full lesson with phases
-        $wordPairs = $this->vocabulary->getWordPairs(strtolower($lesson->title), $language->name);
-        $steps = $this->buildLessonSteps($wordPairs, $language->name);
+        $isExam = str_contains($lesson->title, 'Final Exam');
+        $uiLang = $request->user()->ui_language ?? 'en';
+
+        if ($isExam) {
+            $cefr = $lesson->level->cefr;
+            $cefrLevels = $language->levels->where('cefr', $cefr);
+            $allWords = [];
+            foreach ($cefrLevels as $lvl) {
+                foreach ($lvl->lessons as $ls) {
+                    if (str_contains($ls->title, 'Exam')) continue;
+                    $pairs = $this->vocabulary->getWordPairs(strtolower($ls->title), $language->name);
+                    $allWords = array_merge($allWords, $pairs);
+                }
+            }
+            $seen = [];
+            $wordPairs = [];
+            foreach ($allWords as $p) {
+                if (!isset($seen[$p['word']])) {
+                    $wordPairs[] = $p;
+                    $seen[$p['word']] = true;
+                }
+            }
+            $wordPairs = array_slice($wordPairs, 0, 30);
+            $wordPairs = $this->translator->translatePairs($wordPairs, $uiLang);
+            $translatedLang = trans_lang($language->slug);
+            $steps = $this->buildExamSteps($wordPairs, $language->name, $translatedLang);
+        } else {
+            $wordPairs = $this->vocabulary->getWordPairs(strtolower($lesson->title), $language->name);
+            $wordPairs = $this->translator->translatePairs($wordPairs, $uiLang);
+            $translatedLang = trans_lang($language->slug);
+            $steps = $this->buildLessonSteps($wordPairs, $language->name, $translatedLang);
+        }
 
         return view('learn.lesson', compact('lesson', 'language', 'steps', 'progress'));
     }
@@ -215,6 +247,8 @@ class LearnController extends Controller
 
         // Use exact same lookup as the lesson view
         $wordPairs = $this->vocabulary->getWordPairs(strtolower($lesson->title), $language->name);
+        $uiLang = $request->user()->ui_language ?? 'en';
+        $wordPairs = $this->translator->translatePairs($wordPairs, $uiLang);
 
         return view('learn.review', compact('lesson', 'language', 'progress', 'wordPairs'));
     }
@@ -295,8 +329,70 @@ class LearnController extends Controller
         ]);
     }
 
-    private function buildLessonSteps(array $wordPairs, string $langName): array
+    private function buildExamSteps(array $wordPairs, string $langName, string $langLabel = ''): array
     {
+        $langLabel = $langLabel ?: $langName;
+        $steps = [];
+        $pairs = collect($wordPairs)->shuffle();
+
+        // No flashcards in exams — straight to questions
+
+        // 6x Multiple choice: What does X mean?
+        foreach ($pairs->take(6) as $pair) {
+            $wrong = $pairs->where('word', '!=', $pair['word'])->pluck('translation')->shuffle()->take(3)->values()->toArray();
+            $steps[] = ['type' => 'multiple_choice', 'question' => __('ui.q_what_does_mean', ['word' => $pair['word']]), 'options' => collect(array_merge([$pair['translation']], $wrong))->shuffle()->values()->toArray(), 'correct' => $pair['translation']];
+        }
+
+        // 4x Fill in the blank
+        foreach ($pairs->skip(6)->take(4) as $pair) {
+            $wrong = $pairs->where('word', '!=', $pair['word'])->pluck('word')->shuffle()->take(3)->values()->toArray();
+            $steps[] = ['type' => 'fill_blank', 'sentence' => __("ui.q_fill_blank", ["word" => $pair["translation"], "lang" => $langLabel]), 'blank' => $pair['word'], 'options' => collect(array_merge([$pair['word']], $wrong))->shuffle()->values()->toArray(), 'correct' => $pair['word']];
+        }
+
+        // 1x Matching (4 pairs)
+        if ($pairs->count() >= 4) {
+            $matchPairs = $pairs->skip(10)->take(4)->map(fn($p) => ['word' => $p['word'], 'translation' => $p['translation']])->values()->toArray();
+            if (count($matchPairs) >= 4) {
+                $steps[] = ['type' => 'matching', 'instruction' => __('ui.match_the_pairs'), 'pairs' => $matchPairs, 'lang' => $langName];
+            }
+        }
+
+        // 4x Reverse: How do you say X?
+        foreach ($pairs->skip(14)->take(4) as $pair) {
+            $wrong = $pairs->where('translation', '!=', $pair['translation'])->pluck('word')->shuffle()->take(3)->values()->toArray();
+            $steps[] = ['type' => 'multiple_choice', 'question' => __("ui.q_how_do_you_say", ["word" => $pair["translation"], "lang" => $langLabel]), 'options' => collect(array_merge([$pair['word']], $wrong))->shuffle()->values()->toArray(), 'correct' => $pair['word']];
+        }
+
+        // 3x True/False
+        foreach ($pairs->skip(18)->take(3) as $i => $pair) {
+            $isCorrect = $i % 2 === 0;
+            $shownTranslation = $isCorrect ? $pair['translation'] : $pairs->where('word', '!=', $pair['word'])->random()['translation'];
+            $steps[] = ['type' => 'true_false', 'question' => __("ui.q_is_means", ["word" => $pair["word"], "translation" => $shownTranslation]), 'correct' => $isCorrect ? 'true' : 'false', 'actual_translation' => $pair['translation'], 'lang' => $langName];
+        }
+
+        // 2x Listening
+        foreach ($pairs->skip(21)->take(2) as $pair) {
+            $wrong = $pairs->where('word', '!=', $pair['word'])->pluck('translation')->shuffle()->take(3)->values()->toArray();
+            $steps[] = ['type' => 'listening', 'word' => $pair['word'], 'question' => __('ui.what_do_you_hear'), 'options' => collect(array_merge([$pair['translation']], $wrong))->shuffle()->values()->toArray(), 'correct' => $pair['translation'], 'lang' => $langName];
+        }
+
+        // 5x Typing
+        foreach ($pairs->skip(23)->take(5) as $pair) {
+            $steps[] = ['type' => 'typing', 'question' => __("ui.q_type_word_for", ["word" => $pair["translation"], "lang" => $langLabel]), 'correct' => strtolower($pair['word']), 'hint' => mb_substr($pair['word'], 0, 1) . str_repeat('_', max(0, mb_strlen($pair['word']) - 1)), 'lang' => $langName];
+        }
+
+        // 1x Final matching
+        if ($pairs->count() >= 8) {
+            $matchPairs = $pairs->take(4)->map(fn($p) => ['word' => $p['word'], 'translation' => $p['translation']])->values()->toArray();
+            $steps[] = ['type' => 'matching', 'instruction' => __('ui.match_the_pairs'), 'pairs' => $matchPairs, 'lang' => $langName];
+        }
+
+        return $steps;
+    }
+
+    private function buildLessonSteps(array $wordPairs, string $langName, string $langLabel = ''): array
+    {
+        $langLabel = $langLabel ?: $langName;
         $steps = [];
         $pairs = collect($wordPairs);
 
@@ -319,7 +415,7 @@ class LearnController extends Controller
 
             $steps[] = [
                 'type' => 'multiple_choice',
-                'question' => "What does \"{$pair['word']}\" mean?",
+                'question' => __('ui.q_what_does_mean', ['word' => $pair['word']]),
                 'options' => collect(array_merge([$pair['translation']], $wrong))->shuffle()->values()->toArray(),
                 'correct' => $pair['translation'],
             ];
@@ -330,7 +426,7 @@ class LearnController extends Controller
             $matchPairs = $shuffled->take(4)->map(fn($p) => ['word' => $p['word'], 'translation' => $p['translation']])->values()->toArray();
             $steps[] = [
                 'type' => 'matching',
-                'instruction' => 'Match each word to its translation',
+                'instruction' => __('ui.match_the_pairs'),
                 'pairs' => $matchPairs,
                 'lang' => $langName,
             ];
@@ -344,7 +440,7 @@ class LearnController extends Controller
             $steps[] = [
                 'type' => 'listening',
                 'word' => $pair['word'],
-                'question' => 'What do you hear?',
+                'question' => __('ui.what_do_you_hear'),
                 'options' => collect(array_merge([$pair['translation']], $wrong))->shuffle()->values()->toArray(),
                 'correct' => $pair['translation'],
                 'lang' => $langName,
@@ -358,13 +454,28 @@ class LearnController extends Controller
 
             $steps[] = [
                 'type' => 'multiple_choice',
-                'question' => "How do you say \"{$pair['translation']}\" in {$langName}?",
+                'question' => __("ui.q_how_do_you_say", ["word" => $pair["translation"], "lang" => $langLabel]),
                 'options' => collect(array_merge([$pair['word']], $wrong))->shuffle()->values()->toArray(),
                 'correct' => $pair['word'],
             ];
         }
 
-        // === PHASE 6: True/False — is this translation correct? ===
+        // === PHASE 6: Fill in the blank ===
+        foreach ($shuffled->take(2) as $pair) {
+            $sentence = __("ui.q_fill_blank", ["word" => $pair["translation"], "lang" => $langLabel]);
+            $wrong = $pairs->where('word', '!=', $pair['word'])
+                ->pluck('word')->shuffle()->take(3)->values()->toArray();
+
+            $steps[] = [
+                'type' => 'fill_blank',
+                'sentence' => $sentence,
+                'blank' => $pair['word'],
+                'options' => collect(array_merge([$pair['word']], $wrong))->shuffle()->values()->toArray(),
+                'correct' => $pair['word'],
+            ];
+        }
+
+        // === PHASE 7: True/False — is this translation correct? ===
         foreach ($shuffled->take(2) as $i => $pair) {
             $isCorrect = $i % 2 === 0;
             $shownTranslation = $isCorrect
@@ -373,7 +484,7 @@ class LearnController extends Controller
 
             $steps[] = [
                 'type' => 'true_false',
-                'question' => "\"{$pair['word']}\" means \"{$shownTranslation}\"",
+                'question' => __("ui.q_is_means", ["word" => $pair["word"], "translation" => $shownTranslation]),
                 'correct' => $isCorrect ? 'true' : 'false',
                 'actual_translation' => $pair['translation'],
                 'lang' => $langName,
@@ -384,7 +495,7 @@ class LearnController extends Controller
         foreach ($shuffled->take(3) as $pair) {
             $steps[] = [
                 'type' => 'typing',
-                'question' => "Type the {$langName} word for \"{$pair['translation']}\"",
+                'question' => __("ui.q_type_word_for", ["word" => $pair["translation"], "lang" => $langLabel]),
                 'correct' => strtolower($pair['word']),
                 'hint' => mb_substr($pair['word'], 0, 1) . str_repeat('_', max(0, mb_strlen($pair['word']) - 1)),
                 'lang' => $langName,
@@ -397,7 +508,7 @@ class LearnController extends Controller
             if ($matchPairs->count() >= 3) {
                 $steps[] = [
                     'type' => 'matching',
-                    'instruction' => 'Match the remaining words',
+                    'instruction' => __('ui.match_the_pairs'),
                     'pairs' => $matchPairs->map(fn($p) => ['word' => $p['word'], 'translation' => $p['translation']])->values()->toArray(),
                     'lang' => $langName,
                 ];
